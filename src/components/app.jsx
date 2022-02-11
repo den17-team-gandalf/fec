@@ -1,12 +1,12 @@
 import React from 'react';
-import {appContext} from './contexts.js';
+import AppContext from './contexts';
 
 export default function App() {
   return (
-    <appContext.Provider>
+    // <AppContext>
     <div>
       Hi
     </div>
-    </appContext.Provider>
+    // {/* </AppContext> */}
   );
 }

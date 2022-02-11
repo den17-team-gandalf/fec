@@ -1,13 +1,13 @@
 import React from 'react';
 
-const appContext = React.createContext({});
-const detailsContext = React.createContext({});
-const questionsContext = React.createContext({});
-const ratingsContext = React.createContext({});
+const AppContext = React.createContext('');
+const DetailsContext = React.createContext({});
+const QuestionsContext = React.createContext({});
+const RatingsContext = React.createContext({});
 
 export default {
-  appContext: appContext,
-  detailsContext: detailsContext,
-  questionsContext: questionsContext,
-  ratingsContext: ratingsContext,
-}
+  AppContext,
+  DetailsContext,
+  QuestionsContext,
+  RatingsContext,
+};
