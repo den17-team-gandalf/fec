@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/den17-team-gandalf/fec"
+    "url": "git+https://github.com/DenBerez/fec"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/den17-team-gandalf/fec/issues"
+    "url": "https://github.com/DenBerez/fec/issues"
   },
-  "homepage": "https://github.com/den17-team-gandalf/fec#readme",
+  "homepage": "https://github.com/DenBerez/fec#readme",
   "devDependencies": {
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.13.10",
