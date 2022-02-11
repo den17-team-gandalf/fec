@@ -10,7 +10,7 @@ axios.defaults.headers.common.Authorization = API_KEY;
 app.use(express.static(path.join(__dirname, '../dist')));
 
 const proxyGet = (req, resp) => {
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-den17/', req.params)
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-den/', req.params)
     .then((resu) => {
       resp.send(resu);
     })
@@ -21,7 +21,7 @@ const proxyGet = (req, resp) => {
 };
 
 const proxyPost = (req, resp) => {
-  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-den17/', req)
+  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-den/', req)
     .then((resu) => {
       resp.send(resu);
     })
@@ -32,7 +32,7 @@ const proxyPost = (req, resp) => {
 };
 
 const proxyPut = (req, resp) => {
-  axios.put('https://app-hrsei-api.herokuapp.com/api/fec2/hr-den17/', req.params)
+  axios.put('https://app-hrsei-api.herokuapp.com/api/fec2/hr-den/', req.params)
     .then((resu) => {
       resp.send(resu);
     })
@@ -43,7 +43,7 @@ const proxyPut = (req, resp) => {
 };
 
 const proxyDelete = (req, resp) => {
-  axios.delete('https://app-hrsei-api.herokuapp.com/api/fec2/hr-den17/', req.params)
+  axios.delete('https://app-hrsei-api.herokuapp.com/api/fec2/hr-den/', req.params)
     .then((resu) => {
       resp.send(resu);
     })
