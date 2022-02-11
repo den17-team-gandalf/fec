@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "react-dev": "webpack --config ./webpack.config.js  -w"
   },
@@ -38,6 +39,7 @@
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
+    "underscore": "^1.13.2",
     "webpack": "^5.68.0"
   }
 }
