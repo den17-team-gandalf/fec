@@ -8,7 +8,7 @@ const { API_KEY } = require('../configs');
 
 axios.defaults.headers.common.Authorization = API_KEY;
 app.use(express.static(path.join(__dirname, '../dist')));
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const proxyGet = (req, res) => {
