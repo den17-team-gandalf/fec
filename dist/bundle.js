@@ -2155,6 +2155,91 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./src/components/FAQ/FAQ.jsx":
+/*!************************************!*\
+  !*** ./src/components/FAQ/FAQ.jsx ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ questions)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _QAList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QAList */ "./src/components/FAQ/QAList.jsx");
+
+
+function questions() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Q&A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "searchbar"
+  }, " search bar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_QAList__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+}
+
+/***/ }),
+
+/***/ "./src/components/FAQ/QAIndividual.jsx":
+/*!*********************************************!*\
+  !*** ./src/components/FAQ/QAIndividual.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ QAIndividual)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function QAIndividual(question) {
+  console.log(question.answers, ' inside QAInd');
+  var counter = Object.keys(question.answers).length;
+  var answers = Object.entries(question.answers);
+  console.log(answers, ' answers');
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Q: ", question.question_body), answers.map(function (answer) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: answer[0]
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "A: ", answer[1].body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), answer[1].photos ? answer[1].photos.map(function (link) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: link,
+        alt: "answer pic"
+      });
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h6", null, "by: ", answer[1].answerer_name, " ", answer[1].date, " helpfulness:", ' ', answer[1].helpfulness));
+  }));
+} // (
+//   <img src={link} alt="answer pic"></img>
+// )
+
+/***/ }),
+
+/***/ "./src/components/FAQ/QAList.jsx":
+/*!***************************************!*\
+  !*** ./src/components/FAQ/QAList.jsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ QAList)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _dummyData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dummyData */ "./src/dummyData.js");
+/* harmony import */ var _QAIndividual__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QAIndividual */ "./src/components/FAQ/QAIndividual.jsx");
+
+
+
+function QAList() {
+  console.log(_dummyData__WEBPACK_IMPORTED_MODULE_1__.questions, ' inside QAlist');
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "text"), _dummyData__WEBPACK_IMPORTED_MODULE_1__.questions.results.map(function (question) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: question.question_id
+    }, (0,_QAIndividual__WEBPACK_IMPORTED_MODULE_2__["default"])(question));
+  }));
+}
+
+/***/ }),
+
 /***/ "./src/components/app.jsx":
 /*!********************************!*\
   !*** ./src/components/app.jsx ***!
@@ -2171,6 +2256,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contexts */ "./src/components/contexts.js");
+/* harmony import */ var _FAQ_FAQ__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FAQ/FAQ */ "./src/components/FAQ/FAQ.jsx");
+
 
 
 
@@ -2181,13 +2268,19 @@ function App() {
       products = _React$useState2[0],
       setProducts = _React$useState2[1];
 
-  axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/products').then(function (_ref) {
-    var data = _ref.data;
-    return setProducts(data);
-  })["catch"](function () {});
+  function fetch() {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get('/products').then(function (_ref) {
+      var data = _ref.data;
+      return setProducts(data);
+    })["catch"](function () {});
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__["default"].AppContext.Provider, {
     value: products
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, JSON.stringify(products)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+    type: "button",
+    onClick: fetch
+  }, "click"), JSON.stringify(products), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_FAQ_FAQ__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
 }
 
 /***/ }),
@@ -2215,6 +2308,323 @@ var RatingsContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createConte
   QuestionsContext: QuestionsContext,
   RatingsContext: RatingsContext
 });
+
+/***/ }),
+
+/***/ "./src/dummyData.js":
+/*!**************************!*\
+  !*** ./src/dummyData.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+var questions = {
+  product_id: '44388',
+  results: [{
+    question_id: 543166,
+    question_body: 'Is this a center for ants?!',
+    question_date: '2021-11-06T00:00:00.000Z',
+    asker_name: 'Derek Z.',
+    question_helpfulness: 1071,
+    reported: false,
+    answers: {
+      5087574: {
+        id: 5087574,
+        body: "No, it's a center for kids that can't read good.",
+        date: '2021-11-06T00:00:00.000Z',
+        answerer_name: 'Mugatu',
+        helpfulness: 54,
+        photos: []
+      },
+      5087577: {
+        id: 5087577,
+        body: 'Be professionally good looking',
+        date: '2021-11-06T00:00:00.000Z',
+        answerer_name: 'Derek Z.',
+        helpfulness: 27,
+        photos: []
+      },
+      5087651: {
+        id: 5087651,
+        body: 'The squad!',
+        date: '2021-11-08T00:00:00.000Z',
+        answerer_name: "Mugatu's Finest",
+        helpfulness: 38,
+        photos: ['https://static.standard.co.uk/s3fs-public/thumbnails/image/2016/02/05/10/zoolander2poster0502a.jpg?width=990&auto=webp&quality=75&crop=968%3A645%2Csmart']
+      },
+      5087657: {
+        id: 5087657,
+        body: "I've never even been to Mt. Vesuvius!",
+        date: '2021-11-09T00:00:00.000Z',
+        answerer_name: 'Hansel',
+        helpfulness: 7,
+        photos: []
+      },
+      5087658: {
+        id: 5087658,
+        body: 'Cool story, Hansel',
+        date: '2021-11-09T00:00:00.000Z',
+        answerer_name: 'Derek Zoolander',
+        helpfulness: 5,
+        photos: []
+      },
+      5181157: {
+        id: 5181157,
+        body: 'No need to make a mountain out of an anthill',
+        date: '2021-11-12T00:00:00.000Z',
+        answerer_name: 'Derelict',
+        helpfulness: 7,
+        photos: ['https://imgur.com/gallery/wXW6jlm']
+      },
+      5269212: {
+        id: 5269212,
+        body: 'If it were a center for ants, would they invade?',
+        date: '2021-12-31T00:00:00.000Z',
+        answerer_name: 'water104',
+        helpfulness: 0,
+        photos: []
+      },
+      5269369: {
+        id: 5269369,
+        body: 'We would like to clarify that yes, its a center for ants.',
+        date: '2022-01-04T00:00:00.000Z',
+        answerer_name: 'sellercheck123',
+        helpfulness: 2,
+        photos: []
+      },
+      5269506: {
+        id: 5269506,
+        body: 'I fear that this is not a center for ants',
+        date: '2022-01-05T00:00:00.000Z',
+        answerer_name: 'antexpert12345',
+        helpfulness: 11,
+        photos: []
+      },
+      5269523: {
+        id: 5269523,
+        body: 'It is a center for dogs',
+        date: '2022-01-05T00:00:00.000Z',
+        answerer_name: 'scoobydoo',
+        helpfulness: 6,
+        photos: []
+      },
+      5269540: {
+        id: 5269540,
+        body: 'This is a center for bees',
+        date: '2022-01-06T00:00:00.000Z',
+        answerer_name: 'beeknee',
+        helpfulness: 2,
+        photos: []
+      },
+      5269693: {
+        id: 5269693,
+        body: 'answer me this batman',
+        date: '2022-01-07T00:00:00.000Z',
+        answerer_name: 'Riddler',
+        helpfulness: 0,
+        photos: []
+      },
+      5269695: {
+        id: 5269695,
+        body: 'i love water!!!',
+        date: '2022-01-07T00:00:00.000Z',
+        answerer_name: 'waterboy123',
+        helpfulness: 0,
+        photos: []
+      },
+      5269703: {
+        id: 5269703,
+        body: 'yes it is ',
+        date: '2022-01-07T00:00:00.000Z',
+        answerer_name: 'ants',
+        helpfulness: 0,
+        photos: []
+      },
+      5269704: {
+        id: 5269704,
+        body: 'yes it is ',
+        date: '2022-01-07T00:00:00.000Z',
+        answerer_name: 'ants',
+        helpfulness: 0,
+        photos: []
+      },
+      5269746: {
+        id: 5269746,
+        body: 'test me',
+        date: '2022-01-08T00:00:00.000Z',
+        answerer_name: 'test',
+        helpfulness: 0,
+        photos: []
+      }
+    }
+  }, {
+    question_id: 542899,
+    question_body: 'Notorious Rubber Ducks?',
+    question_date: '2021-11-03T00:00:00.000Z',
+    asker_name: 'joe_pope',
+    question_helpfulness: 494,
+    reported: false,
+    answers: {
+      5087405: {
+        id: 5087405,
+        body: 'DUCKS! DUCKS! DUCKS! DUCKS!',
+        date: '2021-11-05T00:00:00.000Z',
+        answerer_name: 'abunys',
+        helpfulness: 22,
+        photos: []
+      },
+      5087573: {
+        id: 5087573,
+        body: 'so hot right now!',
+        date: '2021-11-06T00:00:00.000Z',
+        answerer_name: 'Hansel',
+        helpfulness: 18,
+        photos: []
+      },
+      5087576: {
+        id: 5087576,
+        body: 'How to I get the files out of the computer??',
+        date: '2021-11-06T00:00:00.000Z',
+        answerer_name: 'Derek Z.',
+        helpfulness: 7,
+        photos: []
+      },
+      5087620: {
+        id: 5087620,
+        body: 'DUCKS! DUCKS! DUCKS! DUCKS! DUCKS! ',
+        date: '2021-11-08T00:00:00.000Z',
+        answerer_name: 'N8',
+        helpfulness: 5,
+        photos: []
+      },
+      5087630: {
+        id: 5087630,
+        body: "I'm really really good looking!",
+        date: '2021-11-08T00:00:00.000Z',
+        answerer_name: 'Derek',
+        helpfulness: 38,
+        photos: ['https://i.pinimg.com/564x/c3/4b/9f/c34b9f4154abccf284f286a81afdc3e4.jpg']
+      },
+      5087646: {
+        id: 5087646,
+        body: 'ducks fly together!',
+        date: '2021-11-08T00:00:00.000Z',
+        answerer_name: 'Duckman',
+        helpfulness: 22,
+        photos: ['https://media.istockphoto.com/photos/yellow-rubber-duck-for-bath-time-picture-id185590965?k=20&m=185590965&s=612x612&w=0&h=tXDiN77vzdvGyCuIN3tD8I6kUjA2fNq-dKaVmodXuTA=']
+      },
+      5181305: {
+        id: 5181305,
+        body: 'beignet, done that!',
+        date: '2021-11-13T00:00:00.000Z',
+        answerer_name: 'Senoir Snacks',
+        helpfulness: 0,
+        photos: ['https://www.mashed.com/img/gallery/beignet/intro-1616089939.jpg']
+      },
+      5269214: {
+        id: 5269214,
+        body: 'Invasion of the ducks!!',
+        date: '2021-12-31T00:00:00.000Z',
+        answerer_name: 'duckGod505',
+        helpfulness: 2,
+        photos: []
+      },
+      5269701: {
+        id: 5269701,
+        body: "I don't like ducks",
+        date: '2022-01-07T00:00:00.000Z',
+        answerer_name: 'duckhunt',
+        helpfulness: 0,
+        photos: []
+      }
+    }
+  }, {
+    question_id: 542902,
+    question_body: 'What is the answer to life, the universe, and everything?',
+    question_date: '2021-11-04T00:00:00.000Z',
+    asker_name: 'who_asked',
+    question_helpfulness: 25,
+    reported: false,
+    answers: {
+      5087372: {
+        id: 5087372,
+        body: '42',
+        date: '2021-11-04T00:00:00.000Z',
+        answerer_name: 'DeepThought',
+        helpfulness: 2,
+        photos: []
+      },
+      5181047: {
+        id: 5181047,
+        body: 'more cowbell!',
+        date: '2021-11-10T00:00:00.000Z',
+        answerer_name: 'Bill Ferrel',
+        helpfulness: 4,
+        photos: ['https://humorinamerica.files.wordpress.com/2013/12/i-need-more-cowbell.jpg']
+      },
+      5269632: {
+        id: 5269632,
+        body: 'coffee',
+        date: '2022-01-06T00:00:00.000Z',
+        answerer_name: 'caffieneboi',
+        helpfulness: 1,
+        photos: []
+      }
+    }
+  }]
+};
+var products = [{
+  id: 44388,
+  campus: 'hr-den',
+  name: 'Camo Onesie',
+  slogan: 'Blend in to your crowd',
+  description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+  category: 'Jackets',
+  default_price: '140.00',
+  created_at: '2021-08-13T14:40:29.181Z',
+  updated_at: '2021-08-13T14:40:29.181Z'
+}, {
+  id: 44389,
+  campus: 'hr-den',
+  name: 'Bright Future Sunglasses',
+  slogan: "You've got to wear shades",
+  description: "Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.",
+  category: 'Accessories',
+  default_price: '69.00',
+  created_at: '2021-08-13T14:40:29.181Z',
+  updated_at: '2021-08-13T14:40:29.181Z'
+}, {
+  id: 44390,
+  campus: 'hr-den',
+  name: 'Morning Joggers',
+  slogan: 'Make yourself a morning person',
+  description: "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
+  category: 'Pants',
+  default_price: '40.00',
+  created_at: '2021-08-13T14:40:29.181Z',
+  updated_at: '2021-08-13T14:40:29.181Z'
+}, {
+  id: 44391,
+  campus: 'hr-den',
+  name: "Slacker's Slacks",
+  slogan: 'Comfortable for everything, or nothing',
+  description: "I'll tell you how great they are after I nap for a bit.",
+  category: 'Pants',
+  default_price: '65.00',
+  created_at: '2021-08-13T14:40:29.181Z',
+  updated_at: '2021-08-13T14:40:29.181Z'
+}, {
+  id: 44392,
+  campus: 'hr-den',
+  name: 'Heir Force Ones',
+  slogan: 'A sneaker dynasty',
+  description: "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+  category: 'Kicks',
+  default_price: '99.00',
+  created_at: '2021-08-13T14:40:29.181Z',
+  updated_at: '2021-08-13T14:40:29.181Z'
+}];
+exports.questions = questions;
+exports.products = products;
 
 /***/ }),
 
@@ -32265,11 +32675,11 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _components_app_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/app.jsx */ "./src/components/app.jsx");
+/* harmony import */ var _components_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/app */ "./src/components/app.jsx");
 
 
 
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_app_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('app'));
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_app__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('app'));
 })();
 
 /******/ })()
