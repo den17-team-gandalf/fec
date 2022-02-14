@@ -2174,9 +2174,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function App() {
-  axios__WEBPACK_IMPORTED_MODULE_1___default().post('/products').then(function (res) {
-    console.log(res);
-  });
   return (
     /*#__PURE__*/
     // <AppContext>
