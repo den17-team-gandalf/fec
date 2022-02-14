@@ -17,7 +17,7 @@ export default function App() {
   return (
     <contexts.AppContext.Provider value={products}>
       <div>
-        {JSON.stringify(products)}
+        {/* {JSON.stringify(products)} */}
         <RatingsAndReviews />
       </div>
     </contexts.AppContext.Provider>

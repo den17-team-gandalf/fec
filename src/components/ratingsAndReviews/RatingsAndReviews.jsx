@@ -23,8 +23,6 @@ export default function RatingsAndReviews() {
   // <contexts.AppContext.Consumer>
   // </contexts.AppContext.Consumer>
   return (
-    <div>
-      <ReviewsList reviews={reviews} />
-    </div>
+    <ReviewsList reviews={reviews} />
   );
 }

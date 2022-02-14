@@ -9,7 +9,7 @@ export default function ReviewsList({ reviews }) {
   // </contexts.AppContext.Consumer>
   return (
     <div>
-      <ul>
+      <ul className="ReviewsList">
         {reviews.map((review) => <IndividualReview review={review} key={review.review_id} />)}
       </ul>
     </div>
