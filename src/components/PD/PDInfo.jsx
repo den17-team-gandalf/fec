@@ -13,6 +13,7 @@ export default function PDInfo({ product }) {
       </div>
       )}
       <br />
+      <div className="addthis_inline_share_toolbox" />
       <br />
       <br />
       <br />
