@@ -1,7 +1,7 @@
 node_modules
 configs.js
-bundle.js
-bundle.js.map
-app.jsx
+dist/bundle.js
+dist/bundle.js.map
+src/app.jsx
 webpack.config.js
 .eslintrc.js
