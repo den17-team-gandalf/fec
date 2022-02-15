@@ -3,10 +3,12 @@ import axios from 'axios';
 import PDCarousel from './PDCarousel';
 import PDStyles from './PDStyles';
 import PDInfo from './PDInfo';
+import PDMainDisc from './PDMainDisc';
+import PDShop from './PDShop';
 import contexts from '../contexts';
 
 export default function PDWidget() {
-  const [currentStyle, setCurrentStyle] = React.useState({
+  const styleHook = React.useState({
     style_id: 266902,
     name: 'Forest Green & Black',
     original_price: '140.00',
@@ -87,24 +89,28 @@ export default function PDWidget() {
       style={{
         display: 'grid',
         gridTemplateAreas: `
+          'carousel carousel main'
           'carousel carousel styles'
+          'carousel carousel shop'
           'details details details'
         `,
         width: 'auto',
         justifyContent: 'center',
       }}
     >
-      <contexts.DetailsContext.Provider value={productStyles}>
+      <contexts.DetailsContext.Provider value={styleHook}>
         <PDCarousel
           styles={productStyles}
-          currentStyle={currentStyle}
-          setCurrentStyle={setCurrentStyle}
+          // currentStyle={currentStyle}
+          // setCurrentStyle={setCurrentStyle}
         />
+        <PDMainDisc product={product} />
         <PDStyles
           styles={productStyles}
-          currentStyle={currentStyle}
-          setCurrentStyle={setCurrentStyle}
+          // currentStyle={currentStyle}
+          // setCurrentStyle={setCurrentStyle}
         />
+        <PDShop />
         <PDInfo product={product} />
       </contexts.DetailsContext.Provider>
     </div>
