@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import PDStyle from './PDStyle';
 
-export default function PDStyles({ styles, setCurrentStyle }) {
+export default function PDStyles({ styles, currentStyle, setCurrentStyle }) {
   // const styling = '2px solid black';
   // const clicky = (e) => {
   //   console.log(e.target.style)
@@ -15,11 +15,11 @@ export default function PDStyles({ styles, setCurrentStyle }) {
   // };
   return (
     <div id="PDStylesContainer">
-      <strong>Style > </strong><br/><br/>
+      <strong>Style > </strong>{currentStyle.name}<br/><br/>
     <div
       id="PDStyles"
       style={{
-        display: 'grid', justifyItems: 'center', gridArea: 'styles', gridTemplateColumns: 'repeat(4, 90px)', gap: '15px',
+        display: 'grid', placeSelf: 'center', justifyItems: 'center', gridArea: 'styles', gridTemplateColumns: 'repeat(4, 70px)', gap: '10px',
       }}
     >
       {Object.keys(styles).length !== 0

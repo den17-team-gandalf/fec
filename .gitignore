@@ -1,2 +1,5 @@
 node_modules
 configs.js
+bundle.js
+bundle.js.map
+package-lock.json

@@ -35,7 +35,7 @@ export default function PDStyle({ thisStyle, setCurrentStyle }) {
       alt={thisStyle.name}
       value={thisStyle}
       style={{
-        borderRadius: '100%', width: '80px', height: '80px', border: '2px solid black',
+        placeSelf: 'center', borderRadius: '100%', width: '70px', height: '70px', border: '2px solid black',
       }}
     />
   );
