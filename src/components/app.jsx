@@ -3,7 +3,7 @@ import axios from 'axios';
 import contexts from './contexts';
 // eslint-disable-next-line import/extensions
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews.jsx';
-import PDWidget from  './PD/PDWidget.jsx'
+import PDWidget from './PD/PDWidget.jsx';
 
 let flag = true;
 
