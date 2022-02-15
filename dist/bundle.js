@@ -2237,36 +2237,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ IndividualReview)
 /* harmony export */ });
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
+
+
+
+function markHelpful(e, id) {
+  axios__WEBPACK_IMPORTED_MODULE_0___default().put("/reviews/".concat(id, "/helpful")).then(function (results) {
+    console.log(results);
+  })["catch"](function (err) {
+    throw err;
+  });
+}
 
 function IndividualReview(_ref) {
   var review = _ref.review;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", {
     className: "IndividualReview"
-  }, "Star Rating : ".concat(review.rating, ", "), review.reviewer_name, ", Time ".concat(review.date, " (Modules to make together with others)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+  }, "Star Rating : ".concat(review.rating, ", "), review.reviewer_name, ", Time ".concat(review.date, " (Modules to make together with others)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h3", {
     className: "ReviewBody"
-  }, review.summary), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+  }, review.summary), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", {
     className: "ReviewBody"
-  }, review.body), review.recommend && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, review.body), review.recommend && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
     className: "ReviewRecommendation"
-  }, "\u2713 I recommend this product"), review.response && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "\u2713 I recommend this product"), review.response && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
     className: "ResponseBox"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", {
     className: "ResponseHeader"
-  }, "Response:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+  }, "Response:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", {
     className: "ResponseBody"
-  }, review.response)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, review.response)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
     className: "RatingHelpful"
-  }, "Helpful?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, "Helpful?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
     className: "RatingHelpfulButton",
     type: "button",
-    onClick: function onClick() {
-      return console.log('Mark Helpful Clicked!');
+    onClick: function onClick(e) {
+      return markHelpful(e, review.review_id);
     }
-  }, "Yes"), "(".concat(review.helpfulness, ")  |  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, "Yes"), "(".concat(review.helpfulness, ")  |  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
     className: "RatingReportButton",
     type: "button",
     onClick: function onClick() {
@@ -2275,17 +2287,17 @@ function IndividualReview(_ref) {
   }, "Report")));
 }
 IndividualReview.propTypes = {
-  review: prop_types__WEBPACK_IMPORTED_MODULE_1___default().exact({
-    review_id: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().number),
-    rating: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().number),
-    summary: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string),
-    recommend: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().bool),
-    response: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().object),
-    body: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string),
-    date: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string),
-    reviewer_name: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string),
-    helpfulness: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().number),
-    photos: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().array)
+  review: prop_types__WEBPACK_IMPORTED_MODULE_2___default().exact({
+    review_id: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().number),
+    rating: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().number),
+    summary: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string),
+    recommend: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().bool),
+    response: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().object),
+    body: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string),
+    date: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string),
+    reviewer_name: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string),
+    helpfulness: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().number),
+    photos: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().array)
   })
 };
 IndividualReview.defaultProps = {
@@ -2379,6 +2391,7 @@ function ReviewsList(_ref) {
   var reviews = _ref.reviews;
   // <contexts.AppContext.Consumer>
   // </contexts.AppContext.Consumer>
+  console.log(reviews);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: "ReviewsList"
   }, reviews.map(function (review) {

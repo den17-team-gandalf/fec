@@ -7,6 +7,7 @@ import IndividualReview from './IndividualReview.jsx';
 export default function ReviewsList({ reviews }) {
   // <contexts.AppContext.Consumer>
   // </contexts.AppContext.Consumer>
+  console.log(reviews);
   return (
     <div>
       <ul className="ReviewsList">

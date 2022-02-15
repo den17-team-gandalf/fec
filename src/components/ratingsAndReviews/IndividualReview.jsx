@@ -1,5 +1,16 @@
+import axios from 'axios';
 import propTypes from 'prop-types';
 import React from 'react';
+
+function markHelpful(e, id) {
+  axios.put(`/reviews/${id}/helpful`)
+    .then((results) => {
+      console.log(results);
+    })
+    .catch((err) => {
+      throw err;
+    });
+}
 
 export default function IndividualReview({ review }) {
   return (
@@ -26,7 +37,7 @@ export default function IndividualReview({ review }) {
       )}
       <div className="RatingHelpful">
         Helpful?
-        <button className="RatingHelpfulButton" type="button" onClick={() => console.log('Mark Helpful Clicked!')}>Yes</button>
+        <button className="RatingHelpfulButton" type="button" onClick={(e) => markHelpful(e, review.review_id)}>Yes</button>
         {`(${review.helpfulness})  |  `}
         <button className="RatingReportButton" type="button" onClick={() => console.log('Report Clicked!')}>Report</button>
       </div>
