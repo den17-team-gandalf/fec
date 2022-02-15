@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function PDInfo({ product }) {
   return (
-    <div style={{ gridArea: 'details' }}>
+    <div style={{ gridArea: 'details', margin: '15px' }}>
       {Object.keys(product).length !== 0
       && (
       <div id="description">
