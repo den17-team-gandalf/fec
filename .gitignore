@@ -1,7 +1,9 @@
 node_modules
 configs.js
-bundle.js
-bundle.js.map
+dist/bundle.js
+dist/bundle.js.map
 package-lock.json
-app.jsx
+src/components/app.jsx
 webpack.config.js
+.eslintrc.js
+.gitignore
