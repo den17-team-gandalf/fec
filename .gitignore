@@ -6,4 +6,3 @@ package-lock.json
 src/components/app.jsx
 webpack.config.js
 .eslintrc.js
-.gitignore
