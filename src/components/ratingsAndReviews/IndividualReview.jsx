@@ -81,6 +81,7 @@ export default function IndividualReview({ review }) {
           Report
         </button>
       </div>
+      <hr />
     </li>
   );
 }
