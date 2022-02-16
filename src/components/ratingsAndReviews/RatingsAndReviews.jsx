@@ -1,17 +1,24 @@
 import axios from 'axios';
 import React from 'react';
-// eslint-disable-next-line import/extensions
-import ReviewsList from './ReviewsList.jsx';
+import ReviewsList from './ReviewsList';
 import contexts from '../contexts';
 
 let flag = true;
 
 export default function RatingsAndReviews() {
   const ratingsHook = React.useState([]);
+  const metadataHook = React.useState({});
   if (flag) {
     flag = false;
     // console.log('querying:');
-    axios.get('/reviews/?product_id=44388&count=4')
+    axios.get('/reviews/meta/?product_id=44388')
+      .then(({ data }) => {
+        metadataHook[1](data);
+      })
+      .catch(() => {
+        throw Error;
+      });
+    axios.get('/reviews/?product_id=44388&count=4&sort="newest"')
       .then(({ data }) => {
         // console.log('results', data);
         ratingsHook[1](data.results);
@@ -23,9 +30,14 @@ export default function RatingsAndReviews() {
   // <contexts.AppContext.Consumer>
   // </contexts.AppContext.Consumer>
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <contexts.RatingsContext.Provider value={ratingsHook}>
       <h2 className="RatingsTitle">Ratings & Reviews</h2>
-      <ReviewsList reviews={ratingsHook[0]} />
+      <ReviewsList numReviews={metadataHook[0].recommended
+        ? parseInt(metadataHook[0].recommended.false, 10)
+        + parseInt(metadataHook[0].recommended.true, 10)
+        : 0}
+      />
     </contexts.RatingsContext.Provider>
   );
 }

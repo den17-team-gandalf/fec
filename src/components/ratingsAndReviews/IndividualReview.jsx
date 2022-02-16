@@ -48,6 +48,7 @@ export default function IndividualReview({ review }) {
       <p className="ReviewBody">
         {review.body}
       </p>
+      {review.photos.map(({ url, id }) => (<img src={url} alt="user-submitted" width="100" key={id} />))}
       {review.recommend && (<div className="ReviewRecommendation">✓ I recommend this product</div>)}
       {review.response !== null && (
         <div className="ResponseBox">
