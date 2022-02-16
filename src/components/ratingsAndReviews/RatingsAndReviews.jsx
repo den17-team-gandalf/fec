@@ -2,19 +2,19 @@ import axios from 'axios';
 import React from 'react';
 // eslint-disable-next-line import/extensions
 import ReviewsList from './ReviewsList.jsx';
-// import contexts from '../contexts.js';
+import contexts from '../contexts';
 
 let flag = true;
 
 export default function RatingsAndReviews() {
-  const [reviews, updateReviews] = React.useState([]);
+  const ratingsHook = React.useState([]);
   if (flag) {
     flag = false;
     // console.log('querying:');
     axios.get('/reviews/?product_id=44391')
       .then(({ data }) => {
         // console.log('results', data);
-        updateReviews(data.results);
+        ratingsHook[1](data.results);
       })
       .catch(() => {
         throw Error;
@@ -23,6 +23,8 @@ export default function RatingsAndReviews() {
   // <contexts.AppContext.Consumer>
   // </contexts.AppContext.Consumer>
   return (
-    <ReviewsList reviews={reviews} />
+    <contexts.RatingsContext.Provider value={ratingsHook}>
+      <ReviewsList reviews={ratingsHook[0]} />
+    </contexts.RatingsContext.Provider>
   );
 }
