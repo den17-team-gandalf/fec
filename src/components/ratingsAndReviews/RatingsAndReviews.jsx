@@ -11,7 +11,7 @@ export default function RatingsAndReviews() {
   if (flag) {
     flag = false;
     // console.log('querying:');
-    axios.get('/reviews/?product_id=44391&count=4')
+    axios.get('/reviews/?product_id=44388&count=4')
       .then(({ data }) => {
         // console.log('results', data);
         ratingsHook[1](data.results);
@@ -24,6 +24,7 @@ export default function RatingsAndReviews() {
   // </contexts.AppContext.Consumer>
   return (
     <contexts.RatingsContext.Provider value={ratingsHook}>
+      <h2 className="RatingsTitle">Ratings & Reviews</h2>
       <ReviewsList reviews={ratingsHook[0]} />
     </contexts.RatingsContext.Provider>
   );

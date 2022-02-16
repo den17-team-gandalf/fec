@@ -6,7 +6,7 @@ import IndividualReview from './IndividualReview';
 let nextPage = 3;
 
 const loadReviews = (reviews, updateReviews) => {
-  axios.get(`/reviews/?product_id=44391&count=2&page=${nextPage}`)
+  axios.get(`/reviews/?product_id=44388&count=2&page=${nextPage}`)
     .then(({ data }) => {
       // console.log('results', data);
       updateReviews(reviews.concat(data.results));
@@ -27,19 +27,19 @@ export default function ReviewsList() {
             {reviews.slice(0, displayedReviews).map(
               (review) => <IndividualReview review={review} key={review.review_id} />
             )}
-            {displayedReviews < reviews.length && (
-              <button
-                type="submit"
-                className="LoadReviewsButton"
-                onClick={() => {
-                  updateDisplayedReviews(reviews.length);
-                  loadReviews(reviews, updateReviews);
-                }}
-              >
-                More Reviews
-              </button>
-            )}
           </ul>
+          {displayedReviews < reviews.length && (
+            <button
+              type="submit"
+              className="LoadReviewsButton"
+              onClick={() => {
+                updateDisplayedReviews(reviews.length);
+                loadReviews(reviews, updateReviews);
+              }}
+            >
+              More Reviews
+            </button>
+          )}
         </div>
       )}
     </contexts.RatingsContext.Consumer>

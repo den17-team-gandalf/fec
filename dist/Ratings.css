@@ -1,0 +1,9 @@
+.ResponseBox {
+  background-color: gray;
+}
+
+.ReviewsList {
+  height: 350px;
+  overflow: scroll;
+}
+
