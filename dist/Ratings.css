@@ -4,6 +4,20 @@
 
 .ReviewsList {
   height: 350px;
+  width: 90%;
+  word-break: break-all;
   overflow: scroll;
 }
 
+.RatingsAndReviewsGrid {
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.ReviewsRightSide {
+
+}
+
+.RatingsLeftSide {
+
+}

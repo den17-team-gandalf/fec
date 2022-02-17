@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import ReviewsList from './ReviewsList';
 import contexts from '../contexts';
+import RatingsBreakdown from './RatingsBreakdown';
 
 let flag = true;
 
@@ -33,11 +34,14 @@ export default function RatingsAndReviews() {
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <contexts.RatingsContext.Provider value={ratingsHook}>
       <h2 className="RatingsTitle">Ratings & Reviews</h2>
-      <ReviewsList numReviews={metadataHook[0].recommended
-        ? parseInt(metadataHook[0].recommended.false, 10)
-        + parseInt(metadataHook[0].recommended.true, 10)
-        : 0}
-      />
+      <div className="RatingsAndReviewsGrid">
+        {metadataHook[0].recommended && (<RatingsBreakdown metadata={metadataHook[0]} />)}
+        <ReviewsList numReviews={metadataHook[0].recommended
+          ? parseInt(metadataHook[0].recommended.false, 10)
+          + parseInt(metadataHook[0].recommended.true, 10)
+          : 0}
+        />
+      </div>
     </contexts.RatingsContext.Provider>
   );
 }
