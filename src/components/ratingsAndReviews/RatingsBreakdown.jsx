@@ -2,7 +2,6 @@ import React from 'react';
 import propTypes from 'prop-types';
 import Ratings from 'react-ratings-declarative';
 import ReviewStarBar from './ReviewStarBar';
-import ratings from 'react-ratings-declarative/build/ratings';
 
 export default function RatingsBreakdown({ metadata }) {
   const numReviews = parseInt(metadata.recommended.false, 10)
@@ -22,19 +21,20 @@ export default function RatingsBreakdown({ metadata }) {
   return (
     <div className="RatingsLeftSide">
       <h1 className="AverageRating">{avgRating}</h1>
-      <Ratings
-        rating={avgRating}
-        widgetRatedColors="orange"
-        widgetDimensions="30px"
-        widgetSpacings="3px"
-        className="OverallStarRating"
-      >
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-      </Ratings>
+      <div className="OverallStarRating">
+        <Ratings
+          rating={avgRating}
+          widgetRatedColors="orange"
+          widgetDimensions="25px"
+          widgetSpacings="2px"
+        >
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+        </Ratings>
+      </div>
       <div className="PercentReviews">
         {`${percentPositive}% of reviews recommend this product`}
       </div>
