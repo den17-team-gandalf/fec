@@ -1,26 +1,55 @@
+import axios from 'axios';
 import React from 'react';
-import PropTypes from 'prop-types';
-// import contexts from '../contexts';
-// eslint-disable-next-line import/extensions
-import IndividualReview from './IndividualReview.jsx';
+import propTypes from 'prop-types';
+import contexts from '../contexts';
+import IndividualReview from './IndividualReview';
+import RatingsSortBar from './RatingsSortBar';
 
-export default function ReviewsList({ reviews }) {
-  // <contexts.AppContext.Consumer>
-  // </contexts.AppContext.Consumer>
-  console.log(reviews);
+let nextPage = 3;
+
+const loadReviews = (reviews, updateReviews, sortMethod) => {
+  axios.get(`/reviews/?product_id=44388&count=2&page=${nextPage}&sort="${sortMethod}"`)
+    .then(({ data }) => {
+      // console.log('results', data);
+      updateReviews(reviews.concat(data.results));
+      nextPage += 1;
+    })
+    .catch(() => {
+      throw Error;
+    });
+};
+
+export default function ReviewsList({ numReviews }) {
+  const [displayedReviews, updateDisplayedReviews] = React.useState(2);
+  const [sortMethod, updateSort] = React.useState('newest');
   return (
-    <div>
-      <ul className="ReviewsList">
-        {reviews.map((review) => <IndividualReview review={review} key={review.review_id} />)}
-      </ul>
-    </div>
+    <contexts.RatingsContext.Consumer>
+      {([reviews, updateReviews]) => (
+        <div>
+          <RatingsSortBar sortMethod={sortMethod} updateSort={updateSort} numReviews={numReviews} />
+          <ul className="ReviewsList">
+            {reviews.slice(0, displayedReviews).map(
+              (review) => <IndividualReview review={review} key={review.review_id} />,
+            )}
+          </ul>
+          {displayedReviews < reviews.length && (
+            <button
+              type="submit"
+              className="LoadReviewsButton"
+              onClick={() => {
+                updateDisplayedReviews(reviews.length);
+                loadReviews(reviews, updateReviews, sortMethod);
+              }}
+            >
+              More Reviews
+            </button>
+          )}
+        </div>
+      )}
+    </contexts.RatingsContext.Consumer>
   );
 }
 
 ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.object),
-};
-
-ReviewsList.defaultProps = {
-  reviews: [],
+  numReviews: propTypes.number.isRequired,
 };

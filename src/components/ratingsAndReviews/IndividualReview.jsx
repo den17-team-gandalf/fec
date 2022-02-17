@@ -1,6 +1,7 @@
 import axios from 'axios';
 import propTypes from 'prop-types';
 import React from 'react';
+import Ratings from 'react-ratings-declarative';
 
 // let unUsed = true;
 
@@ -39,7 +40,19 @@ export default function IndividualReview({ review }) {
   const [unUsed] = React.useState({ flag: true });
   return (
     <li className="IndividualReview">
-      {`Star Rating : ${review.rating}, `}
+      <Ratings
+        rating={review.rating}
+        widgetRatedColors="green"
+        widgetDimensions="20px"
+        widgetSpacings="1px"
+        className="ReviewStarRating"
+      >
+        <Ratings.Widget />
+        <Ratings.Widget />
+        <Ratings.Widget />
+        <Ratings.Widget />
+        <Ratings.Widget />
+      </Ratings>
       {review.reviewer_name}
       {`, Time ${review.date} (Modules to make together with others)`}
       <h3 className="ReviewBody">
@@ -48,6 +61,7 @@ export default function IndividualReview({ review }) {
       <p className="ReviewBody">
         {review.body}
       </p>
+      {review.photos.map(({ url, id }) => (<img src={url} alt="user-submitted" width="100" key={id} />))}
       {review.recommend && (<div className="ReviewRecommendation">✓ I recommend this product</div>)}
       {review.response !== null && (
         <div className="ResponseBox">
@@ -81,6 +95,7 @@ export default function IndividualReview({ review }) {
           Report
         </button>
       </div>
+      <hr />
     </li>
   );
 }
