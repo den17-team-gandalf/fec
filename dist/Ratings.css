@@ -19,5 +19,51 @@
 }
 
 .RatingsLeftSide {
-
+  display: grid;
+  grid-template-areas:
+  'number stars stars'
+  'percent percent percent'
+  'star1 star1 star1'
+  'star2 star2 star2'
+  'star3 star3 star3'
+  'star4 star4 star4'
+  'star5 star5 star5'
 }
+
+.AverageRating {
+  font-size: 50px;
+  grid-area: number;
+}
+
+.OverallStarRating {
+  grid-area: stars;
+}
+
+.PercentReviews {
+  grid-area: percent;
+}
+
+/* .ReviewStarBar {
+  grid-area: bar;
+} */
+
+#StarsBar1 {
+  grid-area: star1;
+}
+
+#StarsBar2 {
+  grid-area: star2;
+}
+
+#StarsBar3 {
+  grid-area: star3;
+}
+
+#StarsBar4 {
+  grid-area: star4;
+}
+
+#StarsBar5 {
+  grid-area: star5;
+}
+
