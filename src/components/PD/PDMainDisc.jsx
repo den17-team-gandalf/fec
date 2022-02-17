@@ -6,12 +6,15 @@ import contexts from '../contexts';
 export default function PDMainDisc({ product }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
   return (
-    <div id="mainDisc">
+    <div id="mainDisc" style={{ gridArea: 'main' }}>
+      <br />
       ***** Read All Reviews
       <br />
-      {product.category}
       <br />
-      <strong>{product.name}</strong>
+      {product.category
+      && product.category.toUpperCase()}
+      <br />
+      <div id="productName" style={{ fontSize: '2em', color: '#303030' }}><strong>{product.name}</strong></div>
       <br />
       {currentStyle.sale_price === null ? `$${currentStyle.original_price}`
         : (
