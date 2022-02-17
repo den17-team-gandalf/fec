@@ -8,21 +8,21 @@ import PDWidget from './PD/PDWidget';
 let flag = true;
 
 export default function App() {
-  const [products, setProducts] = React.useState([]);
-  if (flag) {
-    flag = false;
-    axios
-      .get('/products')
-      .then(({ data }) => setProducts(data))
-      .catch(() => {});
-  }
+  // const [products, setProducts] = React.useState([]);
+  // if (flag) {
+  //   flag = false;
+  //   axios
+  //     .get('/products')
+  //     .then(({ data }) => setProducts(data))
+  //     .catch(() => {});
+  // }
   return (
-    <contexts.AppContext.Provider value={products}>
-      <div>
-        {/* <PDWidget /> */}
-        <FAQ />
-        {/* <RatingsAndReviews /> */}
-      </div>
-    </contexts.AppContext.Provider>
+    // <contexts.AppContext.Provider value={products}>
+    <div>
+      {/* <PDWidget /> */}
+      <FAQ />
+      {/* <RatingsAndReviews /> */}
+    </div>
+    // </contexts.AppContext.Provider>
   );
 }

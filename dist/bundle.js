@@ -2164,21 +2164,20 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "QuestionAndAnswerConsumer": () => (/* binding */ QuestionAndAnswerConsumer),
 /* harmony export */   "default": () => (/* binding */ questions)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _QAList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QAList */ "./src/components/FAQ/QAList.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _QAList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QAList */ "./src/components/FAQ/QAList.jsx");
+/* harmony import */ var _dummyData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../dummyData */ "./src/dummyData.js");
 
 
 
+var QuestionAndAnswerData = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
+var QuestionAndAnswerConsumer = QuestionAndAnswerData.Consumer;
 function questions() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(document.documentElement.clientHeight),
-      _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-      height = _useState2[0],
-      setHeight = _useState2[1];
-
-  var ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null); // useEffect(
+  // const [height, setHeight] = useState(document.documentElement.clientHeight);
+  var height = document.documentElement.clientHeight; // useEffect(
   //   () => setHeight(document.documentElement.clientHeight),
   //   [
   //     window.addEventListener('resize', () => {
@@ -2187,23 +2186,15 @@ function questions() {
   //   ]
   // );
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-    ref: ref,
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(QuestionAndAnswerData.Provider, {
+    value: _dummyData__WEBPACK_IMPORTED_MODULE_2__
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       maxHeight: "".concat(height / 2, "px"),
       overflow: 'auto',
       maxWidth: "".concat(document.documentElement.clientWidth / 2, "px")
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", null, "Q&A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
-    type: "text",
-    id: "search",
-    name: "search",
-    placeholder: "Search for your answer",
-    value: ""
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
-    type: "submit",
-    value: "Submit"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_QAList__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Q&A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_QAList__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
 }
 
 /***/ }),
@@ -2235,14 +2226,14 @@ function QAIndividual(answers) {
       setCount = _useState2[1];
 
   var answersList = answersArr.slice(0, count);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, answersList.map(function (answerIn) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, " A:"), answersList.map(function (answerIn) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
       key: answerIn[0]
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", {
       style: {
         fontStyle: 'italic'
       }
-    }, "A:", answerIn[1].body), answerIn[1].photos ? answerIn[1].photos.map(function (link) {
+    }, answerIn[1].body), answerIn[1].photos ? answerIn[1].photos.map(function (link) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("a", {
         target: "_blank",
         href: link,
@@ -2268,7 +2259,7 @@ function QAIndividual(answers) {
     onClick: function onClick() {
       return setCount(2);
     }
-  }, "Show less answers"));
+  }, "Collapse answers"));
 }
 
 /***/ }),
@@ -2284,17 +2275,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ QAList)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _dummyData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../dummyData */ "./src/dummyData.js");
-/* harmony import */ var _QAIndividual__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QAIndividual */ "./src/components/FAQ/QAIndividual.jsx");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_readOnlyError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/readOnlyError */ "./node_modules/@babel/runtime/helpers/esm/readOnlyError.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _dummyData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../dummyData */ "./src/dummyData.js");
+/* harmony import */ var _QAIndividual__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./QAIndividual */ "./src/components/FAQ/QAIndividual.jsx");
 
 
+
+
+
+
+function SearchBar(_ref) {
+  var search = _ref.search;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+      _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+      searchInput = _useState2[0],
+      setSearchInput = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    if (searchInput.length >= 3) {}
+  }, [searchInput]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("form", {
+    onSubmit: function onSubmit() {
+      search;
+      '', (0,_babel_runtime_helpers_readOnlyError__WEBPACK_IMPORTED_MODULE_1__["default"])("searchInput");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("input", {
+    type: "text",
+    id: "search",
+    placeholder: "Search for your answer",
+    value: searchInput,
+    onChange: function onChange(e) {
+      return setSearchInput(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", {
+    type: "button"
+  }, "Search"));
+}
 
 function QAList() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, _dummyData__WEBPACK_IMPORTED_MODULE_1__.questions.results.map(function (question) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    console.log(e.target[0]);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react__WEBPACK_IMPORTED_MODULE_2__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(SearchBar, {
+    search: handleSubmit
+  }), _dummyData__WEBPACK_IMPORTED_MODULE_3__.questions.results.map(function (question) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
       key: question.question_id.toString()
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Q: ", question.question_body), (0,_QAIndividual__WEBPACK_IMPORTED_MODULE_2__["default"])(question.answers));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("h3", null, "Q:", console.log(question.question_id.toString()), question.question_body), (0,_QAIndividual__WEBPACK_IMPORTED_MODULE_4__["default"])(question.answers));
   }));
 }
 /*
@@ -2304,6 +2336,8 @@ create function to update list with 2 more answers
 check to see if the height of list takes up full screen
 if more entries after full screen keep rending more reviews but now it scrolls
 check if end of list if true remove button
+
+
 
 document.documentElement.clientHeight
 */
@@ -2652,15 +2686,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ App)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contexts */ "./src/components/contexts.js");
-/* harmony import */ var _ratingsAndReviews_RatingsAndReviews__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ratingsAndReviews/RatingsAndReviews */ "./src/components/ratingsAndReviews/RatingsAndReviews.jsx");
-/* harmony import */ var _FAQ_FAQ__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FAQ/FAQ */ "./src/components/FAQ/FAQ.jsx");
-/* harmony import */ var _PD_PDWidget__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PD/PDWidget */ "./src/components/PD/PDWidget.jsx");
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./contexts */ "./src/components/contexts.js");
+/* harmony import */ var _ratingsAndReviews_RatingsAndReviews__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ratingsAndReviews/RatingsAndReviews */ "./src/components/ratingsAndReviews/RatingsAndReviews.jsx");
+/* harmony import */ var _FAQ_FAQ__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FAQ/FAQ */ "./src/components/FAQ/FAQ.jsx");
+/* harmony import */ var _PD_PDWidget__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PD/PDWidget */ "./src/components/PD/PDWidget.jsx");
 
 
 
@@ -2669,22 +2701,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var flag = true;
 function App() {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
-      _React$useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
-      products = _React$useState2[0],
-      setProducts = _React$useState2[1];
+  // const [products, setProducts] = React.useState([]);
+  // if (flag) {
+  //   flag = false;
+  //   axios
+  //     .get('/products')
+  //     .then(({ data }) => setProducts(data))
+  //     .catch(() => {});
+  // }
+  return (
+    /*#__PURE__*/
+    // <contexts.AppContext.Provider value={products}>
+    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FAQ_FAQ__WEBPACK_IMPORTED_MODULE_4__["default"], null)) // </contexts.AppContext.Provider>
 
-  if (flag) {
-    flag = false;
-    axios__WEBPACK_IMPORTED_MODULE_2___default().get('/products').then(function (_ref) {
-      var data = _ref.data;
-      return setProducts(data);
-    })["catch"](function () {});
-  }
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__["default"].AppContext.Provider, {
-    value: products
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_FAQ_FAQ__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+  );
 }
 
 /***/ }),
@@ -34121,6 +34151,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/readOnlyError.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/readOnlyError.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _readOnlyError)
+/* harmony export */ });
+function _readOnlyError(name) {
+  throw new TypeError("\"" + name + "\" is read-only");
 }
 
 /***/ }),

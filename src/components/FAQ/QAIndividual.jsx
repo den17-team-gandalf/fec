@@ -10,12 +10,10 @@ export default function QAIndividual(answers) {
   const answersList = answersArr.slice(0, count);
   return (
     <>
+      <p> A:</p>
       {answersList.map((answerIn) => (
         <div key={answerIn[0]}>
-          <p style={{ fontStyle: 'italic' }}>
-            A:
-            {answerIn[1].body}
-          </p>
+          <p style={{ fontStyle: 'italic' }}>{answerIn[1].body}</p>
           {answerIn[1].photos
             ? answerIn[1].photos.map((link) => (
                 <a
@@ -43,7 +41,7 @@ export default function QAIndividual(answers) {
         </button>
       ) : (
         <button type="button" onClick={() => setCount(2)}>
-          Show less answers
+          Collapse answers
         </button>
       )}
     </>
