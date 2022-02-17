@@ -1,9 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import QAList from './QAList';
+import Data from '../../dummyData';
 
+const QuestionAndAnswerData = React.createContext();
+export const QuestionAndAnswerConsumer = QuestionAndAnswerData.Consumer;
 export default function questions() {
-  const [height, setHeight] = useState(document.documentElement.clientHeight);
-  const ref = useRef(null);
+  // const [height, setHeight] = useState(document.documentElement.clientHeight);
+  const height = document.documentElement.clientHeight;
 
   // useEffect(
   //   () => setHeight(document.documentElement.clientHeight),
@@ -15,26 +18,17 @@ export default function questions() {
   // );
 
   return (
-    <div
-      ref={ref}
-      style={{
-        maxHeight: `${height / 2}px`,
-        overflow: 'auto',
-        maxWidth: `${document.documentElement.clientWidth / 2}px`,
-      }}
-    >
-      <h1>Q&A</h1>
-      <form>
-        <input
-          type="text"
-          id="search"
-          name="search"
-          placeholder="Search for your answer"
-          value=""
-        />
-        <input type="submit" value="Submit" />
-      </form>
-      <QAList />
-    </div>
+    <QuestionAndAnswerData.Provider value={Data}>
+      <div
+        style={{
+          maxHeight: `${height / 2}px`,
+          overflow: 'auto',
+          maxWidth: `${document.documentElement.clientWidth / 2}px`,
+        }}
+      >
+        <h1>Q&A</h1>
+        <QAList />
+      </div>
+    </QuestionAndAnswerData.Provider>
   );
 }
