@@ -1,10 +1,58 @@
+import axios from 'axios';
 import propTypes from 'prop-types';
 import React from 'react';
+import Ratings from 'react-ratings-declarative';
+
+// let unUsed = true;
+
+const markHelpful = (e, id, updateHelpfulness, unUsed) => {
+  // console.log(id, unUsed);
+  if (unUsed.flag) {
+    axios.put(`/reviews/${id}/helpful`)
+      .then(() => {
+        updateHelpfulness((x) => x + 1);
+        // eslint-disable-next-line no-param-reassign
+        unUsed.flag = false;
+        // e.target.childNodes[0].nodeValue = Number(e.target.text)
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+};
+
+const reportReview = (e, id, unUsed) => {
+  if (unUsed.flag) {
+    axios.put(`/reviews/${id}/report`)
+      .then(() => {
+        // console.log(results);
+        // eslint-disable-next-line no-param-reassign
+        unUsed.flag = false;
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+};
 
 export default function IndividualReview({ review }) {
+  const [helpfulness, updateHelpfulness] = React.useState(review.helpfulness);
+  const [unUsed] = React.useState({ flag: true });
   return (
     <li className="IndividualReview">
-      {`Star Rating : ${review.rating}, `}
+      <Ratings
+        rating={review.rating}
+        widgetRatedColors="green"
+        widgetDimensions="20px"
+        widgetSpacings="1px"
+        className="ReviewStarRating"
+      >
+        <Ratings.Widget />
+        <Ratings.Widget />
+        <Ratings.Widget />
+        <Ratings.Widget />
+        <Ratings.Widget />
+      </Ratings>
       {review.reviewer_name}
       {`, Time ${review.date} (Modules to make together with others)`}
       <h3 className="ReviewBody">
@@ -13,8 +61,9 @@ export default function IndividualReview({ review }) {
       <p className="ReviewBody">
         {review.body}
       </p>
+      {review.photos.map(({ url, id }) => (<img src={url} alt="user-submitted" width="100" key={id} />))}
       {review.recommend && (<div className="ReviewRecommendation">✓ I recommend this product</div>)}
-      {review.response && (
+      {review.response !== null && (
         <div className="ResponseBox">
           <h4 className="ResponseHeader">
             Response:
@@ -26,10 +75,27 @@ export default function IndividualReview({ review }) {
       )}
       <div className="RatingHelpful">
         Helpful?
-        <button className="RatingHelpfulButton" type="button" onClick={() => console.log('Mark Helpful Clicked!')}>Yes</button>
-        {`(${review.helpfulness})  |  `}
-        <button className="RatingReportButton" type="button" onClick={() => console.log('Report Clicked!')}>Report</button>
+        <button
+          className="RatingHelpfulButton"
+          type="button"
+          onClick={
+            (e) => markHelpful(e, review.review_id, updateHelpfulness, unUsed)
+          }
+        >
+          Yes
+        </button>
+        {`(${helpfulness})  |  `}
+        <button
+          className="RatingReportButton"
+          type="button"
+          onClick={
+            (e) => reportReview(e, review.review_id, unUsed)
+          }
+        >
+          Report
+        </button>
       </div>
+      <hr />
     </li>
   );
 }
@@ -40,7 +106,7 @@ IndividualReview.propTypes = {
     rating: propTypes.number,
     summary: propTypes.string,
     recommend: propTypes.bool,
-    response: propTypes.object,
+    response: propTypes.any,
     body: propTypes.string,
     date: propTypes.string,
     reviewer_name: propTypes.string,
