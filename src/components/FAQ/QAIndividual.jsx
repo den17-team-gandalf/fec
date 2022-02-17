@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 export default function QAIndividual(answers) {
+  //try
   const counter = Object.keys(answers).length;
   const answersArr = Object.entries(answers)
     .sort((a, b) => a[1].helpfulness - b[1].helpfulness)
