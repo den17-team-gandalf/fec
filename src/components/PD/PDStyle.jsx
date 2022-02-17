@@ -25,18 +25,18 @@ export default function PDStyle({
         value={thisStyle}
         style={{
           borderRadius: '100%',
-          width: '70px',
-          height: '70px',
-          border: '3px solid black',
+          width: '60px',
+          height: '60px',
+          border: '2px solid black',
+          backgroundColor: 'black',
         }}
       />
       {toggled === thisStyle.name
       && (
       <FontAwesomeIcon
         icon={faCheck}
-        size="lg"
         style={{
-          position: 'absolute', top: '0', right: '-8px', color: 'green',
+          position: 'absolute', padding: '2px', top: '0', right: '0', color: 'green', borderRadius: '100%', backgroundColor: 'white', border: '2px solid black',
         }}
       />
       )}

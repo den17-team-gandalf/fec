@@ -101,14 +101,10 @@ export default function PDWidget() {
       <contexts.DetailsContext.Provider value={styleHook}>
         <PDCarousel
           styles={productStyles}
-          // currentStyle={currentStyle}
-          // setCurrentStyle={setCurrentStyle}
         />
         <PDMainDisc product={product} />
         <PDStyles
           styles={productStyles}
-          // currentStyle={currentStyle}
-          // setCurrentStyle={setCurrentStyle}
         />
         <PDShop />
         <PDInfo product={product} />

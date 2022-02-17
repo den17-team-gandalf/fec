@@ -21,7 +21,7 @@ export default function PDStyles({ styles }) {
       <div
         id="PDStyles"
         style={{
-          display: 'grid', placeSelf: 'center', justifyItems: 'center', gridArea: 'styles', gridTemplateColumns: 'repeat(4, 70px)', gap: '10px',
+          display: 'grid', alignItems: 'center', justifyItems: 'center', gridArea: 'styles', gridTemplateColumns: 'repeat(4, 70px)', gap: '10px',
         }}
       >
         {Object.keys(styles).length !== 0
