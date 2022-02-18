@@ -14,7 +14,8 @@ app.use(express.json());
 const proxyGet = (req, res) => {
   const queryString = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-den${req.url}`;
   // console.log(queryString, req.url);
-  axios.get(queryString, req.params)
+  axios
+    .get(queryString, req.params)
     .then((results) => {
       // console.log(results.data);
       res.send(results.data);
@@ -26,7 +27,11 @@ const proxyGet = (req, res) => {
 };
 
 const proxyPost = (req, res) => {
-  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-den${req.url}`, req.body)
+  axios
+    .post(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/hr-den${req.url}`,
+      req.body
+    )
     .then((results) => {
       res.send(results.data);
     })
@@ -37,7 +42,11 @@ const proxyPost = (req, res) => {
 };
 
 const proxyPut = (req, res) => {
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-den${req.url}`, req.body)
+  axios
+    .put(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/hr-den${req.url}`,
+      req.body
+    )
     .then((results) => {
       res.send(results.data);
     })
