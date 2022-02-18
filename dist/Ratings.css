@@ -1,3 +1,9 @@
+.RatingsTitle {
+  padding-left: 1.2%;
+  font-size: 275%;
+  margin-bottom: 0;
+}
+
 .ResponseBox {
   background-color: gray;
 }
@@ -7,6 +13,37 @@
   width: 90%;
   word-break: break-word;
   overflow: scroll;
+  list-style-type: none;
+}
+
+.IndividualReviewTitleBar {
+  display: grid;
+  grid-template-areas:
+  'stars username';
+}
+
+.ReviewStarRating {
+  grid-area: stars;
+}
+
+.ReviewUsernameAndDate {
+  grid-area: username;
+  text-align: right;
+}
+
+.ReviewSortBar {
+  text-align: center;
+}
+
+.RatingHelpfulButton, .RatingReportButton {
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.LoadReviewsButton {
+  position: center;
+  display: grid;
+  margin: auto;
 }
 
 .RatingsAndReviewsGrid {
@@ -20,6 +57,7 @@
 
 .RatingsLeftSide {
   height: 500px;
+  padding-left: 4%;
   display: grid;
   grid-template-areas:
   'starBreakdowns'
@@ -43,14 +81,17 @@
 
 .ReviewsFilterDisplay {
   grid-area: currentFilters;
+  height: 20px;
+  margin-bottom: 0;
 }
 
 .ProductCharacteristics {
   grid-area: characteristics;
+  height: 220px;
 }
 
 .AverageRating {
-  font-size: 50px;
+  font-size: 275%;
   grid-area: number;
   height: 1px;
   padding-bottom: 10px;
@@ -64,6 +105,7 @@
 
 .PercentReviews {
   grid-area: percent;
+  /* text-align: center; */
 }
 
 .ReviewsRatingBar {
@@ -71,11 +113,12 @@
   height: 16px;
   border: 0 4px 0 4px;
   border-radius: 8px;
+  width: 60%;
 }
 
 #StarsBar1:hover, #StarsBar2:hover,
 #StarsBar3:hover, #StarsBar4:hover, #StarsBar5:hover {
-  background-color: rgb(206, 206, 206);
+  background-color:rgb(206, 206, 206);
   cursor: pointer;
 }
 
@@ -98,3 +141,31 @@
 #StarsBar5 {
   grid-area: star5;
 }
+
+.CharacteristicBar {
+  font-size: large;
+  display: grid;
+  grid-template-areas:
+  'title title'
+  'poor great'
+}
+
+.CharBarTitle {
+  padding-top: 4%;
+  grid-area: title;
+}
+
+.CharacteristicDescriptionPoor {
+  font-size: small;
+  grid-area: poor;
+}
+
+.CharacteristicDescriptionGreat {
+  font-size: small;
+  grid-area: great;
+  text-align: right;
+}
+
+/* .CharacteristicIcon {
+  width: 30px;
+} */

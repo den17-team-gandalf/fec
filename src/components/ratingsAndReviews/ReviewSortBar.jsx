@@ -8,7 +8,7 @@ export default function ReviewSortBar({ numReviews }) {
   return (
     <contexts.RatingsContext.Consumer>
       {([reviews, updateReviews]) => (
-        <div className="SortBar">
+        <div className="ReviewSortBar">
           {`${numReviews} reviews, sorted by `}
           <select
             name="sortMethod"
