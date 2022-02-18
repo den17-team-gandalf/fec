@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import Ratings from 'react-ratings-declarative';
 import ReviewStarBar from './ReviewStarBar';
 
-export default function RatingsBreakdown({ metadata }) {
+export default function RatingsBreakdown({ metadata, filterHook }) {
   const numReviews = parseInt(metadata.recommended.false, 10)
     + parseInt(metadata.recommended.true, 10);
   const avgRating = (Math.floor((
@@ -18,36 +18,50 @@ export default function RatingsBreakdown({ metadata }) {
   const modeStarRating = Math.max(
     ...Object.values(metadata.ratings).map((x) => Number(x)),
   );
+
   return (
     <div className="RatingsLeftSide">
-      <h1 className="AverageRating">{avgRating}</h1>
-      <div className="OverallStarRating">
-        <Ratings
-          rating={avgRating}
-          widgetRatedColors="orange"
-          widgetDimensions="25px"
-          widgetSpacings="2px"
-        >
-          <Ratings.Widget />
-          <Ratings.Widget />
-          <Ratings.Widget />
-          <Ratings.Widget />
-          <Ratings.Widget />
-        </Ratings>
+      <div className="RatingsLeftSideStars">
+        <h1 className="AverageRating">{avgRating}</h1>
+        <div className="OverallStarRating">
+          <Ratings
+            rating={avgRating}
+            widgetRatedColors="orange"
+            widgetDimensions="25px"
+            widgetSpacings="2px"
+          >
+            <Ratings.Widget />
+            <Ratings.Widget />
+            <Ratings.Widget />
+            <Ratings.Widget />
+            <Ratings.Widget />
+          </Ratings>
+        </div>
+        <div className="PercentReviews">
+          {`${percentPositive}% of reviews recommend this product`}
+        </div>
+        {Object.keys(metadata.ratings).map(
+          (numStars) => (
+            <ReviewStarBar
+              numStars={Number(numStars)}
+              modeStarRating={modeStarRating.toString()}
+              numMatching={metadata.ratings[numStars]}
+              filterHook={filterHook}
+              key={numStars}
+            />
+          ),
+        )}
       </div>
-      <div className="PercentReviews">
-        {`${percentPositive}% of reviews recommend this product`}
+      <div className="ReviewsFilterDisplay">
+        {(filterHook[0].length !== 0) && (
+          <div>
+            {`Currently Applied Filters: ${JSON.stringify(filterHook[0]).slice(1, -1)}`}
+          </div>
+        )}
       </div>
-      {Object.keys(metadata.ratings).map(
-        (numStars) => (
-          <ReviewStarBar
-            numStars={Number(numStars)}
-            modeStarRating={modeStarRating.toString()}
-            numMatching={metadata.ratings[numStars]}
-            key={numStars}
-          />
-        ),
-      )}
+      <div className="ProductCharacteristics">
+        Characteristics here
+      </div>
     </div>
   );
 }
@@ -59,4 +73,5 @@ RatingsBreakdown.propTypes = {
     recommended: propTypes.object,
     characteristics: propTypes.object,
   }).isRequired,
+  filterHook: propTypes.arrayOf(propTypes.any).isRequired,
 };

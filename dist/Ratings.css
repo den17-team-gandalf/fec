@@ -3,9 +3,9 @@
 }
 
 .ReviewsList {
-  height: 350px;
+  height: 500px;
   width: 90%;
-  word-break: break-all;
+  word-break: break-word;
   overflow: scroll;
 }
 
@@ -19,6 +19,17 @@
 } */
 
 .RatingsLeftSide {
+  height: 500px;
+  display: grid;
+  grid-template-areas:
+  'starBreakdowns'
+  'currentFilters'
+  'characteristics';
+}
+
+.RatingsLeftSideStars {
+  height: 250px;
+  grid-area: starBreakdowns;
   display: grid;
   grid-template-areas:
   'number stars stars'
@@ -30,16 +41,25 @@
   'star5 star5 star5'
 }
 
+.ReviewsFilterDisplay {
+  grid-area: currentFilters;
+}
+
+.ProductCharacteristics {
+  grid-area: characteristics;
+}
+
 .AverageRating {
   font-size: 50px;
   grid-area: number;
   height: 1px;
+  padding-bottom: 10px;
 }
 
 .OverallStarRating {
   grid-area: stars;
-  height: 10%;
-  padding-top: 25%;
+  height: 10px;
+  padding-top: 40px;
 }
 
 .PercentReviews {
@@ -55,7 +75,7 @@
 
 #StarsBar1:hover, #StarsBar2:hover,
 #StarsBar3:hover, #StarsBar4:hover, #StarsBar5:hover {
-  background-color: gray;
+  background-color: rgb(206, 206, 206);
   cursor: pointer;
 }
 
