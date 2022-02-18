@@ -14,9 +14,9 @@
   grid-template-columns: 30% 70%;
 }
 
-.ReviewsRightSide {
+/* .ReviewsRightSide {
 
-}
+} */
 
 .RatingsLeftSide {
   display: grid;
@@ -33,19 +33,31 @@
 .AverageRating {
   font-size: 50px;
   grid-area: number;
+  height: 1px;
 }
 
 .OverallStarRating {
   grid-area: stars;
+  height: 10%;
+  padding-top: 25%;
 }
 
 .PercentReviews {
   grid-area: percent;
 }
 
-/* .ReviewStarBar {
-  grid-area: bar;
-} */
+.ReviewsRatingBar {
+  background-color: green;
+  height: 16px;
+  border: 0 4px 0 4px;
+  border-radius: 8px;
+}
+
+#StarsBar1:hover, #StarsBar2:hover,
+#StarsBar3:hover, #StarsBar4:hover, #StarsBar5:hover {
+  background-color: gray;
+  cursor: pointer;
+}
 
 #StarsBar1 {
   grid-area: star1;

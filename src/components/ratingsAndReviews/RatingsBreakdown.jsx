@@ -16,7 +16,7 @@ export default function RatingsBreakdown({ metadata }) {
   const percentPositive = Math.floor(((Number(metadata.recommended.true))
     / numReviews) * 100);
   const modeStarRating = Math.max(
-    Object.values(metadata.ratings).map((x) => Number(x)),
+    ...Object.values(metadata.ratings).map((x) => Number(x)),
   );
   return (
     <div className="RatingsLeftSide">
@@ -42,8 +42,8 @@ export default function RatingsBreakdown({ metadata }) {
         (numStars) => (
           <ReviewStarBar
             numStars={Number(numStars)}
-            modeStarRating={modeStarRating}
-            numMatching={Number(metadata.ratings[numStars])}
+            modeStarRating={modeStarRating.toString()}
+            numMatching={metadata.ratings[numStars]}
             key={numStars}
           />
         ),
