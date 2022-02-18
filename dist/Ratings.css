@@ -43,10 +43,12 @@
 
 .ReviewsFilterDisplay {
   grid-area: currentFilters;
+  height: 20px;
 }
 
 .ProductCharacteristics {
   grid-area: characteristics;
+  height: 220px;
 }
 
 .AverageRating {
@@ -73,9 +75,13 @@
   border-radius: 8px;
 }
 
+.ToggledRatingsFilter {
+  background-color: rgb(233, 233, 233)
+}
+
 #StarsBar1:hover, #StarsBar2:hover,
 #StarsBar3:hover, #StarsBar4:hover, #StarsBar5:hover {
-  background-color: rgb(206, 206, 206);
+  background-color:rgb(206, 206, 206);
   cursor: pointer;
 }
 

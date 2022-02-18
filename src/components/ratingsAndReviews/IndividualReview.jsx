@@ -21,6 +21,12 @@ const markHelpful = (e, id, updateHelpfulness, unUsed) => {
   }
 };
 
+const formatDateString = (date) => {
+  let str = new Date(date).toDateString();
+  str = `${str.slice(4, str.length - 5)},${str.slice(str.length - 5, str.length)}`;
+  return str;
+};
+
 const reportReview = (e, id, unUsed) => {
   if (unUsed.flag) {
     axios.put(`/reviews/${id}/report`)
@@ -54,7 +60,7 @@ export default function IndividualReview({ review }) {
         <Ratings.Widget />
       </Ratings>
       {review.reviewer_name}
-      {`, Time ${review.date} (Modules to make together with others)`}
+      {`, ${formatDateString(review.date)} (Modules to make together with others)`}
       <h3 className="ReviewBody">
         {review.summary}
       </h3>

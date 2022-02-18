@@ -2,7 +2,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const updateFilters = (filterHook, numStars) => {
+const updateFilters = (e, filterHook, numStars) => {
   const i = filterHook[0].indexOf(numStars);
   if (i !== -1) {
     filterHook[1](filterHook[0].slice(0, i).concat(
@@ -18,7 +18,7 @@ export default function ReviewStarBar({
 }) {
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div id={`StarsBar${numStars}`} onClick={() => updateFilters(filterHook, numStars)}>
+    <div id={`StarsBar${numStars}`} onClick={(e) => updateFilters(e, filterHook, numStars)}>
       {`${numStars} stars`}
       <progress className="ReviewsRatingBar" max={modeStarRating} value={numMatching} />
       {numMatching}
