@@ -33,7 +33,9 @@ export default function RatingsAndReviews() {
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <contexts.RatingsContext.Provider value={ratingsHook}>
-      <h2 className="RatingsTitle">Ratings & Reviews</h2>
+      <section id="scrollTo">
+        <h2 className="RatingsTitle">Ratings & Reviews</h2>
+      </section>
       <div className="RatingsAndReviewsGrid">
         {metadataHook[0].recommended && (<RatingsBreakdown metadata={metadataHook[0]} />)}
         <ReviewsList numReviews={metadataHook[0].recommended
