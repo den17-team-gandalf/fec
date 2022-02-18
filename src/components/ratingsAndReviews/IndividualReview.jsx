@@ -69,7 +69,8 @@ export default function IndividualReview({ review }) {
         {review.summary}
       </h3>
       <p className="ReviewBody">
-        {review.body}
+        {review.body.length < 250 && review.body}
+        {review.body.length > 250 && `${review.body.slice(0, 250)}... Load More TODO`}
       </p>
       {review.photos.map(({ url, id }) => (<img src={url} alt="user-submitted" width="100" key={id} />))}
       {review.recommend && (<div className="ReviewRecommendation">✓ I recommend this product</div>)}

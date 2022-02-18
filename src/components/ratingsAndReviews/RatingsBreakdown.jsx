@@ -14,6 +14,13 @@ export default function RatingsBreakdown({ metadata, filterHook }) {
     + (Number(metadata.ratings['4']) * 4)
     + (Number(metadata.ratings['5']) * 5)
   ) / (numReviews / 4)) / 4);
+  const roundedRating = (Math.round((
+    Number(metadata.ratings['1'])
+    + (Number(metadata.ratings['2']) * 2)
+    + (Number(metadata.ratings['3']) * 3)
+    + (Number(metadata.ratings['4']) * 4)
+    + (Number(metadata.ratings['5']) * 5)
+  ) / (numReviews / 10)) / 10);
   const percentPositive = Math.floor(((Number(metadata.recommended.true))
     / numReviews) * 100);
   const modeStarRating = Math.max(
@@ -23,7 +30,7 @@ export default function RatingsBreakdown({ metadata, filterHook }) {
   return (
     <div className="RatingsLeftSide">
       <div className="RatingsLeftSideStars">
-        <h1 className="AverageRating">{avgRating}</h1>
+        <h1 className="AverageRating">{roundedRating}</h1>
         <div className="OverallStarRating">
           <Ratings
             rating={avgRating}
@@ -39,7 +46,7 @@ export default function RatingsBreakdown({ metadata, filterHook }) {
           </Ratings>
         </div>
         <div className="PercentReviews">
-          {`${percentPositive}% of reviews recommend this product`}
+          {`${percentPositive}% of ${numReviews} reviews recommend this product`}
         </div>
         {Object.keys(metadata.ratings).map(
           (numStars) => (
