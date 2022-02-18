@@ -2,29 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import contexts from '../contexts';
 
-export default function PDCarouselSlide({ thisPhoto }) {
-  const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
+export default function PDCarouselSlide({
+  thisPhoto, currentPhoto, setCurrentPhoto,
+}) {
+  const clicky = () => {
+    setCurrentPhoto(thisPhoto.url);
+  };
   return (
-    <div id="imgCard">
+    <div className="imgCardContainer">
       <input
+        className="imgCard"
         type="image"
-        // onClick={(e) => {
-        //   clicky(e);
-        // }}
+        onClick={(e) => {
+          clicky(e);
+        }}
         src={thisPhoto.thumbnail_url}
         alt="Carousel Style Image"
         value={thisPhoto}
-        style={{
-          width: '60px',
-          height: '60px',
-          border: '2px solid black',
-          backgroundColor: 'black',
-        }}
       />
+      {currentPhoto === thisPhoto.url
+      && <div className="imgToggleLine" />}
     </div>
   );
 }
 
 PDCarouselSlide.propTypes = {
   thisPhoto: PropTypes.object,
+  currentPhoto: PropTypes.string,
+  setCurrentPhoto: PropTypes.func,
 };

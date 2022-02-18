@@ -6,16 +6,18 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import contexts from '../contexts';
 
 export default function PDStyle({
-  thisStyle, toggled, setToggled,
+  thisStyle, toggled, setToggled, currentPhoto, setCurrentPhoto,
 }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
   const clicky = () => {
     setCurrentStyle(thisStyle);
     setToggled(thisStyle.name);
+    setCurrentPhoto(thisStyle.photos[0].url);
   };
   return (
-    <span style={{ display: 'block', position: 'relative' }}>
+    <span className="PDStyle">
       <input
+        className="PDStyleImg"
         type="image"
         onClick={(e) => {
           clicky(e);
@@ -23,22 +25,10 @@ export default function PDStyle({
         src={thisStyle.photos[0].thumbnail_url}
         alt={thisStyle.name}
         value={thisStyle}
-        style={{
-          borderRadius: '100%',
-          width: '60px',
-          height: '60px',
-          border: '2px solid black',
-          backgroundColor: 'black',
-        }}
       />
       {toggled === thisStyle.name
       && (
-      <FontAwesomeIcon
-        icon={faCheck}
-        style={{
-          position: 'absolute', padding: '2px', top: '0', right: '0', color: 'green', borderRadius: '100%', backgroundColor: 'white', border: '2px solid black',
-        }}
-      />
+      <FontAwesomeIcon className="I_checksS" icon={faCheck} />
       )}
     </span>
   );
@@ -50,4 +40,6 @@ PDStyle.propTypes = {
   toggled: PropTypes.string,
   setToggled: PropTypes.func,
   setCurrentStyle: PropTypes.func,
+  currentPhoto: PropTypes.string,
+  setCurrentPhoto: PropTypes.func,
 };

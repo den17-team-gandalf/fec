@@ -5,33 +5,60 @@ import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import contexts from '../contexts';
 import PDCarouselSlides from './PDCarouselSlides';
 
-export default function PDCarousel() {
+export default function PDCarousel({
+  areaChanger, expanded, setExpanded, currentPhoto, setCurrentPhoto,
+}) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
+  const clicky = () => {
+    setExpanded(!expanded);
+    if (expanded) {
+      areaChanger.current.style.gridTemplateAreas = `
+        "carousel carousel main"
+        "carousel carousel styles"
+        "carousel carousel shop"
+        "details details details"
+    `;
+    } else {
+      areaChanger.current.style.gridTemplateAreas = `
+        "carousel carousel carousel"
+        "carousel carousel carousel"
+        "carousel carousel carousel"
+        "details details details"
+    `;
+    }
+  };
   return (
-    <div style={{
-      display: 'grid', position: 'relative', gridArea: 'carousel', backgroundColor: 'gray', width: 'auto', height: '600px', margin: '15px',
-    }}
-    >
-      <div id="cSlides" style={{ position: 'absolute' }}>
-        <PDCarouselSlides />
+    <div className="PDCarousel">
+      <div className="cSlides">
+        <PDCarouselSlides
+          currentPhoto={currentPhoto}
+          setCurrentPhoto={setCurrentPhoto}
+        />
       </div>
-      <img
-        src={currentStyle.photos[0].url}
-        alt={currentStyle.name}
-        style={{
-          width: '300px', height: 'auto', alignSelf: 'center', justifySelf: 'center', objectFit: 'cover',
-        }}
-      />
-      <FontAwesomeIcon
-        icon={faExpand}
-        style={{
-          position: 'absolute', top: '20px', right: '20px', padding: '2px', color: 'black',
-        }}
-      />
+      {currentPhoto === '' ? (
+        <img
+          src={currentStyle.photos[0].url}
+          className="primaryImg"
+          alt={currentStyle.name}
+        />
+      )
+        : (
+          <img
+            src={currentPhoto}
+            className="primaryImg"
+            alt={currentStyle.name}
+          />
+        )}
+      <FontAwesomeIcon onClick={(e) => { clicky(e); }} className="I_expand" icon={faExpand} />
     </div>
   );
 }
 
 PDCarousel.propTypes = {
+  areaChanger: PropTypes.object,
   currentStyle: PropTypes.object,
+  currentPhoto: PropTypes.string,
+  setCurrentPhoto: PropTypes.func,
+  expanded: PropTypes.bool,
+  setExpanded: PropTypes.func,
 };
