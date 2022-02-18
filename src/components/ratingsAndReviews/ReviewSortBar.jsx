@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import contexts from '../contexts';
 
-export default function RatingsSortBar({ sortMethod, updateSort, numReviews }) {
+export default function ReviewSortBar({ sortMethod, updateSort, numReviews }) {
   return (
     <contexts.RatingsContext.Consumer>
       {([reviews, updateReviews]) => (
@@ -35,7 +35,7 @@ export default function RatingsSortBar({ sortMethod, updateSort, numReviews }) {
   );
 }
 
-RatingsSortBar.propTypes = {
+ReviewSortBar.propTypes = {
   sortMethod: propTypes.string.isRequired,
   updateSort: propTypes.func.isRequired,
   numReviews: propTypes.number.isRequired,

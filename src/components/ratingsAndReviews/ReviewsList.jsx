@@ -3,7 +3,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import contexts from '../contexts';
 import IndividualReview from './IndividualReview';
-import RatingsSortBar from './RatingsSortBar';
+import ReviewSortBar from './ReviewSortBar';
 
 let nextPage = 3;
 
@@ -25,8 +25,8 @@ export default function ReviewsList({ numReviews }) {
   return (
     <contexts.RatingsContext.Consumer>
       {([reviews, updateReviews]) => (
-        <div>
-          <RatingsSortBar sortMethod={sortMethod} updateSort={updateSort} numReviews={numReviews} />
+        <div className="ReviewsRightSide">
+          <ReviewSortBar sortMethod={sortMethod} updateSort={updateSort} numReviews={numReviews} />
           <ul className="ReviewsList">
             {reviews.slice(0, displayedReviews).map(
               (review) => <IndividualReview review={review} key={review.review_id} />,

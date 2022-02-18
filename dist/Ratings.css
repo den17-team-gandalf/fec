@@ -4,7 +4,77 @@
 
 .ReviewsList {
   height: 350px;
+  width: 90%;
+  word-break: break-all;
   overflow: scroll;
 }
 
+.RatingsAndReviewsGrid {
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
 
+/* .ReviewsRightSide {
+
+} */
+
+.RatingsLeftSide {
+  display: grid;
+  grid-template-areas:
+  'number stars stars'
+  'percent percent percent'
+  'star1 star1 star1'
+  'star2 star2 star2'
+  'star3 star3 star3'
+  'star4 star4 star4'
+  'star5 star5 star5'
+}
+
+.AverageRating {
+  font-size: 50px;
+  grid-area: number;
+  height: 1px;
+}
+
+.OverallStarRating {
+  grid-area: stars;
+  height: 10%;
+  padding-top: 25%;
+}
+
+.PercentReviews {
+  grid-area: percent;
+}
+
+.ReviewsRatingBar {
+  background-color: green;
+  height: 16px;
+  border: 0 4px 0 4px;
+  border-radius: 8px;
+}
+
+#StarsBar1:hover, #StarsBar2:hover,
+#StarsBar3:hover, #StarsBar4:hover, #StarsBar5:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+#StarsBar1 {
+  grid-area: star1;
+}
+
+#StarsBar2 {
+  grid-area: star2;
+}
+
+#StarsBar3 {
+  grid-area: star3;
+}
+
+#StarsBar4 {
+  grid-area: star4;
+}
+
+#StarsBar5 {
+  grid-area: star5;
+}
