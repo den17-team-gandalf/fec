@@ -9,6 +9,12 @@
   overflow: scroll;
 }
 
+.LoadReviewsButton {
+  position: center;
+  display: grid;
+  margin: auto;
+}
+
 .RatingsAndReviewsGrid {
   display: grid;
   grid-template-columns: 30% 70%;
@@ -20,6 +26,7 @@
 
 .RatingsLeftSide {
   height: 500px;
+  padding-left: 2%;
   display: grid;
   grid-template-areas:
   'starBreakdowns'
@@ -73,6 +80,7 @@
   height: 16px;
   border: 0 4px 0 4px;
   border-radius: 8px;
+  width: 60%;
 }
 
 .ToggledRatingsFilter {
@@ -105,3 +113,30 @@
   grid-area: star5;
 }
 
+.CharacteristicBar {
+  font-size: medium;
+  display: grid;
+  grid-template-areas:
+  'title title'
+  'poor great'
+}
+
+.CharBarTitle {
+  padding-top: 4%;
+  grid-area: title;
+}
+
+.CharacteristicDescriptionPoor {
+  font-size: small;
+  grid-area: poor;
+}
+
+.CharacteristicDescriptionGreat {
+  font-size: small;
+  grid-area: great;
+  text-align: right;
+}
+
+/* .CharacteristicIcon {
+  width: 30px;
+} */

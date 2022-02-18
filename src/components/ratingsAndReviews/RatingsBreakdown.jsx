@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import Ratings from 'react-ratings-declarative';
 import ReviewStarBar from './ReviewStarBar';
+import CharacteristicBar from './CharacteristicBar';
 
 export default function RatingsBreakdown({ metadata, filterHook }) {
   const numReviews = parseInt(metadata.recommended.false, 10)
@@ -60,7 +61,15 @@ export default function RatingsBreakdown({ metadata, filterHook }) {
         )}
       </div>
       <div className="ProductCharacteristics">
-        Characteristics here
+        {Object.keys(metadata.characteristics).map(
+          (characteristic) => (
+            <CharacteristicBar
+              key={metadata.characteristics[characteristic].id}
+              characteristic={characteristic}
+              rating={Number(metadata.characteristics[characteristic].value)}
+            />
+          ),
+        )}
       </div>
     </div>
   );
