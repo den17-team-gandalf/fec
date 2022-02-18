@@ -9,7 +9,7 @@ let flag = true;
 export default function RatingsAndReviews() {
   const ratingsHook = React.useState([]);
   const metadataHook = React.useState({});
-  const filterHook = React.useState([1, 2, 3, 4, 5]);
+  const filterHook = React.useState([]);
 
   if (flag) {
     flag = false;
@@ -30,7 +30,6 @@ export default function RatingsAndReviews() {
   }
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <contexts.RatingsContext.Provider value={ratingsHook}>
       <h2 className="RatingsTitle">Ratings & Reviews</h2>
       <div className="RatingsAndReviewsGrid">
