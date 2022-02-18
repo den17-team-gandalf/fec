@@ -83,30 +83,33 @@ export default function PDWidget() {
       })
       .catch(() => { });
   }
+  const [currentPhoto, setCurrentPhoto] = React.useState(styleHook[0].photos[0].url);
+  const [expanded, setExpanded] = React.useState(false);
+  const areaChanger = React.createRef(0);
   return (
-    <div
-      id="PDWidget"
-      style={{
-        display: 'grid',
-        gridTemplateAreas: `
-          'carousel carousel main'
-          'carousel carousel styles'
-          'carousel carousel shop'
-          'details details details'
-        `,
-        width: 'auto',
-        justifyContent: 'center',
-      }}
-    >
+    <div className="PDWidget" ref={areaChanger}>
       <contexts.DetailsContext.Provider value={styleHook}>
         <PDCarousel
+          areaChanger={areaChanger}
+          expanded={expanded}
+          setExpanded={setExpanded}
+          currentPhoto={currentPhoto}
+          setCurrentPhoto={setCurrentPhoto}
           styles={productStyles}
         />
-        <PDMainDisc product={product} />
-        <PDStyles
-          styles={productStyles}
-        />
-        <PDShop />
+        {expanded === false
+        && (
+          <>
+            <PDMainDisc product={product} />
+            <PDStyles
+              currentPhoto={currentPhoto}
+              setCurrentPhoto={setCurrentPhoto}
+              styles={productStyles}
+            />
+            <PDShop />
+          </>
+        )}
+
         <PDInfo product={product} />
       </contexts.DetailsContext.Provider>
     </div>

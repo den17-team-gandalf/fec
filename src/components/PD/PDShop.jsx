@@ -21,22 +21,11 @@ export default function PDShop() {
   // }, [currentSkuQ]);
   // React.useEffect(() => (<input type="number" min="0" max={currentSkuQ} />), [currentSkuQ]);
   return (
-    <div
-      id="shop"
-      style={{ gridArea: 'shop' }}
-    >
-      <form style={{
-        display: 'grid', gridTemplateAreas: `
-          'size size quantity'
-          'bag bag bag'
-          `,
-      }}
-      >
+    <div className="PDShop">
+      <form className="shopForm">
         <select
           ref={selectEl}
-          style={{
-            height: '40px', cursor: 'pointer', gridArea: 'size',
-          }}
+          className="sizeSelector"
           onChange={(e) => selectChanger(e)}
           name="size"
           id="size"
@@ -60,17 +49,14 @@ export default function PDShop() {
         {' '}
         {' '}
         {' '}
-        {Object.keys(currentSkuQ).length === 0 ? <input ref={inputEl} style={{ height: '34px', gridArea: 'quantity' }} type="text" placeholder="-" readOnly />
+        {Object.keys(currentSkuQ).length === 0 ? <input className="quantitySelector" ref={inputEl} type="text" placeholder="-" readOnly />
           : (
-            <input ref={inputEl} style={{ height: '34px', gridArea: 'quantity' }} type="number" defaultValue="1" min="1" max={currentSkuQ > 15 ? '15' : currentSkuQ} />
+            <input className="quantitySelector" ref={inputEl} type="number" defaultValue="1" min="1" max={currentSkuQ > 15 ? '15' : currentSkuQ} />
           )}
-
         <br />
         <br />
         <input
-          style={{
-            height: '40px', backgroundColor: 'white', cursor: 'pointer', gridArea: 'bag',
-          }}
+          className="addToBag"
           type="button"
           value="ADD TO BAG"
         />

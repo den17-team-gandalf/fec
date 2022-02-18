@@ -1,3 +1,214 @@
 body {
   margin: 0;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  color: dimgray;
+}
+
+.PDWidget {
+  display: grid;
+  grid-template-areas:
+    "carousel carousel main"
+    "carousel carousel styles"
+    "carousel carousel shop"
+    "details details details";
+  width: auto;
+  justify-content: center;
+}
+
+.PDCarousel {
+  display: grid;
+  position: relative;
+  grid-area: carousel;
+  background-color: gray;
+  width: auto;
+  height: 600px;
+  margin: 15px;
+}
+
+.PDMainDisc {
+  grid-area: main;
+}
+
+.productName {
+  font-size: 2em;
+  color: #303030;
+}
+
+.salePrice {
+  color: red;
+}
+
+.cSlides {
+  position: absolute;
+  z-index: 1;
+}
+
+.primaryImg {
+  width: 300px;
+  height: auto;
+  align-self: center;
+  justify-self: center;
+  object-fit: cover;
+}
+
+.I_expand {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 2px;
+  color: black;
+  cursor: pointer;
+}
+
+.PDInfo {
+  display: grid;
+  grid-template-areas:
+  'disc line checks'
+  'share line checks';
+  grid-area: details;
+  margin: 15px;
+}
+
+.description {
+  grid-area: disc;
+}
+
+.vl {
+  border-left: 2px solid gray;
+  height: 100%;
+  grid-area: line;
+  margin: 10px;
+}
+
+.addthis_inline_share_toolbox {
+  grid-area: share;
+  margin: 10px;
+}
+
+.I_checksD {
+  position: relative;
+  grid-area: checks;
+  margin: 10px;
+}
+
+.PDShop {
+  grid-area: shop;
+}
+
+.shopForm {
+  display: grid;
+  grid-template-areas:
+    'size size quantity'
+    'bag bag bag';
+}
+
+.sizeSelector {
+  height: 40px;
+  cursor: pointer;
+  grid-area: size;
+}
+
+.quantitySelector {
+  height: 34px;
+  grid-area: quantity;
+}
+
+.addToBag {
+  height: 40px;
+  background-color: white;
+  cursor: pointer;
+  grid-area: bag;
+}
+
+.PDStyles {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-area: styles;
+  grid-template-columns: repeat(4, 70px);
+  gap: 10px;
+}
+
+.PDStyle {
+  display: block;
+  position: relative;
+}
+
+.PDStyleImg {
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  border: 2px solid black;
+  background-color: black;
+}
+
+.I_checksS {
+  position: absolute;
+  padding: 2px;
+  top: 0;
+  right: 0;
+  color: green;
+  border-radius: 100%;
+  background-color: white;
+  border: 2px solid black;
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: #303030;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  color: lightgray;
+  display: grid;
+  align-content: center;
+}
+
+.hLogo {
+  margin-left: 15px;
+}
+
+.hSearch {
+  margin-right: 15px;
+  position: fixed;
+  right: 0px;
+}
+
+.hInput {
+  color: lightgray;
+  outline: 0;
+  border-width: 0 0 1px;
+  background-color: #303030;
+}
+
+.PDSlides {
+  margin: 15px;
+  position: relative;
+}
+
+.imgToggleLine {
+  border-top: 2px solid black;
+  position: relative;
+  bottom: 8px;
+}
+
+.imgCardContainer {
+  position: relative;
+}
+
+.imgCard {
+  width: 60px;
+  height: 60px;
+  border: 2px solid black;
+  background-color: black;
+  margin: 5px;
+  position: relative;
+}

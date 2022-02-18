@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import PDStyle from './PDStyle';
 import contexts from '../contexts';
 
-export default function PDStyles({ styles }) {
+export default function PDStyles({ styles, currentPhoto, setCurrentPhoto }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
   const [toggled, setToggled] = React.useState(currentStyle.name);
   return (
-    <div id="PDStylesContainer">
+    <div className="PDStylesContainer">
       <strong>
         Style
         {' '}
@@ -18,12 +18,7 @@ export default function PDStyles({ styles }) {
       {currentStyle.name}
       <br />
       <br />
-      <div
-        id="PDStyles"
-        style={{
-          display: 'grid', alignItems: 'center', justifyItems: 'center', gridArea: 'styles', gridTemplateColumns: 'repeat(4, 70px)', gap: '10px',
-        }}
-      >
+      <div className="PDStyles">
         {Object.keys(styles).length !== 0
         && styles.results.map((style) => (
           <PDStyle
@@ -31,6 +26,8 @@ export default function PDStyles({ styles }) {
             toggled={toggled}
             setToggled={setToggled}
             thisStyle={style}
+            currentPhoto={currentPhoto}
+            setCurrentPhoto={setCurrentPhoto}
           />
         ))}
       </div>
@@ -42,4 +39,6 @@ PDStyles.propTypes = {
   styles: PropTypes.object,
   currentStyle: PropTypes.object,
   setCurrentStyle: PropTypes.func,
+  currentPhoto: PropTypes.string,
+  setCurrentPhoto: PropTypes.func,
 };
