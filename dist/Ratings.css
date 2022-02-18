@@ -1,3 +1,9 @@
+.RatingsTitle {
+  padding-left: 1.2%;
+  font-size: 275%;
+  margin-bottom: 0;
+}
+
 .ResponseBox {
   background-color: gray;
 }
@@ -7,6 +13,31 @@
   width: 90%;
   word-break: break-word;
   overflow: scroll;
+  list-style-type: none;
+}
+
+.IndividualReviewTitleBar {
+  display: grid;
+  grid-template-areas:
+  'stars username';
+}
+
+.ReviewStarRating {
+  grid-area: stars;
+}
+
+.ReviewUsernameAndDate {
+  grid-area: username;
+  text-align: right;
+}
+
+.ReviewSortBar {
+  text-align: center;
+}
+
+.RatingHelpfulButton, .RatingReportButton {
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 .LoadReviewsButton {
@@ -26,7 +57,7 @@
 
 .RatingsLeftSide {
   height: 500px;
-  padding-left: 2%;
+  padding-left: 4%;
   display: grid;
   grid-template-areas:
   'starBreakdowns'
@@ -51,6 +82,7 @@
 .ReviewsFilterDisplay {
   grid-area: currentFilters;
   height: 20px;
+  margin-bottom: 0;
 }
 
 .ProductCharacteristics {
@@ -59,7 +91,7 @@
 }
 
 .AverageRating {
-  font-size: 50px;
+  font-size: 275%;
   grid-area: number;
   height: 1px;
   padding-bottom: 10px;
@@ -73,6 +105,7 @@
 
 .PercentReviews {
   grid-area: percent;
+  /* text-align: center; */
 }
 
 .ReviewsRatingBar {
@@ -81,10 +114,6 @@
   border: 0 4px 0 4px;
   border-radius: 8px;
   width: 60%;
-}
-
-.ToggledRatingsFilter {
-  background-color: rgb(233, 233, 233)
 }
 
 #StarsBar1:hover, #StarsBar2:hover,
@@ -114,7 +143,7 @@
 }
 
 .CharacteristicBar {
-  font-size: medium;
+  font-size: large;
   display: grid;
   grid-template-areas:
   'title title'

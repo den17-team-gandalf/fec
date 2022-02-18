@@ -46,21 +46,25 @@ export default function IndividualReview({ review }) {
   const [unUsed] = React.useState({ flag: true });
   return (
     <li className="IndividualReview">
-      <Ratings
-        rating={review.rating}
-        widgetRatedColors="green"
-        widgetDimensions="20px"
-        widgetSpacings="1px"
-        className="ReviewStarRating"
-      >
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-      </Ratings>
-      {review.reviewer_name}
-      {`, ${formatDateString(review.date)} (Modules to make together with others)`}
+      <div className="IndividualReviewTitleBar">
+        <Ratings
+          rating={review.rating}
+          widgetRatedColors="green"
+          widgetDimensions="20px"
+          widgetSpacings="1px"
+          className="ReviewStarRating"
+        >
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+        </Ratings>
+        <div className="ReviewUsernameAndDate">
+          {review.reviewer_name}
+          {`, ${formatDateString(review.date)}`}
+        </div>
+      </div>
       <h3 className="ReviewBody">
         {review.summary}
       </h3>
@@ -90,7 +94,7 @@ export default function IndividualReview({ review }) {
         >
           Yes
         </button>
-        {`(${helpfulness})  |  `}
+        {`(${helpfulness})   |   `}
         <button
           className="RatingReportButton"
           type="button"

@@ -11,7 +11,6 @@ const characteristicMeanings = {
 };
 
 export default function CharacteristicBar({ characteristic, rating }) {
-  console.log(rating, String((rating / 5) * 27.5));
   return (
     <div className="CharacteristicBar">
       <div className="CharBarTitle">
@@ -20,7 +19,7 @@ export default function CharacteristicBar({ characteristic, rating }) {
           src="https://cdn0.iconfinder.com/data/icons/famous-character-vol-2-colored/48/JD-41-512.png"
           alt="gandalf"
           style={{
-            width: '30px',
+            width: '35px',
             position: 'absolute',
             paddingLeft: `${String((rating / 5) * 27.5)}%`,
           }}
