@@ -32,6 +32,7 @@ export default function QAList() {
           placeholder="Have a question? Search for answers…"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
+          size="60"
         />
       </form>
       {renderList.map((q) => (
@@ -51,61 +52,3 @@ check if end of list if true remove button
 
 document.documentElement.clientHeight
 */
-
-// function SearchBar({ search }) {
-//   const [searchInput, setSearchInput] = useState('');
-
-//   useEffect(() => {
-//     if (searchInput.length >= 3) {
-//     }
-//   }, [searchInput]);
-
-//   return (
-//     <form
-//       onSubmit={() => {
-//         search;
-//         searchInput = '';
-//       }}
-//     >
-//       <input
-//         type="text"
-//         id="search"
-//         placeholder="Search for your answer"
-//         value={searchInput}
-//         onChange={(e) => setSearchInput(e.target.value)}
-//       />
-//       <button type="button">Search</button>
-//     </form>
-//   );
-// }
-
-// function AnswerList() {
-
-//   return (
-//   <>
-//   stuff.questions.results.map((question) => (
-//     <div key={question.question_id.toString()}>
-//       <h3>
-//         Q:
-//         {console.log(question.question_id.toString())}
-//         {question.question_body}
-//       </h3>
-//       {QAIndividual(question.answers)}
-//     </div>
-//   ))
-//   </>
-//   )
-// }
-
-// export default function QAList() {
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log(e.target[0]);
-//   };
-//   return (
-//     <>
-//       <SearchBar search={handleSubmit} />
-//       <AnswerList />
-//     </>
-//   );
-// }

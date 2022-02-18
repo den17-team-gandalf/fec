@@ -1,10 +1,12 @@
 import React from 'react';
 import QAList from './QAList';
-import Data from '../../dummyData';
+import useGetinfo from './useGetInfo';
 
 const QuestionAndAnswerData = React.createContext();
 export const QuestionAndAnswerConsumer = QuestionAndAnswerData.Consumer;
 export default function questions() {
+  const Data = useGetinfo();
+
   // const [height, setHeight] = useState(document.documentElement.clientHeight);
   const height = document.documentElement.clientHeight;
 

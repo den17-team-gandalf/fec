@@ -83,6 +83,7 @@ export default function PDWidget() {
       })
       .catch(() => { });
   }
+
   return (
     <div
       id="PDWidget"

@@ -2,15 +2,27 @@
 /* eslint-disable react/jsx-indent */
 /* eslint-disable indent */
 /* eslint-disable react/prop-types */
+import axios from 'axios';
 import React, { useState } from 'react';
 
 function AList({ a }) {
+  console.log(a);
+  const { photos, body, answerer_name, id, helpfulness } = a[1];
+  const [helpful, setHelpfulness] = useState(helpfulness);
+  function handleHelpfulClick(id) {
+    // axios.put()
+    console.log(id, ' id inside helpful');
+  }
+
+  let { date } = a[1];
+  date = new Date(date).toDateString();
+
   return (
     <div className="answer">
-      <p>{a[1].body}</p>
+      <p>{body}</p>
       <div className="thumbnail">
-        {a[1].photos
-          ? a[1].photos.map((link) => (
+        {photos
+          ? photos.map((link) => (
               <a key={link} target="_blank" href={link} rel="noreferrer">
                 <img src={link} alt="answer pic" style={{ width: '150px' }} />
               </a>
@@ -19,8 +31,18 @@ function AList({ a }) {
       </div>
       <sub className="author">
         by:
-        {a[1].answerer_name} | {a[1].date} | helpfulness: |<a href="#"> Yes </a>{' '}
-        ({a[1].helpfulness}) | <a href="#"> Report</a>
+        {answerer_name} | <time dateTime={date}>{date}</time> | helpfulness: |
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            handleHelpfulClick(id);
+          }}
+        >
+          {' '}
+          Yes{' '}
+        </a>{' '}
+        ({helpful}) | <a href="/"> Report</a>
       </sub>
     </div>
   );
@@ -48,7 +70,7 @@ export default function SetIndividualItem({ item }) {
   const [clicked, setClick] = useState(false);
   const numOfAns = answers.length;
   const sortedAnswers = answers
-    .sort((a, b) => a[1].helpfulness - b[1].helpfulness)
+    .sort((a, b) => a.helpfulness - b[1].helpfulness)
     .reverse(); // sort answers by helpfulness
   const renderAnswers = sortedAnswers.slice(0, 2);
   return (
