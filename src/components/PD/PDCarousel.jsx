@@ -61,9 +61,8 @@ export default function PDCarousel({
 
 PDCarousel.propTypes = {
   areaChanger: PropTypes.object,
-  currentStyle: PropTypes.object,
-  currentPhoto: PropTypes.string,
-  setCurrentPhoto: PropTypes.func,
-  expanded: PropTypes.bool,
-  setExpanded: PropTypes.func,
+  currentPhoto: PropTypes.string.isRequired,
+  setCurrentPhoto: PropTypes.func.isRequired,
+  expanded: PropTypes.bool.isRequired,
+  setExpanded: PropTypes.func.isRequired,
 };

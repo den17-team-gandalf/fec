@@ -48,7 +48,7 @@ export default function PDMainDisc({ product }) {
         <Ratings.Widget />
       </Ratings>
       {' '}
-      <a href="#scrollTo" target="_self">
+      <a href="#Reviews" target="_self">
         {' '}
         Read all
         {' '}

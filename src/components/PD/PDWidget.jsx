@@ -32,7 +32,7 @@ export default function PDWidget() {
   }
   return (
     <div className="PDWidget" ref={areaChanger}>
-      {Object.keys(product).length !== 0 && currentPhoto.length !== 0
+      {(Object.keys(product).length !== 0 && currentPhoto.length !== 0)
       && (
       <contexts.DetailsContext.Provider value={styleHook}>
         <PDCarousel
@@ -44,21 +44,22 @@ export default function PDWidget() {
           styles={productStyles}
         />
         {!expanded
-        && (
-          <>
-            <PDMainDisc product={product} />
-            <PDStyles
-              currentPhoto={currentPhoto}
-              setCurrentPhoto={setCurrentPhoto}
-              styles={productStyles}
-            />
-            <PDShop />
-          </>
-        )}
+          && (
+            <>
+              <PDMainDisc product={product} />
+              <PDStyles
+                currentPhoto={currentPhoto}
+                setCurrentPhoto={setCurrentPhoto}
+                styles={productStyles}
+              />
+              <PDShop />
+            </>
+          )}
 
         <PDInfo product={product} />
       </contexts.DetailsContext.Provider>
       )}
+
     </div>
   );
 }

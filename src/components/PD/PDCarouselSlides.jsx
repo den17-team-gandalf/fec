@@ -22,6 +22,6 @@ export default function PDCarouselSlides({
 }
 
 PDCarouselSlides.propTypes = {
-  currentPhoto: PropTypes.string,
-  setCurrentPhoto: PropTypes.func,
+  currentPhoto: PropTypes.string.isRequired,
+  setCurrentPhoto: PropTypes.func.isRequired,
 };
