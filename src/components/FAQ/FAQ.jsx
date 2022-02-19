@@ -5,32 +5,46 @@ import useGetinfo from './useGetInfo';
 const QuestionAndAnswerData = React.createContext();
 export const QuestionAndAnswerConsumer = QuestionAndAnswerData.Consumer;
 export default function questions() {
-  const Data = useGetinfo();
-
-  // const [height, setHeight] = useState(document.documentElement.clientHeight);
+  const data = useGetinfo();
   const height = document.documentElement.clientHeight;
 
-  // useEffect(
-  //   () => setHeight(document.documentElement.clientHeight),
-  //   [
-  //     window.addEventListener('resize', () => {
-  //       console.log('resize');
-  //     }),
-  //   ]
-  // );
-
   return (
-    <QuestionAndAnswerData.Provider value={Data}>
-      <div
-        style={{
-          maxHeight: `${height / 2}px`,
-          overflow: 'auto',
-          maxWidth: `${document.documentElement.clientWidth / 2}px`,
-        }}
-      >
-        <h1>Q&A</h1>
-        <QAList />
-      </div>
-    </QuestionAndAnswerData.Provider>
+    <div
+      style={{
+        maxHeight: `${height / 2}px`,
+        overflow: 'auto',
+      }}
+    >
+      <h1>Q&A</h1>
+      {data ? (
+        <QAList data={data} />
+      ) : (
+        <div
+          style={{
+            maxHeight: `${height / 2}px`,
+          }}
+        />
+      )}
+    </div>
   );
 }
+
+/*
+
+const markHelpful = (e, id, updateHelpfulness, unUsed) => {
+  // console.log(id, unUsed);
+  if (unUsed.flag) {
+    axios.put(`/reviews/${id}/helpful`)
+      .then(() => {
+        updateHelpfulness((x) => x + 1);
+        // eslint-disable-next-line no-param-reassign
+        unUsed.flag = false;
+        // e.target.childNodes[0].nodeValue = Number(e.target.text)
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+};
+
+*/

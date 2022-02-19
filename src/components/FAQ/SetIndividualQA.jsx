@@ -6,14 +6,14 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 function AList({ a }) {
-  console.log(a);
+  // console.log(a, ' a');
   const { photos, body, answerer_name, id, helpfulness } = a[1];
   const [helpful, setHelpfulness] = useState(helpfulness);
   function handleHelpfulClick(id) {
-    // axios.put()
-    console.log(id, ' id inside helpful');
+    axios.put(`/qa/answers/${id}/helpful`);
+    // console.log(id, ' id inside helpful');
+    setHelpfulness(helpful + 1);
   }
-
   let { date } = a[1];
   date = new Date(date).toDateString();
 
@@ -31,7 +31,7 @@ function AList({ a }) {
       </div>
       <sub className="author">
         by:
-        {answerer_name} | <time dateTime={date}>{date}</time> | helpfulness: |
+        {answerer_name} | <time dateTime={date}>{date}</time> | Helpfulness: |
         <a
           href="/"
           onClick={(e) => {
@@ -63,21 +63,21 @@ function Buttons({ click, setClick }) {
     </button>
   );
 }
-
-export default function SetIndividualItem({ item }) {
+export default function SetIndividualq({ question }) {
+  // console.log(question, ' ind');
   // eslint-disable-next-line react/destructuring-assignment
-  const answers = Object.entries(item.answers);
+  const answers = Object.entries(question.answers);
   const [clicked, setClick] = useState(false);
   const numOfAns = answers.length;
   const sortedAnswers = answers
-    .sort((a, b) => a.helpfulness - b[1].helpfulness)
+    .sort((a, b) => a[1].helpfulness - b[1].helpfulness)
     .reverse(); // sort answers by helpfulness
   const renderAnswers = sortedAnswers.slice(0, 2);
   return (
     <>
       <div>
         Q:
-        <div>{item.question_body}</div>
+        <div>{question.question_body}</div>
       </div>
       <div>
         A:

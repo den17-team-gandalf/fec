@@ -1,26 +1,27 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { questions } from '../../dummyData';
-import SetIndividualA from './SetIndividualQA';
+import SetIndividualQ from './SetIndividualQA';
 
-export default function QAList() {
-  const questionsList = questions.results;
-  const [renderList, setRenderList] = useState(questionsList);
+export default function QAList({ data }) {
+  const { results } = data;
+  // console.log(results, product_id);
+  const [renderList, setRenderList] = useState(results);
   const [searchInput, setSearchInput] = useState('');
   useEffect(() => {
     if (searchInput.length >= 3) {
-      let searchResult = questionsList.map((q) => {
+      let searchResult = renderList.map((q) => {
         if (
           q.question_body.toLowerCase().indexOf(searchInput.toLowerCase()) !==
           -1
         ) {
           return q;
         }
+        return undefined;
       });
       searchResult = searchResult.filter((x) => x !== undefined);
       setRenderList(searchResult);
     } else {
-      setRenderList(questionsList);
+      setRenderList(results);
     }
   }, [searchInput]);
   return (
@@ -31,24 +32,16 @@ export default function QAList() {
           id="search"
           placeholder="Have a question? Search for answers…"
           value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
+          onChange={(e) => {
+            e.preventDefault();
+            setSearchInput(e.target.value);
+          }}
           size="60"
         />
       </form>
       {renderList.map((q) => (
-        <SetIndividualA item={q} key={q.question_id} />
+        <SetIndividualQ key={q.question_id} question={q} />
       ))}
     </>
   );
 }
-
-/*
-create a state keeping track of how many reviews to render
-create state to keep track if "more review" needs to still render
-create function to update list with 2 more answers
-check to see if the height of list takes up full screen
-if more entries after full screen keep rending more reviews but now it scrolls
-check if end of list if true remove button
-
-document.documentElement.clientHeight
-*/
