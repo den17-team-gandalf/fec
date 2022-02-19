@@ -40,10 +40,34 @@
   margin-right: 1%;
 }
 
+.ReviewsListButtons {
+  display: grid;
+  grid-template-areas:
+  'load add'
+}
+
 .LoadReviewsButton {
-  position: center;
+  grid-area: load;
+  position: absolute;
   display: grid;
   margin: auto;
+  margin-left: 25%;
+}
+
+.AddReviewButton {
+  grid-area: add;
+  position: absolute;
+  display: grid;
+  margin: auto;
+  margin-left: 40%;
+}
+
+/* .AddReviewErrorMessage {
+  color: red;
+} */
+
+.ReviewInput:invalid {
+  background-color: rgb(255, 155, 155);
 }
 
 .RatingsAndReviewsGrid {
@@ -165,7 +189,3 @@
   grid-area: great;
   text-align: right;
 }
-
-/* .CharacteristicIcon {
-  width: 30px;
-} */
