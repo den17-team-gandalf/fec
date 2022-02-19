@@ -1,47 +1,67 @@
 import React from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import contexts from '../contexts';
 
 export default function PDShop() {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
-  const [currentSkuQ, setCurrentSkuQ] = React.useState({});
+  const [currentSku, setCurrentSku] = React.useState('');
+  const [currentSkuQ, setCurrentSkuQ] = React.useState('1');
+  const [totalSkuQ, setTotalSkuQ] = React.useState('');
   const selectEl = React.useRef(0);
   const inputEl = React.useRef(0);
   const selectChanger = (e) => {
-    setCurrentSkuQ(e.target.value);
-    if (currentSkuQ === '0') {
-      inputEl.current.value = 'OUT OF STOCK';
+    setTotalSkuQ(e.target.value.slice(e.target.value.indexOf(',') + 1, e.target.value.length));
+    setCurrentSku(e.target.value.slice(0, e.target.value.indexOf(',')));
+    setCurrentSkuQ('1');
+    if (totalSkuQ === '0') {
+      selectEl.current.value = 'OUT OF STOCK';
     } else {
       inputEl.current.value = 1;
     }
   };
-  // React.useEffect(() => {
-  //   inputEl.current = 0;
-  // }, [currentSkuQ]);
-  // React.useEffect(() => (<input type="number" min="0" max={currentSkuQ} />), [currentSkuQ]);
+  const inputChanger = (e) => {
+    setCurrentSkuQ(e.target.value);
+  };
+  const add2Cart = (e) => {
+    e.preventDefault();
+    let once = true;
+    for (let i = 0; i < Number(currentSkuQ); i++) {
+      axios.post('/cart', { sku_id: currentSku })
+        // eslint-disable-next-line no-loop-func
+        .then(() => {
+          if (once) {
+            // eslint-disable-next-line no-alert
+            alert('Successfully added to bag!');
+            once = false;
+          }
+        })
+        .catch(() => { });
+    }
+  };
   return (
     <div className="PDShop">
-      <form className="shopForm">
+      <form className="shopForm" onSubmit={(e) => add2Cart(e)}>
+        {/* Size Selector */}
         <select
           ref={selectEl}
           className="sizeSelector"
           onChange={(e) => selectChanger(e)}
           name="size"
           id="size"
+          required
         >
           <option value="">SELECT SIZE</option>
-          {Object.values(currentStyle.skus)
+          {Object.entries(currentStyle.skus)
             .filter(
-              (clothingStyle) => clothingStyle.quantity !== 0,
+              (clothingStyle) => clothingStyle[1].quantity !== 0,
             )
             .map(
               (clothingStyle) => (
                 <option
-                  key={Object.values(clothingStyle)}
-                  value={clothingStyle.quantity}
+                  key={clothingStyle[0]}
+                  value={[clothingStyle[0], clothingStyle[1].quantity]}
                 >
-                  {clothingStyle.size}
+                  {clothingStyle[1].size}
                 </option>
               ),
             )}
@@ -49,17 +69,43 @@ export default function PDShop() {
         {' '}
         {' '}
         {' '}
-        {Object.keys(currentSkuQ).length === 0 ? <input className="quantitySelector" ref={inputEl} type="text" placeholder="-" readOnly />
+        {/* Quantity Selector */}
+        {Object.keys(totalSkuQ).length === 0
+          ? (
+            <input
+              className="quantitySelector"
+              ref={inputEl}
+              type="text"
+              placeholder="-"
+              readOnly
+              required
+            />
+          )
           : (
-            <input className="quantitySelector" ref={inputEl} type="number" defaultValue="1" min="1" max={currentSkuQ > 15 ? '15' : currentSkuQ} />
+            <input
+              className="quantitySelector"
+              ref={inputEl}
+              type="number"
+              defaultValue="1"
+              onChange={(e) => inputChanger(e)}
+              min="1"
+              max={totalSkuQ > 15 ? '15' : totalSkuQ}
+              required
+            />
           )}
         <br />
         <br />
-        <input
-          className="addToBag"
-          type="button"
-          value="ADD TO BAG"
-        />
+        {/* Submit Button */}
+        {totalSkuQ !== '0' || selectEl.current.value === ''
+          ? (
+            <input
+              className="addToBag"
+              type="submit"
+              value="ADD TO BAG"
+            />
+          )
+          : <div />}
+
       </form>
     </div>
   );
