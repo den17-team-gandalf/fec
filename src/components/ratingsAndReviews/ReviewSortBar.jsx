@@ -3,11 +3,12 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import contexts from '../contexts';
 
-export default function ReviewSortBar({ sortMethod, updateSort, numReviews }) {
+export default function ReviewSortBar({ numReviews }) {
+  const [sortMethod, updateSort] = React.useState('newest');
   return (
     <contexts.RatingsContext.Consumer>
       {([reviews, updateReviews]) => (
-        <div className="SortBar">
+        <div className="ReviewSortBar">
           {`${numReviews} reviews, sorted by `}
           <select
             name="sortMethod"
@@ -36,7 +37,5 @@ export default function ReviewSortBar({ sortMethod, updateSort, numReviews }) {
 }
 
 ReviewSortBar.propTypes = {
-  sortMethod: propTypes.string.isRequired,
-  updateSort: propTypes.func.isRequired,
   numReviews: propTypes.number.isRequired,
 };

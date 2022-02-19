@@ -21,6 +21,12 @@ const markHelpful = (e, id, updateHelpfulness, unUsed) => {
   }
 };
 
+const formatDateString = (date) => {
+  let str = new Date(date).toDateString();
+  str = `${str.slice(4, str.length - 5)},${str.slice(str.length - 5, str.length)}`;
+  return str;
+};
+
 const reportReview = (e, id, unUsed) => {
   if (unUsed.flag) {
     axios.put(`/reviews/${id}/report`)
@@ -40,26 +46,31 @@ export default function IndividualReview({ review }) {
   const [unUsed] = React.useState({ flag: true });
   return (
     <li className="IndividualReview">
-      <Ratings
-        rating={review.rating}
-        widgetRatedColors="green"
-        widgetDimensions="20px"
-        widgetSpacings="1px"
-        className="ReviewStarRating"
-      >
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-      </Ratings>
-      {review.reviewer_name}
-      {`, Time ${review.date} (Modules to make together with others)`}
+      <div className="IndividualReviewTitleBar">
+        <Ratings
+          rating={review.rating}
+          widgetRatedColors="green"
+          widgetDimensions="20px"
+          widgetSpacings="1px"
+          className="ReviewStarRating"
+        >
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+        </Ratings>
+        <div className="ReviewUsernameAndDate">
+          {review.reviewer_name}
+          {`, ${formatDateString(review.date)}`}
+        </div>
+      </div>
       <h3 className="ReviewBody">
         {review.summary}
       </h3>
       <p className="ReviewBody">
-        {review.body}
+        {review.body.length < 250 && review.body}
+        {review.body.length > 250 && `${review.body.slice(0, 250)}... Load More TODO`}
       </p>
       {review.photos.map(({ url, id }) => (<img src={url} alt="user-submitted" width="100" key={id} />))}
       {review.recommend && (<div className="ReviewRecommendation">✓ I recommend this product</div>)}
@@ -84,7 +95,7 @@ export default function IndividualReview({ review }) {
         >
           Yes
         </button>
-        {`(${helpfulness})  |  `}
+        {`(${helpfulness})   |   `}
         <button
           className="RatingReportButton"
           type="button"
