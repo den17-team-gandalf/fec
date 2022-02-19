@@ -21,13 +21,13 @@ export default function PDCarouselSlide({
         value={thisPhoto}
       />
       {currentPhoto === thisPhoto.url
-      && <div className="imgToggleLine" />}
+      && <hr className="imgToggleLine" />}
     </div>
   );
 }
 
 PDCarouselSlide.propTypes = {
   thisPhoto: PropTypes.object,
-  currentPhoto: PropTypes.string,
-  setCurrentPhoto: PropTypes.func,
+  currentPhoto: PropTypes.string.isRequired,
+  setCurrentPhoto: PropTypes.func.isRequired,
 };

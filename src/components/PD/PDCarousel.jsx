@@ -9,26 +9,31 @@ export default function PDCarousel({
   areaChanger, expanded, setExpanded, currentPhoto, setCurrentPhoto,
 }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
-  const clicky = () => {
-    setExpanded(!expanded);
-    if (expanded) {
-      areaChanger.current.style.gridTemplateAreas = `
+  const carousel = React.createRef(0);
+  const clicky = (e) => {
+    if (e.target.className !== 'imgCard' && e.target.className !== 'imgCardContainer') {
+      setExpanded(!expanded);
+      if (expanded) {
+        areaChanger.current.style.gridTemplateAreas = `
         "carousel carousel main"
         "carousel carousel styles"
         "carousel carousel shop"
         "details details details"
-    `;
-    } else {
-      areaChanger.current.style.gridTemplateAreas = `
+        `;
+        carousel.current.style.cursor = 'zoom-in';
+      } else {
+        areaChanger.current.style.gridTemplateAreas = `
         "carousel carousel carousel"
         "carousel carousel carousel"
         "carousel carousel carousel"
         "details details details"
-    `;
+       `;
+        carousel.current.style.cursor = 'cell';
+      }
     }
   };
   return (
-    <div className="PDCarousel">
+    <div className="PDCarousel" ref={carousel} onClick={(e) => clicky(e)}>
       <div className="cSlides">
         <PDCarouselSlides
           currentPhoto={currentPhoto}
@@ -49,7 +54,7 @@ export default function PDCarousel({
             alt={currentStyle.name}
           />
         )}
-      <FontAwesomeIcon onClick={(e) => { clicky(e); }} className="I_expand" icon={faExpand} />
+      <FontAwesomeIcon className="I_expand" icon={faExpand} />
     </div>
   );
 }

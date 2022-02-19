@@ -29,6 +29,7 @@ a {
   width: auto;
   height: 600px;
   margin: 15px;
+  cursor: zoom-in;
 }
 
 .PDMainDisc {
@@ -195,9 +196,13 @@ a {
 }
 
 .imgToggleLine {
-  border-top: 2px solid black;
-  position: relative;
-  bottom: 8px;
+  background-color: black;
+  height: 2px;
+  border: none;
+  color: black;
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
 }
 
 .imgCardContainer {
