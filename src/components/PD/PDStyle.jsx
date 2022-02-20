@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import contexts from '../contexts';
@@ -36,10 +35,8 @@ export default function PDStyle({
 
 PDStyle.propTypes = {
   thisStyle: PropTypes.object,
-  currentStyle: PropTypes.object,
-  toggled: PropTypes.string,
-  setToggled: PropTypes.func,
-  setCurrentStyle: PropTypes.func,
-  currentPhoto: PropTypes.string,
-  setCurrentPhoto: PropTypes.func,
+  toggled: PropTypes.string.isRequired,
+  setToggled: PropTypes.func.isRequired,
+  currentPhoto: PropTypes.string.isRequired,
+  setCurrentPhoto: PropTypes.func.isRequired,
 };

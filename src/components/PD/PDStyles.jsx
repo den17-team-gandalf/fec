@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import PDStyle from './PDStyle';
 import contexts from '../contexts';
@@ -37,8 +36,6 @@ export default function PDStyles({ styles, currentPhoto, setCurrentPhoto }) {
 
 PDStyles.propTypes = {
   styles: PropTypes.object,
-  currentStyle: PropTypes.object,
-  setCurrentStyle: PropTypes.func,
-  currentPhoto: PropTypes.string,
-  setCurrentPhoto: PropTypes.func,
+  currentPhoto: PropTypes.string.isRequired,
+  setCurrentPhoto: PropTypes.func.isRequired,
 };
