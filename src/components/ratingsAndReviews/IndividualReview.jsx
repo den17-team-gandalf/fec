@@ -72,7 +72,7 @@ export default function IndividualReview({ review }) {
         {review.body.length < 250 && review.body}
         {review.body.length > 250 && `${review.body.slice(0, 250)}... Load More TODO`}
       </p>
-      {review.photos.map(({ url, id }) => (<img src={url} alt="user-submitted" width="100" key={id} />))}
+      {review.photos.map(({ url, id }) => (<img src={url} alt="user-submitted" width="100" key={id} loading="lazy" />))}
       {review.recommend && (<div className="ReviewRecommendation">✓ I recommend this product</div>)}
       {review.response !== null && (
         <div className="ResponseBox">

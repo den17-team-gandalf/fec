@@ -3,9 +3,11 @@ import propTypes from 'prop-types';
 import contexts from '../contexts';
 import IndividualReview from './IndividualReview';
 import ReviewSortBar from './ReviewSortBar';
+import AddReview from './AddReview';
 
-export default function ReviewsList({ filter }) {
+export default function ReviewsList({ filter, metadata }) {
   const [displayedReviews, updateDisplayedReviews] = React.useState(2);
+  const [addReviewOpen, updateAddReview] = React.useState(false);
   return (
     <contexts.RatingsContext.Consumer>
       {([reviews]) => {
@@ -19,17 +21,31 @@ export default function ReviewsList({ filter }) {
                 (review) => <IndividualReview review={review} key={review.review_id} />,
               )}
             </ul>
-            {displayedReviews < filteredReviews.length && (
+            <div className="ReviewsListButtons">
+              {displayedReviews < filteredReviews.length && (
+                <button
+                  type="submit"
+                  className="LoadReviewsButton"
+                  onClick={() => {
+                    updateDisplayedReviews(displayedReviews + 2);
+                  }}
+                >
+                  More Reviews
+                </button>
+              )}
               <button
                 type="submit"
-                className="LoadReviewsButton"
-                onClick={() => {
-                  updateDisplayedReviews(displayedReviews + 2);
-                }}
+                className="AddReviewButton"
+                onClick={() => updateAddReview(!addReviewOpen)}
               >
-                More Reviews
+                Add A Review +
               </button>
-            )}
+            </div>
+            <AddReview
+              isOpen={addReviewOpen}
+              updateIsOpen={updateAddReview}
+              metadata={metadata}
+            />
           </div>
         );
       }}
@@ -39,4 +55,10 @@ export default function ReviewsList({ filter }) {
 
 ReviewsList.propTypes = {
   filter: propTypes.arrayOf(propTypes.number).isRequired,
+  metadata: propTypes.exact({
+    product_id: propTypes.string,
+    ratings: propTypes.object,
+    recommended: propTypes.object,
+    characteristics: propTypes.object,
+  }).isRequired,
 };
