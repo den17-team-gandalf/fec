@@ -36,13 +36,17 @@ export default function RatingsAndReviews() {
       <div className="RatingsAndReviewsGrid">
         {metadataHook[0].recommended
           && (<RatingsBreakdown metadata={metadataHook[0]} filterHook={filterHook} />)}
-        <ReviewsList
-          numReviews={metadataHook[0].recommended
-            ? Number(metadataHook[0].recommended.false)
-            + Number(metadataHook[0].recommended.true)
-            : 0}
-          filter={filterHook[0]}
-        />
+        {metadataHook[0].recommended
+          && (
+            <ReviewsList
+              numReviews={metadataHook[0].recommended
+                ? Number(metadataHook[0].recommended.false)
+                + Number(metadataHook[0].recommended.true)
+                : 0}
+              filter={filterHook[0]}
+              metadata={metadataHook[0]}
+            />
+          )}
       </div>
     </contexts.RatingsContext.Provider>
   );
