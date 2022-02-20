@@ -34,20 +34,24 @@ export default function PDMainDisc({ product }) {
   return (
     <div className="PDMainDisc">
       <br />
-      <Ratings
-        rating={avgStars}
-        widgetRatedColors="green"
-        widgetDimensions="20px"
-        widgetSpacings="1px"
-        className="ReviewStarRating"
-      >
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-      </Ratings>
+      {avgStars !== 0
+      && (
+        <Ratings
+          rating={avgStars}
+          widgetRatedColors="green"
+          widgetDimensions="20px"
+          widgetSpacings="1px"
+          className="ReviewStarRating"
+        >
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+          <Ratings.Widget />
+        </Ratings>
+      )}
       {' '}
+      {totalStars !== 0 && (
       <a href="#Reviews" target="_self">
         {' '}
         Read all
@@ -57,12 +61,13 @@ export default function PDMainDisc({ product }) {
         reviews
 
       </a>
+      )}
       <br />
       <br />
       {product.category
       && product.category.toUpperCase()}
       <br />
-      <div className="productName"><strong>{product.name}</strong></div>
+      {product.name && (<div className="productName"><strong>{product.name}</strong></div>)}
       <br />
       {currentStyle.sale_price === null ? `$${currentStyle.original_price}`
         : (

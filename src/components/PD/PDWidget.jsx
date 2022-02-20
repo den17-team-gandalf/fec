@@ -11,9 +11,10 @@ export default function PDWidget() {
   const styleHook = React.useState({});
   const [productStyles, setProductStyles] = React.useState({});
   const [currentPhoto, setCurrentPhoto] = React.useState('');
+  const [currentPhotoIndex, setCurrentPhotoIndex] = React.useState(0);
   const [product, setProduct] = React.useState({});
   const [expanded, setExpanded] = React.useState(false);
-  const areaChanger = React.createRef(0);
+  const areaChanger = React.useRef(0);
   if (Object.keys(productStyles).length === 0) {
     axios.get('/products/44388/styles')
       .then(({ data }) => {
@@ -36,6 +37,8 @@ export default function PDWidget() {
       && (
       <contexts.DetailsContext.Provider value={styleHook}>
         <PDCarousel
+          currentPhotoIndex={currentPhotoIndex}
+          setCurrentPhotoIndex={setCurrentPhotoIndex}
           areaChanger={areaChanger}
           expanded={expanded}
           setExpanded={setExpanded}

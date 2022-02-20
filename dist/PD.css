@@ -27,9 +27,10 @@ a {
   grid-area: carousel;
   background-color: gray;
   width: auto;
-  height: 600px;
+  height: 700px;
   margin: 15px;
   cursor: zoom-in;
+  overflow-y: scroll;
 }
 
 .PDMainDisc {
@@ -62,6 +63,24 @@ a {
   position: absolute;
   top: 20px;
   right: 20px;
+  padding: 2px;
+  color: black;
+  cursor: pointer;
+}
+
+.I_right {
+  position: absolute;
+  top: 350px;
+  right: 100px;
+  padding: 2px;
+  color: black;
+  cursor: pointer;
+}
+
+.I_left {
+  position: absolute;
+  top: 350px;
+  left: 100px;
   padding: 2px;
   color: black;
   cursor: pointer;
@@ -191,7 +210,7 @@ a {
 }
 
 .PDSlides {
-  margin: 15px;
+  margin: 10px;
   position: relative;
 }
 
@@ -212,6 +231,15 @@ a {
 .imgCard {
   width: 60px;
   height: 60px;
+  border: 2px solid black;
+  background-color: black;
+  margin: 5px;
+  position: relative;
+}
+
+.imgCardExpanded {
+  width: 40px;
+  height: 40px;
   border: 2px solid black;
   background-color: black;
   margin: 5px;
@@ -240,4 +268,9 @@ a {
 
 #Reviews {
   margin: 50px;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
