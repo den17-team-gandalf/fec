@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import axios from 'axios';
 import ReactModal from 'react-modal';
 import propTypes from 'prop-types';
 import Ratings from 'react-ratings-declarative';
@@ -50,7 +51,7 @@ const charDesc = {
 };
 
 export default function AddReview({ isOpen, updateIsOpen, metadata }) {
-  const [stars, updateStars] = React.useState(0);
+  const [rating, updateRating] = React.useState(0);
   const [recommend, updateRecommend] = React.useState('');
   const charRatings = {
     Size: React.useState(0),
@@ -65,10 +66,33 @@ export default function AddReview({ isOpen, updateIsOpen, metadata }) {
   const [email, updateEmail] = React.useState('');
   const [name, updateName] = React.useState('');
   const [photos, updatePhotos] = React.useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`submitted name: ${name} ${recommend} ${charRatings.Fit[0]} ${charRatings.Length[0]}`);
-    updateIsOpen(false);
+    const characteristics = {};
+    // eslint-disable-next-line no-restricted-syntax
+    for (const char of Object.keys(metadata.characteristics)) {
+      // eslint-disable-next-line prefer-destructuring
+      characteristics[metadata.characteristics[char].id] = charRatings[char][0];
+    }
+    axios.post('/reviews', {
+      product_id: 44388,
+      rating,
+      summary,
+      recommend,
+      body,
+      name,
+      photos: photos.split(' '),
+      characteristics,
+      email,
+    })
+      .then(() => {
+        updateIsOpen(false);
+      })
+      .catch((error) => {
+        updateIsOpen(false);
+        throw Error(error);
+      });
   };
 
   return (
@@ -87,12 +111,12 @@ export default function AddReview({ isOpen, updateIsOpen, metadata }) {
         Overall Rating*
         <br />
         <Ratings
-          rating={stars}
+          rating={rating}
           widgetRatedColors="orange"
           widgetDimensions="20px"
           widgetSpacings="1px"
           className="AddReviewStarInput"
-          changeRating={updateStars}
+          changeRating={updateRating}
         >
           <Ratings.Widget widgetHoverColor="orange" />
           <Ratings.Widget widgetHoverColor="orange" />
