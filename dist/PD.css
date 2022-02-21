@@ -1,5 +1,27 @@
+:root, html[data-theme="light"] {
+  --background-color: #fff;
+  --alternate-background-color: #f7f7f9;
+  --text-color: #121416d8;
+  --text-color-light: #777676bb;
+  --link-color: #543fd7;
+  --button-color: #263238;
+  --button-text: #fff;
+  --border-color: #121416d8;
+  --mode-color: yellow;
+}
+
+html[data-theme="dark"] {
+  --background-color: #4a4d4e;
+  --text-color: #F7F8F8;
+  --link-color: #828fff;
+  --border-color: lightgray;
+  --mode-color: #F7F8F8;
+}
+
 body {
   margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 html {
@@ -7,7 +29,7 @@ html {
 }
 
 a {
-  color: dimgray;
+  color: var(--link-color);
 }
 
 .PDWidget {
@@ -30,7 +52,7 @@ a {
   height: 700px;
   margin: 15px;
   cursor: zoom-in;
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 .PDMainDisc {
@@ -39,7 +61,6 @@ a {
 
 .productName {
   font-size: 2em;
-  color: #303030;
 }
 
 .salePrice {
@@ -63,7 +84,7 @@ a {
   position: absolute;
   top: 20px;
   right: 20px;
-  padding: 2px;
+  padding: 5px;
   color: black;
   cursor: pointer;
 }
@@ -100,7 +121,7 @@ a {
 }
 
 .vl {
-  border-left: 2px solid gray;
+  border-left: 2px solid #121416d8;
   height: 100%;
   grid-area: line;
   margin: 10px;
@@ -132,16 +153,24 @@ a {
   height: 40px;
   cursor: pointer;
   grid-area: size;
+  background-color: lightgray;
+  border: 2px solid #121416d8;
+  color: #121416d8;
 }
 
 .quantitySelector {
   height: 34px;
   grid-area: quantity;
+  background-color: lightgray;
+  border-color: #121416d8;
+  color: #121416d8;
 }
 
 .addToBag {
   height: 40px;
-  background-color: white;
+  background-color: lightgray;
+  border-color: #121416d8;
+  color: #121416d8;
   cursor: pointer;
   grid-area: bag;
 }
@@ -164,8 +193,8 @@ a {
   border-radius: 100%;
   width: 60px;
   height: 60px;
-  border: 2px solid black;
-  background-color: black;
+  border: 2px solid #121416d8;
+  background-color: #121416d8;
 }
 
 .I_checksS {
@@ -175,8 +204,12 @@ a {
   right: 0;
   color: green;
   border-radius: 100%;
-  background-color: white;
-  border: 2px solid black;
+  background-color: #fff;
+  border: 2px solid #121416d8;
+}
+
+.I_bulb {
+  color: var(--mode-color);
 }
 
 .header {
@@ -215,10 +248,10 @@ a {
 }
 
 .imgToggleLine {
-  background-color: black;
+  background-color: #121416d8;
   height: 2px;
   border: none;
-  color: black;
+  color: #121416d8;
   position: absolute;
   bottom: -2px;
   width: 100%;
@@ -231,8 +264,8 @@ a {
 .imgCard {
   width: 60px;
   height: 60px;
-  border: 2px solid black;
-  background-color: black;
+  border: 2px solid #121416d8;
+  background-color: #121416d8;
   margin: 5px;
   position: relative;
 }
@@ -240,8 +273,8 @@ a {
 .imgCardExpanded {
   width: 40px;
   height: 40px;
-  border: 2px solid black;
-  background-color: black;
+  border: 2px solid #121416d8;
+  background-color: #121416d8;
   margin: 5px;
   position: relative;
 }
@@ -271,6 +304,12 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+  width: 5px;
+  background: dimgray;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 50px;
+  background: black;
 }

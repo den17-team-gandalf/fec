@@ -12,13 +12,14 @@ export default function PDCarousel({
   currentPhotoIndex, setCurrentPhotoIndex,
 }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
-  const carousel = React.createRef(0);
-  const pImage = React.createRef(0);
-  const photoIndexerR = (e) => {
+  const [superZoomed, setSuperZoomed] = React.useState(false);
+  const carousel = React.useRef(0);
+  const pImage = React.useRef(0);
+  const photoIndexerR = () => {
     setCurrentPhotoIndex(currentPhotoIndex + 1);
     setCurrentPhoto(currentStyle.photos[currentPhotoIndex + 1].url);
   };
-  const photoIndexerL = (e) => {
+  const photoIndexerL = () => {
     setCurrentPhotoIndex(currentPhotoIndex - 1);
     setCurrentPhoto(currentStyle.photos[currentPhotoIndex - 1].url);
   };
@@ -39,7 +40,8 @@ export default function PDCarousel({
           "carousel carousel shop"
           "details details details"
         `;
-        pImage.current.style = '';
+        pImage.current.style.width = '450px';
+        pImage.current.style.cursor = '';
         // If in expanded view and clicking on container or image...
       } else if (expanded
         && (e.target.className === 'primaryImg'
@@ -49,11 +51,13 @@ export default function PDCarousel({
           pImage.current.style.width = '750px';
           pImage.current.style.cursor = 'zoom-out';
           carousel.current.style.cursor = 'zoom-out';
+          setSuperZoomed(true);
         // If already zoomed in...
         } else {
           pImage.current.style.width = '450px';
           pImage.current.style.cursor = '';
           carousel.current.style.cursor = '';
+          setSuperZoomed(false);
         }
         // If in default view...
       } else if (!expanded) {
@@ -82,11 +86,12 @@ export default function PDCarousel({
           setCurrentPhoto={setCurrentPhoto}
           expanded={expanded}
         />
-        {currentPhotoIndex !== 0
+        {currentPhotoIndex !== 0 && !superZoomed
         && (
         <FontAwesomeIcon
           className="I_left"
           icon={faArrowLeft}
+          size="lg"
           onClick={(e) => photoIndexerL(e)}
         />
         )}
@@ -97,6 +102,7 @@ export default function PDCarousel({
           src={currentStyle.photos[0].url}
           className="primaryImg"
           alt={currentStyle.name}
+          style={{ width: '450px' }}
         />
       )
         : (
@@ -105,14 +111,20 @@ export default function PDCarousel({
             src={currentStyle.photos[currentPhotoIndex].url}
             className="primaryImg"
             alt={currentStyle.name}
+            style={{ width: '450px' }}
           />
         )}
-      <FontAwesomeIcon className="I_expand" icon={faExpand} />
-      {currentStyle.photos.length - 1 !== currentPhotoIndex
+      <FontAwesomeIcon
+        className="I_expand"
+        icon={faExpand}
+        size="xl"
+      />
+      {currentStyle.photos.length - 1 !== currentPhotoIndex && !superZoomed
       && (
         <FontAwesomeIcon
           className="I_right"
           icon={faArrowRight}
+          size="lg"
           onClick={(e) => photoIndexerR(e)}
         />
       )}

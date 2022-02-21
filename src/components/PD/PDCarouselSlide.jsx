@@ -39,7 +39,7 @@ export default function PDCarouselSlide({
             className="imgCardExpanded"
             type="image"
             onClick={(e) => {
-              zoomer(e);
+              clicky(e);
             }}
             src={thisPhoto.thumbnail_url}
             alt="Carousel Style Image"
