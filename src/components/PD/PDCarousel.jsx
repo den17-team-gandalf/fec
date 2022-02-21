@@ -41,14 +41,15 @@ export default function PDCarousel({
           "details details details"
         `;
         pImage.current.style.width = '450px';
-        pImage.current.style.cursor = '';
+        pImage.current.style.cursor = 'zoom-in';
+        carousel.current.style.cursor = 'zoom-in';
         // If in expanded view and clicking on container or image...
       } else if (expanded
         && (e.target.className === 'primaryImg'
         || e.target.className === 'PDCarousel')) {
         // If not zoomed in yet...
-        if (pImage.current.style.cursor === '') {
-          pImage.current.style.width = '750px';
+        if (pImage.current.style.cursor === '' || pImage.current.style.cursor === 'zoom-in') {
+          pImage.current.style.width = '900px';
           pImage.current.style.cursor = 'zoom-out';
           carousel.current.style.cursor = 'zoom-out';
           setSuperZoomed(true);
