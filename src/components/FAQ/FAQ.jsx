@@ -1,50 +1,85 @@
-import React from 'react';
-import QAList from './QAList';
-import useGetinfo from './useGetInfo';
+import React, { useEffect, useState } from 'react';
+import FAQFetchList from './FAQFetchList';
+import FAQList from './FAQList';
 
-const QuestionAndAnswerData = React.createContext();
-export const QuestionAndAnswerConsumer = QuestionAndAnswerData.Consumer;
-export default function questions() {
-  const data = useGetinfo();
-  const height = document.documentElement.clientHeight;
-
-  return (
-    <div
-      style={{
-        maxHeight: `${height / 2}px`,
-        overflow: 'auto',
-      }}
-    >
-      <h1>Q&A</h1>
-      {data ? (
-        <QAList data={data} />
-      ) : (
+export default function FAQWidget() {
+  const data = FAQFetchList();
+  const [searchInput, setSearchInput] = useState('');
+  const [searchResultList, setSearchResult] = useState(null);
+  useEffect(() => {
+    if (searchInput.length >= 3) {
+      let searchResult = data.results.map((q) => {
+        if (
+          q.question_body.toLowerCase().indexOf(searchInput.toLowerCase()) !==
+          -1
+        ) {
+          return q;
+        }
+        return undefined;
+      });
+      searchResult = searchResult.filter((x) => x !== undefined);
+      setSearchResult(searchResult);
+    } else {
+      setSearchResult(null);
+    }
+  }, [searchInput]);
+  if (searchResultList) {
+    return (
+      <>
+        <h1>Questions and Answers</h1>
+        <form>
+          <input
+            type="text"
+            id="search"
+            placeholder="Have a question? Search for answers…"
+            value={searchInput}
+            onChange={(e) => {
+              e.preventDefault();
+              setSearchInput(e.target.value);
+            }}
+            size="60"
+          />
+          <br />
+        </form>
         <div
-          style={{
-            maxHeight: `${height / 2}px`,
+          style={{ width: window.innerWidth, height: window.innerHeight / 2 }}
+        >
+          {data ? (
+            <FAQList
+              key={`${Math.random() * 10}FAQListSearch`}
+              list={searchResultList}
+            />
+          ) : (
+            <div className="loading">Loading...</div>
+          )}
+        </div>
+      </>
+    );
+  }
+  return (
+    <>
+      <h1>Questions and Answers</h1>
+      <form>
+        <input
+          type="text"
+          id="search"
+          placeholder="Have a question? Search for answers…"
+          value={searchInput}
+          onChange={(e) => {
+            e.preventDefault();
+            setSearchInput(e.target.value);
           }}
+          size="60"
         />
-      )}
-    </div>
+        <br />
+      </form>
+      <div style={{ width: window.innerWidth, height: window.innerHeight / 2 }}>
+        {data ? (
+          <FAQList key={`${Math.random() * 10}FAQListOG`} list={data.results} />
+        ) : (
+          <div className="loading">Loading...</div>
+        )}
+      </div>
+    </>
   );
 }
-
-/*
-
-const markHelpful = (e, id, updateHelpfulness, unUsed) => {
-  // console.log(id, unUsed);
-  if (unUsed.flag) {
-    axios.put(`/reviews/${id}/helpful`)
-      .then(() => {
-        updateHelpfulness((x) => x + 1);
-        // eslint-disable-next-line no-param-reassign
-        unUsed.flag = false;
-        // e.target.childNodes[0].nodeValue = Number(e.target.text)
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }
-};
-
-*/
