@@ -8,30 +8,33 @@ export default function ReviewSortBar({ numReviews }) {
   return (
     <contexts.RatingsContext.Consumer>
       {([reviews, updateReviews]) => (
-        <div className="ReviewSortBar">
-          {`${numReviews} reviews, sorted by `}
-          <select
-            name="sortMethod"
-            onChange={(e) => {
-              if (sortMethod !== e.target.value) {
-                updateSort(e.target.value);
-                axios.get(`/reviews/?product_id=44388&count=${reviews.length}&sort=${e.target.value}`)
-                  .then(({ data }) => {
-                    updateReviews(data.results);
-                  })
-                  .catch(() => {
-                    throw Error;
-                  });
-              }
-            }}
-          >
-            <option value="newest">Newest</option>
-            <option value="relevant">Relevant</option>
-            <option value="helpful">Helpful</option>
-          </select>
-        </div>
+        <contexts.AppContext.Consumer>
+          {({ currentProduct }) => (
+            <div className="ReviewSortBar">
+              {`${numReviews} reviews, sorted by `}
+              <select
+                name="sortMethod"
+                onChange={(e) => {
+                  if (sortMethod !== e.target.value) {
+                    updateSort(e.target.value);
+                    axios.get(`/reviews/?product_id=${currentProduct}&count=${reviews.length}&sort=${e.target.value}`)
+                      .then(({ data }) => {
+                        updateReviews(data.results);
+                      })
+                      .catch(() => {
+                        throw Error;
+                      });
+                  }
+                }}
+              >
+                <option value="newest">Newest</option>
+                <option value="relevant">Relevant</option>
+                <option value="helpful">Helpful</option>
+              </select>
+            </div>
+          )}
+        </contexts.AppContext.Consumer>
       )}
-
     </contexts.RatingsContext.Consumer>
   );
 }
