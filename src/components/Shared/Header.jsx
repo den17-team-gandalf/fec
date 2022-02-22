@@ -8,7 +8,7 @@ export default function Header() {
   const [searching, setSearching] = React.useState('');
   return (
     <contexts.AppContext.Consumer>
-      {(products) => {
+      {({ products }) => {
         const selectChanger = (e) => {
           setSearching(e.target.value);
         };

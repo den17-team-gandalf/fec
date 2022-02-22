@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react';
 import axios from 'axios';
 import contexts from './contexts';
@@ -11,6 +12,7 @@ let flag = true;
 
 export default function App() {
   const [products, setProducts] = React.useState([]);
+  const [currentProduct, updateCurrentProduct] = React.useState(44389);
   if (flag) {
     flag = false;
     axios.get('/products')
@@ -19,7 +21,7 @@ export default function App() {
   }
   return (
     <div className="appContents">
-      <contexts.AppContext.Provider value={products}>
+      <contexts.AppContext.Provider value={{ products, currentProduct, updateCurrentProduct }}>
         <Header products={products} />
         {Object.keys(products).length !== 0 ? (
           <>
