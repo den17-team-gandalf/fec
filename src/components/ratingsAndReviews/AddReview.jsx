@@ -110,7 +110,7 @@ export default function AddReview({ isOpen, updateIsOpen, metadata }) {
             shouldCloseOnEsc
           >
             <h3>Write Your Review</h3>
-            <h4>About the [Product Name Here, need it from App.jsx context]</h4>
+            <h4>{`About the ${products.filter((product) => product.id === currentProduct)[0].name}`}</h4>
             <form onSubmit={handleSubmit} className="AddAReviewForm">
               Overall Rating*
               <br />
