@@ -12,7 +12,7 @@ let flag = true;
 
 export default function App() {
   const [products, setProducts] = React.useState([]);
-  const [currentProduct, updateCurrentProduct] = React.useState(44389);
+  const [currentProduct, updateCurrentProduct] = React.useState(44388);
   if (flag) {
     flag = false;
     axios.get('/products')

@@ -4,18 +4,19 @@ import ReviewsList from './ReviewsList';
 import contexts from '../contexts';
 import RatingsBreakdown from './RatingsBreakdown';
 
-let flag = true;
+// let flag = false;
+let loadedReviews = 0;
 
 export default function RatingsAndReviews() {
   const ratingsHook = React.useState([]);
   const metadataHook = React.useState({});
   const filterHook = React.useState([]);
-
   return (
     <contexts.AppContext.Consumer>
       {({ currentProduct }) => {
-        if (flag) {
-          flag = false;
+        if (loadedReviews !== currentProduct) {
+          loadedReviews = currentProduct;
+          // flag = false;
           // console.log('querying:');
           axios.get(`/reviews/meta/?product_id=${currentProduct}`)
             .then(({ data }) => {
