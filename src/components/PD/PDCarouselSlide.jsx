@@ -16,9 +16,6 @@ export default function PDCarouselSlide({
       }
     }
   };
-  const zoomer = () => {
-    cardRef.current.style;
-  };
   return (
     <div className="imgCardContainer">
       {!expanded ? (
