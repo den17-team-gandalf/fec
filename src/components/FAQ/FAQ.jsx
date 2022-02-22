@@ -4,6 +4,11 @@ import FAQList from './FAQList';
 
 export default function FAQWidget() {
   const data = FAQFetchList();
+  const windowSize = {
+    width: window.innerWidth,
+    height: window.innerHeight / 2,
+    overflow: 'auto',
+  };
   const [searchInput, setSearchInput] = useState('');
   const [searchResultList, setSearchResult] = useState(null);
   useEffect(() => {
@@ -41,9 +46,7 @@ export default function FAQWidget() {
           />
           <br />
         </form>
-        <div
-          style={{ width: window.innerWidth, height: window.innerHeight / 2 }}
-        >
+        <div style={windowSize}>
           {data ? (
             <FAQList
               key={`${Math.random() * 10}FAQListSearch`}
@@ -57,7 +60,7 @@ export default function FAQWidget() {
     );
   }
   return (
-    <>
+    <div style={windowSize}>
       <h1>Questions and Answers</h1>
       <form>
         <input
@@ -73,13 +76,13 @@ export default function FAQWidget() {
         />
         <br />
       </form>
-      <div style={{ width: window.innerWidth, height: window.innerHeight / 2 }}>
+      <div>
         {data ? (
           <FAQList key={`${Math.random() * 10}FAQListOG`} list={data.results} />
         ) : (
           <div className="loading">Loading...</div>
         )}
       </div>
-    </>
+    </div>
   );
 }

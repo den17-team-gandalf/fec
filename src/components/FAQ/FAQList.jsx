@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import FAQLinks from './FAQLinks';
+import FAQForm from './FAQForm';
 
 Modal.setAppElement(document.getElementById('app'));
 const customStyles = {
@@ -20,13 +21,16 @@ function Answers({ answer }) {
   // console.log(answer);
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
+
   function openModal() {
     setIsOpen(true);
   }
+
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
     subtitle.style.color = '#f00';
   }
+
   function closeModal() {
     setIsOpen(false);
   }
@@ -144,13 +148,47 @@ function Questions({ question }) {
 }
 
 export default function FAQList({ list }) {
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
     <>
       {list.map((q) => (
         <div key={Math.random() * 100}>
           Q:
-          <Questions question={q} />
-          <br />
+          <div>
+            <Questions question={q} />
+          </div>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault;
+              openModal();
+            }}
+          >
+            Add Answer
+          </button>
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="questionForm"
+          >
+            <FAQForm data={{ formType: 'question', itemId: q.question_id }} />
+          </Modal>
         </div>
       ))}
     </>
