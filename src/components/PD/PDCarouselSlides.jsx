@@ -8,6 +8,7 @@ export default function PDCarouselSlides({
   currentPhotoIndex, setCurrentPhotoIndex, expanded,
 }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
+
   return (
     <div className="PDSlides">
       {currentStyle.photos.map((photo) => (

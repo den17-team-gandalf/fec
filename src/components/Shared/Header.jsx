@@ -6,6 +6,7 @@ import contexts from '../contexts';
 export default function Header() {
   const [darkMode, setDarkMode] = React.useState(false);
   const [searching, setSearching] = React.useState('');
+
   return (
     <contexts.AppContext.Consumer>
       {({ products }) => {

@@ -8,6 +8,7 @@ export default function PDMainDisc({ product }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
   const [avgStars, setAvgStars] = React.useState(0);
   const [totalStars, setTotalStars] = React.useState(0);
+
   const totalRevs = (ratings) => (
     Number(ratings['1'])
     + Number(ratings['2'])
@@ -15,6 +16,7 @@ export default function PDMainDisc({ product }) {
     + Number(ratings['4'])
     + Number(ratings['5'])
   );
+
   const avg = (ratings) => (
     1 * Number(ratings['1'])
     + 2 * Number(ratings['2'])
@@ -23,6 +25,7 @@ export default function PDMainDisc({ product }) {
     + 5 * Number(ratings['5'])
   )
     / (totalRevs(ratings));
+
   if (Object.keys(avgStars).length === 0) {
     axios.get('/reviews/meta/?product_id=44388')
       .then(({ data }) => {
@@ -31,6 +34,7 @@ export default function PDMainDisc({ product }) {
       })
       .catch(() => { });
   }
+
   return (
     <div className="PDMainDisc">
       <br />

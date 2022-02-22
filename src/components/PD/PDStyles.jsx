@@ -6,6 +6,7 @@ import contexts from '../contexts';
 export default function PDStyles({ styles, currentPhoto, setCurrentPhoto }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
   const [toggled, setToggled] = React.useState(currentStyle.name);
+
   return (
     <div className="PDStylesContainer">
       <strong>

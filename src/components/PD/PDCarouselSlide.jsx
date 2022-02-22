@@ -8,6 +8,7 @@ export default function PDCarouselSlide({
 }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
   const cardRef = React.useRef('');
+
   const clicky = () => {
     setCurrentPhoto(thisPhoto.url);
     for (let i = 0; i < currentStyle.photos.length; i++) {
@@ -16,6 +17,7 @@ export default function PDCarouselSlide({
       }
     }
   };
+
   return (
     <div className="imgCardContainer">
       {!expanded ? (

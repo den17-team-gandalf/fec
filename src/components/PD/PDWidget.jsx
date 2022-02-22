@@ -15,6 +15,13 @@ export default function PDWidget() {
   const [product, setProduct] = React.useState({});
   const [expanded, setExpanded] = React.useState(false);
   const areaChanger = React.useRef(0);
+
+  const interactions = (e) => {
+    const cTime = new Date().toLocaleTimeString();
+    axios.post('/interactions', { element: `${e.target.tagName} .${e.target.className}`, widget: 'Product Details', time: cTime });
+    // .then((data) => console.log(data.data));
+  };
+
   if (Object.keys(productStyles).length === 0) {
     axios.get('/products/44388/styles')
       .then(({ data }) => {
@@ -24,6 +31,7 @@ export default function PDWidget() {
       })
       .catch(() => { });
   }
+
   if (Object.keys(product).length === 0) {
     axios.get('/products/44388')
       .then(({ data }) => {
@@ -31,8 +39,13 @@ export default function PDWidget() {
       })
       .catch(() => { });
   }
+
   return (
-    <div className="PDWidget" ref={areaChanger}>
+    <div
+      className="PDWidget"
+      ref={areaChanger}
+      onClick={(e) => interactions(e)}
+    >
       {(Object.keys(product).length !== 0 && currentPhoto.length !== 0)
       && (
       <contexts.DetailsContext.Provider value={styleHook}>

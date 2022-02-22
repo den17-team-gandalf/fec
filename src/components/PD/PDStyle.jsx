@@ -8,11 +8,13 @@ export default function PDStyle({
   thisStyle, toggled, setToggled, currentPhoto, setCurrentPhoto,
 }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
+
   const clicky = () => {
     setCurrentStyle(thisStyle);
     setToggled(thisStyle.name);
     setCurrentPhoto(thisStyle.photos[0].url);
   };
+
   return (
     <span className="PDStyle">
       <input
