@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import contexts from '../contexts';
 
 export default function Header() {
@@ -9,9 +9,13 @@ export default function Header() {
 
   return (
     <contexts.AppContext.Consumer>
-      {({ products }) => {
+      {({ products, currentProduct, updateCurrentProduct }) => {
         const selectChanger = (e) => {
-          setSearching(e.target.value);
+          if (searching !== e.target.value) {
+            setSearching(e.target.value);
+            console.log('New selection', e.target.value);
+            updateCurrentProduct(products.filter(({ name }) => name === e.target.value)[0].id);
+          }
         };
         const modeToggle = () => {
           document.documentElement.setAttribute('data-theme', darkMode ? 'light' : 'dark');
@@ -24,13 +28,10 @@ export default function Header() {
               {' '}
               - Team Gandalf -
               {' '}
-              {' '}
-              {' '}
-              {' '}
               <FontAwesomeIcon onClick={() => modeToggle()} className="I_bulb" icon={faLightbulb} />
               <span className="hSearch">
-                <select className="hInput" type="text" name="size" id="size" onChange={(e) => selectChanger(e)}>
-                  <option value="">Choose a Product...</option>
+                <select className="hInput" type="text" name="size" id="size" onChange={selectChanger}>
+                  {/* <option value="">Choose a Product...</option> */}
                   {products
                     .map(
                       ({ name }) => (
