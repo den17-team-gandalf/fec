@@ -18,11 +18,17 @@ export default function PDInfo({ product }) {
         <br />
         {product.description}
         <br />
-        <FacebookIcon key="1" className="I_share" />
+        <a href="https://www.facebook.com">
+          <FacebookIcon key="1" className="I_share" />
+        </a>
         {' '}
-        <TwitterIcon key="2" className="I_share" />
+        <a href="https://www.twitter.com">
+          <TwitterIcon key="2" className="I_share" />
+        </a>
         {' '}
-        <PinterestIcon key="3" className="I_share" />
+        <a href="https://www.pinterest.com">
+          <PinterestIcon key="3" className="I_share" />
+        </a>
       </div>
       )}
       <div className="vl" />
