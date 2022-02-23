@@ -5,3 +5,6 @@ dist/bundle.js.map
 package-lock.json
 webpack.config.js
 .eslintrc.js
+src/components/FAQ/Modal.jsx
+dir_to_ignore/src/components/FAQ/oldStuff/
+dir_to_ignore/Users/laptop/Desktop/work/den17/fec/src/components/FAQ/oldStuff/
