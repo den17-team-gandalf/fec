@@ -8,6 +8,15 @@ export default function PDCarouselSlide({
 }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
   const cardRef = React.useRef('');
+
+  React.useEffect(() => {
+    if (currentStyle.photos.length < currentPhotoIndex + 1) {
+      setCurrentPhotoIndex(0);
+    } else {
+      setCurrentPhotoIndex(currentPhotoIndex);
+    }
+  }, [currentPhotoIndex]);
+
   const clicky = () => {
     setCurrentPhoto(thisPhoto.url);
     for (let i = 0; i < currentStyle.photos.length; i++) {
@@ -16,6 +25,7 @@ export default function PDCarouselSlide({
       }
     }
   };
+
   return (
     <div className="imgCardContainer">
       {!expanded ? (
@@ -43,7 +53,8 @@ export default function PDCarouselSlide({
             value={thisPhoto}
           />
         )}
-      {currentStyle.photos[currentPhotoIndex].url === thisPhoto.url
+      {currentStyle.photos[currentPhotoIndex]
+      && currentStyle.photos[currentPhotoIndex].url === thisPhoto.url
       && <hr className="imgToggleLine" />}
     </div>
   );
@@ -51,7 +62,7 @@ export default function PDCarouselSlide({
 
 PDCarouselSlide.propTypes = {
   thisPhoto: PropTypes.object,
-  currentPhoto: PropTypes.string.isRequired,
+  currentPhoto: PropTypes.string,
   setCurrentPhoto: PropTypes.func.isRequired,
   currentPhotoIndex: PropTypes.number.isRequired,
   setCurrentPhotoIndex: PropTypes.func.isRequired,

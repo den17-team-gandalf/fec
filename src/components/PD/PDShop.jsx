@@ -9,6 +9,7 @@ export default function PDShop() {
   const [totalSkuQ, setTotalSkuQ] = React.useState('');
   const selectEl = React.useRef(0);
   const inputEl = React.useRef(0);
+
   const selectChanger = (e) => {
     setTotalSkuQ(e.target.value.slice(e.target.value.indexOf(',') + 1, e.target.value.length));
     setCurrentSku(e.target.value.slice(0, e.target.value.indexOf(',')));
@@ -19,9 +20,11 @@ export default function PDShop() {
       inputEl.current.value = 1;
     }
   };
+
   const inputChanger = (e) => {
     setCurrentSkuQ(e.target.value);
   };
+
   const add2Cart = (e) => {
     e.preventDefault();
     let once = true;
@@ -38,6 +41,7 @@ export default function PDShop() {
         .catch(() => { });
     }
   };
+
   return (
     <div className="PDShop">
       <form className="shopForm" onSubmit={(e) => add2Cart(e)}>
@@ -93,8 +97,6 @@ export default function PDShop() {
               required
             />
           )}
-        <br />
-        <br />
         {/* Submit Button */}
         {totalSkuQ !== '0' || selectEl.current.value === ''
           ? (

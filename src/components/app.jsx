@@ -21,7 +21,10 @@ export default function App() {
   }
   return (
     <div className="appContents">
-      <contexts.AppContext.Provider value={{ products, currentProduct, updateCurrentProduct }}>
+      <contexts.AppContext.Provider value={{
+        products, currentProduct, updateCurrentProduct, setProducts,
+      }}
+      >
         <Header products={products} />
         {Object.keys(products).length !== 0 ? (
           <>

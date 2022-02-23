@@ -8,11 +8,13 @@ export default function PDStyle({
   thisStyle, toggled, setToggled, currentPhoto, setCurrentPhoto,
 }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
+
   const clicky = () => {
     setCurrentStyle(thisStyle);
     setToggled(thisStyle.name);
     setCurrentPhoto(thisStyle.photos[0].url);
   };
+
   return (
     <span className="PDStyle">
       <input
@@ -37,6 +39,6 @@ PDStyle.propTypes = {
   thisStyle: PropTypes.object,
   toggled: PropTypes.string.isRequired,
   setToggled: PropTypes.func.isRequired,
-  currentPhoto: PropTypes.string.isRequired,
+  currentPhoto: PropTypes.string,
   setCurrentPhoto: PropTypes.func.isRequired,
 };

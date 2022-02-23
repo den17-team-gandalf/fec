@@ -7,6 +7,8 @@ import PDMainDisc from './PDMainDisc';
 import PDShop from './PDShop';
 import contexts from '../contexts';
 
+let loaded = 0;
+
 export default function PDWidget() {
   const styleHook = React.useState({});
   const [productStyles, setProductStyles] = React.useState({});
@@ -15,55 +17,88 @@ export default function PDWidget() {
   const [product, setProduct] = React.useState({});
   const [expanded, setExpanded] = React.useState(false);
   const areaChanger = React.useRef(0);
-  if (Object.keys(productStyles).length === 0) {
-    axios.get('/products/44388/styles')
-      .then(({ data }) => {
-        setProductStyles(data);
-        styleHook[1](data.results[0]);
-        setCurrentPhoto(data.results[0].photos[0].url);
-      })
-      .catch(() => { });
-  }
-  if (Object.keys(product).length === 0) {
-    axios.get('/products/44388')
-      .then(({ data }) => {
-        setProduct(data);
-      })
-      .catch(() => { });
-  }
+
+  const interactions = (e) => {
+    const cTime = new Date().toLocaleTimeString();
+    axios.post('/interactions', { element: `${e.target.tagName} .${e.target.className}`, widget: 'Product Details', time: cTime });
+    // .then((data) => console.log(data.data));
+  };
+
+  // if (Object.keys(productStyles).length === 0) {
+  //   axios.get(`products/${currentProduct}/styles`)
+  //     .then(({ data }) => {
+  //       setProductStyles(data);
+  //       styleHook[1](data.results[0]);
+  //       setCurrentPhoto(data.results[0].photos[0].url);
+  //     })
+  //     .catch(() => { });
+  // }
+
+  // if (Object.keys(product).length === 0) {
+  //   axios.get(`/products/${currentProduct}`)
+  //     .then(({ data }) => {
+  //       setProduct(data);
+  //     })
+  //     .catch(() => { });
+  // }
 
   return (
-    <div className="PDWidget" ref={areaChanger}>
-      {(Object.keys(product).length !== 0 && currentPhoto.length !== 0)
-      && (
-      <contexts.DetailsContext.Provider value={styleHook}>
-        <PDCarousel
-          currentPhotoIndex={currentPhotoIndex}
-          setCurrentPhotoIndex={setCurrentPhotoIndex}
-          areaChanger={areaChanger}
-          expanded={expanded}
-          setExpanded={setExpanded}
-          currentPhoto={currentPhoto}
-          setCurrentPhoto={setCurrentPhoto}
-          styles={productStyles}
-        />
-        {!expanded
-          && (
-            <>
-              <PDMainDisc product={product} />
-              <PDStyles
+    <contexts.AppContext.Consumer>
+      {({ currentProduct }) => {
+        if (loaded !== currentProduct) {
+          loaded = currentProduct;
+          axios.get(`products/${currentProduct}/styles`)
+            .then(({ data }) => {
+              setProductStyles(data);
+              styleHook[1](data.results[0]);
+              setCurrentPhoto(data.results[0].photos[0].url);
+            })
+            .catch(() => { });
+          axios.get(`/products/${currentProduct}`)
+            .then(({ data }) => {
+              setProduct(data);
+            })
+            .catch(() => { });
+        }
+        return (
+          <div
+            className="PDWidget"
+            ref={areaChanger}
+            onClick={(e) => interactions(e)}
+          >
+            {(Object.keys(product).length !== 0 && currentPhoto !== '')
+            && (
+            <contexts.DetailsContext.Provider value={styleHook}>
+              <PDCarousel
+                currentPhotoIndex={currentPhotoIndex}
+                setCurrentPhotoIndex={setCurrentPhotoIndex}
+                areaChanger={areaChanger}
+                expanded={expanded}
+                setExpanded={setExpanded}
                 currentPhoto={currentPhoto}
                 setCurrentPhoto={setCurrentPhoto}
                 styles={productStyles}
               />
-              <PDShop />
-            </>
-          )}
+              {!expanded
+                && (
+                  <>
+                    <PDMainDisc expanded={expanded} product={product} />
+                    <PDStyles
+                      currentPhoto={currentPhoto}
+                      setCurrentPhoto={setCurrentPhoto}
+                      styles={productStyles}
+                    />
+                    <PDShop />
+                  </>
+                )}
 
-        <PDInfo product={product} />
-      </contexts.DetailsContext.Provider>
-      )}
+              <PDInfo product={product} />
+            </contexts.DetailsContext.Provider>
+            )}
 
-    </div>
+          </div>
+        );
+      }}
+    </contexts.AppContext.Consumer>
   );
 }

@@ -80,6 +80,13 @@ a {
   object-fit: cover;
 }
 
+.I_share {
+  grid-area: share;
+  margin: 10px;
+  border-radius: 100%;
+  position: relative;
+}
+
 .I_expand {
   position: absolute;
   top: 20px;
@@ -107,28 +114,32 @@ a {
   cursor: pointer;
 }
 
+.I_down {
+  position: absolute;
+  bottom: -15px;
+  right: 30px;
+  padding: 2px;
+  color: black;
+  cursor: pointer;
+}
+
 .PDInfo {
   display: grid;
   grid-template-areas:
-    'disc line checks'
-    'share line checks';
+    'disc line checks';
   grid-area: details;
   margin: 15px;
 }
 
 .description {
   grid-area: disc;
+  width: 850px;
 }
 
 .vl {
   border-left: 2px solid #121416d8;
   height: 100%;
   grid-area: line;
-  margin: 10px;
-}
-
-.addthis_inline_share_toolbox {
-  grid-area: share;
   margin: 10px;
 }
 

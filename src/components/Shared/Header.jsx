@@ -1,24 +1,40 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 import contexts from '../contexts';
 
 export default function Header() {
   const [darkMode, setDarkMode] = React.useState(false);
   const [searching, setSearching] = React.useState('');
+  const [stones, setStones] = React.useState({});
+
   return (
     <contexts.AppContext.Consumer>
-      {({ products, currentProduct, updateCurrentProduct }) => {
+      {({
+        products, currentProduct, updateCurrentProduct, setProducts,
+      }) => {
+        if (Object.keys(products) && Object.keys(products).length < 5) {
+          axios.get('/products/44397')
+            .then(({ data }) => {
+              setStones(data);
+            })
+            .catch(() => { });
+          { /* .then(() => {
+              setProducts(products.push(stones));
+            }) */ }
+        }
+        const modeToggle = () => {
+          document.documentElement.setAttribute('data-theme', darkMode ? 'light' : 'dark');
+          setDarkMode(!darkMode);
+        };
         const selectChanger = (e) => {
           if (searching !== e.target.value) {
             setSearching(e.target.value);
             console.log('New selection', e.target.value);
             updateCurrentProduct(products.filter(({ name }) => name === e.target.value)[0].id);
           }
-        };
-        const modeToggle = () => {
-          document.documentElement.setAttribute('data-theme', darkMode ? 'light' : 'dark');
-          setDarkMode(!darkMode);
         };
         return (
           <header className="header">
@@ -42,6 +58,15 @@ export default function Header() {
                         </option>
                       ),
                     )}
+                  {/* {Object.keys(products).length !== 0
+                  && (
+                  <option
+                    key={stones.name}
+                    value={stones.name}
+                  >
+                    {stones.name}
+                  </option>
+                  )} */}
                 </select>
                 {/* <FontAwesomeIcon className="I_headerSGlass" icon={faMagnifyingGlass} /> */}
               </span>
@@ -52,3 +77,7 @@ export default function Header() {
     </contexts.AppContext.Consumer>
   );
 }
+
+Header.propTypes = {
+  products: PropTypes.array,
+};

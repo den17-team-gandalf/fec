@@ -3,7 +3,6 @@ configs.js
 dist/bundle.js
 dist/bundle.js.map
 package-lock.json
-# src/components/app.jsx
 webpack.config.js
 .eslintrc.js
 src/components/FAQ/Modal.jsx

@@ -13,16 +13,20 @@ export default function PDCarousel({
 }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
   const [superZoomed, setSuperZoomed] = React.useState(false);
+
   const carousel = React.useRef(0);
   const pImage = React.useRef(0);
+
   const photoIndexerR = () => {
     setCurrentPhotoIndex(currentPhotoIndex + 1);
     setCurrentPhoto(currentStyle.photos[currentPhotoIndex + 1].url);
   };
+
   const photoIndexerL = () => {
     setCurrentPhotoIndex(currentPhotoIndex - 1);
     setCurrentPhoto(currentStyle.photos[currentPhotoIndex - 1].url);
   };
+
   const clicky = (e) => {
     // If clicking on container, image, or expand icon...
     if (e.target.className === 'primaryImg'
@@ -73,6 +77,7 @@ export default function PDCarousel({
       }
     }
   };
+
   return (
     <div
       className="PDCarousel"
@@ -97,7 +102,7 @@ export default function PDCarousel({
         />
         )}
       </div>
-      {currentPhoto === '' ? (
+      {currentPhoto === '' || !currentStyle.photos[currentPhotoIndex] ? (
         <img
           ref={pImage}
           src={currentStyle.photos[0].url}
@@ -135,7 +140,7 @@ export default function PDCarousel({
 
 PDCarousel.propTypes = {
   areaChanger: PropTypes.object,
-  currentPhoto: PropTypes.string.isRequired,
+  currentPhoto: PropTypes.string,
   setCurrentPhoto: PropTypes.func.isRequired,
   expanded: PropTypes.bool.isRequired,
   setExpanded: PropTypes.func.isRequired,
