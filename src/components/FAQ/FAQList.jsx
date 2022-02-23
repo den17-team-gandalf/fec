@@ -87,6 +87,24 @@ function Answers({ answer }) {
         {answer.answerer_name} |<time dateTime={date}> {date} </time>
       </sub>
       <FAQLinks entry={ansProp} />
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault;
+          openModal();
+        }}
+      >
+        Add Answer
+      </button>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="questionForm"
+      >
+        <FAQForm data={{ formType: 'answers', itemId: answer.id }} />
+      </Modal>
       <br />
     </>
   );
@@ -100,6 +118,21 @@ function Questions({ question }) {
     id: question.question_id,
     help: question.question_helpfulness,
   };
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   // console.log(question);
   if (!preview) {
     return (
@@ -134,23 +167,30 @@ function Questions({ question }) {
       {previewList.map((a) => (
         <Answers key={`${Math.random() * 10}AAP`} answer={a[1]} />
       ))}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          setPreview(!preview);
-        }}
-      >
-        Show more answers
-      </button>
+      {answers.length >= 2 && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            setPreview(!preview);
+          }}
+        >
+          Show more answers
+        </button>
+      )}
     </>
   );
 }
 
-export default function FAQList({ list }) {
+export default function FAQList({ data }) {
+  const productId = data.product_id;
+  const list = data.results;
+  // console.log(data)
+  const [questionCount, setQuestionCount] = useState(2);
+  const currentList = list.slice(0, questionCount);
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
-
+  // console.log(productId);
   function openModal() {
     setIsOpen(true);
   }
@@ -165,32 +205,50 @@ export default function FAQList({ list }) {
   }
   return (
     <>
-      {list.map((q) => (
+      {currentList.map((q) => (
         <div key={Math.random() * 100}>
           Q:
           <div>
             <Questions question={q} />
           </div>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault;
-              openModal();
-            }}
-          >
-            Add Answer
-          </button>
-          <Modal
-            isOpen={modalIsOpen}
-            onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="questionForm"
-          >
-            <FAQForm data={{ formType: 'question', itemId: q.question_id }} />
-          </Modal>
         </div>
       ))}
+      {list.length > 2 && (
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            if (questionCount < list.length) {
+              setQuestionCount(questionCount + 2);
+            }
+          }}
+          type="button"
+        >
+          More Questions
+        </button>
+      )}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault;
+          openModal();
+        }}
+      >
+        Add Question
+      </button>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="questionForm"
+      >
+        <FAQForm
+          data={{
+            formType: 'question',
+            productId: productId,
+          }}
+        />
+      </Modal>
     </>
   );
 }

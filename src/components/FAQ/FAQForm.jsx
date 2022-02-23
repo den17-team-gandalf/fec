@@ -2,13 +2,26 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-export default function FAQForm(entry) {
-  const { formType, itemId } = entry;
+export default function FAQForm({ data }) {
+  const { formType, productId } = data;
+  // console.log(formType);
   const [userInput, setUserInput] = useState('');
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
-  const [errors, setErrors] = useState('');
+  const [productData, setData] = useState('');
   // console.log(userInput.length, nameInput, emailInput);
+  useEffect(async () => {
+    let result = await axios.get(`/products/?product_id=${productId}`);
+    result = result.data;
+    for (let i = 0; i < result.length; i++) {
+      console.log(result[i], ' id');
+      if (result[i].id === productId) {
+        await setData(result[i].name);
+        return;
+      }
+    }
+  }, []);
+  console.log(productData, ' id2');
   function handleClick(type, id) {
     const data = {
       body: userInput,
@@ -16,24 +29,43 @@ export default function FAQForm(entry) {
       email: emailInput,
       product_id: id,
     };
-    // console.log(data);
     // axios.post('/qa/questions', data);
   }
-
+  console.log('stuff ', productData);
   useEffect(() => {
-    if (userInput.length > 1000 && nameInput.length > 60) {
-      setErrors(`Response needs ${1000 - userInput.length} more characters!`);
-    } else {
-      setErrors('');
-    }
+    // if (userInput.length > 1000 && nameInput.length > 60) {
+    //   setErrors(`Response needs ${1000 - userInput.length} more characters!`);
+    // } else {
+    //   setErrors('');
+    // }
   }, [userInput, nameInput]);
   // if question get question to stick on top of answers
+  // productData.find((q) => console.log(q));
   return (
     <form>
       <label>
-        {formType === 'ans' ? <>Answer:</> : <>Question:</>}
+        {formType === 'answers' ? (
+          <>
+            Submit Your Answer:
+            <br />
+            {/* <sub>{`${productData.name}: ${data.questionBody}`}</sub> */}
+          </>
+        ) : (
+          <>
+            {' '}
+            Ask Your Question:
+            <br />
+            {productData.length > 1 ? (
+              <sub>{`About the ${productData}`}</sub>
+            ) : (
+              <sub>About the ...loading</sub>
+            )}
+          </>
+        )}
         <br />
-        <input
+        <textarea
+          rows="6"
+          cols="50"
           type="text"
           name=""
           id="userInput"
@@ -79,7 +111,7 @@ export default function FAQForm(entry) {
       <button
         onClick={(e) => {
           e.preventDefault();
-          handleClick(formType, itemId);
+          handleClick(formType, productId);
         }}
         type="button"
       >

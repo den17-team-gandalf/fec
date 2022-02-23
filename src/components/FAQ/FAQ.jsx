@@ -6,7 +6,7 @@ export default function FAQWidget() {
   const data = FAQFetchList();
   const windowSize = {
     width: window.innerWidth,
-    height: window.innerHeight / 2,
+    maxHeight: window.innerHeight,
     overflow: 'auto',
   };
   const [searchInput, setSearchInput] = useState('');
@@ -30,7 +30,7 @@ export default function FAQWidget() {
   }, [searchInput]);
   if (searchResultList) {
     return (
-      <>
+      <div style={{ maxHeight: window.innerHeight, overflow: 'auto' }}>
         <h1>Questions and Answers</h1>
         <form>
           <input
@@ -56,7 +56,7 @@ export default function FAQWidget() {
             <div className="loading">Loading...</div>
           )}
         </div>
-      </>
+      </div>
     );
   }
   return (
@@ -78,7 +78,7 @@ export default function FAQWidget() {
       </form>
       <div>
         {data ? (
-          <FAQList key={`${Math.random() * 10}FAQListOG`} list={data.results} />
+          <FAQList key={`${Math.random() * 10}FAQListOG`} data={data} />
         ) : (
           <div className="loading">Loading...</div>
         )}
