@@ -5,7 +5,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import contexts from '../contexts';
 
-export default function Header({ products }) {
+export default function Header() {
   const [darkMode, setDarkMode] = React.useState(false);
   const [searching, setSearching] = React.useState('');
   const [stones, setStones] = React.useState({});
