@@ -31,6 +31,7 @@ export default function PDWidget() {
       })
       .catch(() => { });
   }
+
   return (
     <div className="PDWidget" ref={areaChanger}>
       {(Object.keys(product).length !== 0 && currentPhoto.length !== 0)
