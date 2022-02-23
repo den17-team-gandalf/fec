@@ -2,15 +2,16 @@ const path = require('path');
 
 const SRC_DIR = path.join(__dirname, '/src');
 const DIST_DIR = path.join(__dirname, '/dist');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: `${SRC_DIR}/index.js`,
   output: {
     filename: 'bundle.js',
     path: DIST_DIR,
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -35,5 +36,8 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
   },
 };
