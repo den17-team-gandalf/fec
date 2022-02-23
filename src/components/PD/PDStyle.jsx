@@ -39,6 +39,6 @@ PDStyle.propTypes = {
   thisStyle: PropTypes.object,
   toggled: PropTypes.string.isRequired,
   setToggled: PropTypes.func.isRequired,
-  currentPhoto: PropTypes.string.isRequired,
+  currentPhoto: PropTypes.string,
   setCurrentPhoto: PropTypes.func.isRequired,
 };

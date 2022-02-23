@@ -97,8 +97,6 @@ export default function PDShop() {
               required
             />
           )}
-        <br />
-        <br />
         {/* Submit Button */}
         {totalSkuQ !== '0' || selectEl.current.value === ''
           ? (

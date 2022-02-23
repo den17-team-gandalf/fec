@@ -102,7 +102,7 @@ export default function PDCarousel({
         />
         )}
       </div>
-      {currentPhoto === '' ? (
+      {currentPhoto === '' || !currentStyle.photos[currentPhotoIndex] ? (
         <img
           ref={pImage}
           src={currentStyle.photos[0].url}
@@ -140,7 +140,7 @@ export default function PDCarousel({
 
 PDCarousel.propTypes = {
   areaChanger: PropTypes.object,
-  currentPhoto: PropTypes.string.isRequired,
+  currentPhoto: PropTypes.string,
   setCurrentPhoto: PropTypes.func.isRequired,
   expanded: PropTypes.bool.isRequired,
   setExpanded: PropTypes.func.isRequired,

@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import Ratings from 'react-ratings-declarative';
 import contexts from '../contexts';
 
-export default function PDMainDisc({ product }) {
+let loaded = 0;
+
+export default function PDMainDisc({ product, expanded }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
   const [avgStars, setAvgStars] = React.useState(0);
   const [totalStars, setTotalStars] = React.useState(0);
+  const [showStars, setShowStars] = React.useState(true);
 
   const totalRevs = (ratings) => (
     Number(ratings['1'])
@@ -26,19 +29,39 @@ export default function PDMainDisc({ product }) {
   )
     / (totalRevs(ratings));
 
-  if (Object.keys(avgStars).length === 0) {
-    axios.get('/reviews/meta/?product_id=44388')
-      .then(({ data }) => {
-        setAvgStars(avg(data.ratings));
-        setTotalStars(totalRevs(data.ratings));
-      })
-      .catch(() => { });
-  }
+  React.useEffect(() => {
+    if (expanded) {
+      setShowStars(false);
+    } else {
+      setShowStars(true);
+    }
+  }, [expanded, totalStars, showStars]);
+
+  // if (Object.keys(avgStars).length === 0) {
+  //   axios.get('/reviews/meta/?product_id=44388')
+  //     .then(({ data }) => {
+  //       setAvgStars(avg(data.ratings));
+  //       setTotalStars(totalRevs(data.ratings));
+  //     })
+  //     .catch(() => { });
+  // }
 
   return (
-    <div className="PDMainDisc">
-      <br />
-      {avgStars !== 0
+    <contexts.AppContext.Consumer>
+      {({ currentProduct }) => {
+        if (loaded !== currentProduct) {
+          loaded = currentProduct;
+          axios.get(`/reviews/meta/?product_id=${currentProduct}`)
+            .then(({ data }) => {
+              setAvgStars(avg(data.ratings));
+              setTotalStars(totalRevs(data.ratings));
+            })
+            .catch(() => { });
+        }
+        return (
+          <div className="PDMainDisc">
+            <br />
+            {showStars
       && (
         <Ratings
           rating={avgStars}
@@ -54,43 +77,47 @@ export default function PDMainDisc({ product }) {
           <Ratings.Widget />
         </Ratings>
       )}
-      {' '}
-      {totalStars !== 0 && (
-      <a href="#Reviews" target="_self">
-        {' '}
-        Read all
-        {' '}
-        {totalStars}
-        {' '}
-        reviews
+            {' '}
+            {showStars && (
+            <a href="#Reviews" target="_self">
+              {' '}
+              Read all
+              {' '}
+              {totalStars}
+              {' '}
+              reviews
 
-      </a>
-      )}
-      <br />
-      <br />
-      {product.category
+            </a>
+            )}
+            <br />
+            <br />
+            {product.category
       && product.category.toUpperCase()}
-      <br />
-      {product.name && (<div className="productName"><strong>{product.name}</strong></div>)}
-      <br />
-      {currentStyle.sale_price === null ? `$${currentStyle.original_price}`
-        : (
-          <div>
-            <span className="salePrice">
-              $
-              {currentStyle.sale_price}
-            </span>
+            <br />
+            {product.name && (<div className="productName"><strong>{product.name}</strong></div>)}
+            <br />
+            {currentStyle.sale_price === null ? `$${currentStyle.original_price}`
+              : (
+                <div>
+                  <span className="salePrice">
+                    $
+                    {currentStyle.sale_price}
+                  </span>
             &nbsp;
-            <s>
-              $
-              {currentStyle.original_price}
-            </s>
+                  <s>
+                    $
+                    {currentStyle.original_price}
+                  </s>
+                </div>
+              )}
           </div>
-        )}
-    </div>
+        );
+      }}
+    </contexts.AppContext.Consumer>
   );
 }
 
 PDMainDisc.propTypes = {
   product: PropTypes.object,
+  expanded: PropTypes.bool.isRequired,
 };
