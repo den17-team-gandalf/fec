@@ -7,14 +7,14 @@ import CharacteristicBar from './CharacteristicBar';
 export default function RatingsBreakdown({ metadata, filterHook }) {
   const numReviews = parseInt(metadata.recommended.false, 10)
     + parseInt(metadata.recommended.true, 10);
-  const avgRating = (Math.floor((
+  let avgRating = (Math.floor((
     Number(metadata.ratings['1'])
     + (Number(metadata.ratings['2']) * 2)
     + (Number(metadata.ratings['3']) * 3)
     + (Number(metadata.ratings['4']) * 4)
     + (Number(metadata.ratings['5']) * 5)
   ) / (numReviews / 4)) / 4);
-  const roundedRating = (Math.round((
+  let roundedRating = (Math.round((
     Number(metadata.ratings['1'])
     + (Number(metadata.ratings['2']) * 2)
     + (Number(metadata.ratings['3']) * 3)
@@ -26,6 +26,12 @@ export default function RatingsBreakdown({ metadata, filterHook }) {
   const modeStarRating = Math.max(
     ...Object.values(metadata.ratings).map((x) => Number(x)),
   );
+  if (Number.isNaN(avgRating)) {
+    avgRating = 0;
+  }
+  if (Number.isNaN(roundedRating)) {
+    roundedRating = 0;
+  }
 
   return (
     <div className="RatingsLeftSide">
