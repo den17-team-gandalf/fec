@@ -33,7 +33,7 @@ export default function RatingsBreakdown({ metadata, filterHook }) {
         <h1 className="AverageRating">{roundedRating}</h1>
         <div className="OverallStarRating">
           <Ratings
-            rating={avgRating}
+            rating={avgRating || 0}
             widgetRatedColors="orange"
             widgetDimensions="25px"
             widgetSpacings="2px"

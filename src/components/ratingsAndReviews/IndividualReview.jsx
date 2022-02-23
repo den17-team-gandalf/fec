@@ -48,7 +48,7 @@ export default function IndividualReview({ review }) {
     <li className="IndividualReview">
       <div className="IndividualReviewTitleBar">
         <Ratings
-          rating={review.rating}
+          rating={review.rating || 0}
           widgetRatedColors="green"
           widgetDimensions="20px"
           widgetSpacings="1px"
