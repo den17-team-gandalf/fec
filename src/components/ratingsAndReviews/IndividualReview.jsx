@@ -1,19 +1,31 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import axios from 'axios';
 import propTypes from 'prop-types';
 import React from 'react';
 import Ratings from 'react-ratings-declarative';
-
-// let unUsed = true;
+import ReactModal from 'react-modal';
 
 const markHelpful = (e, id, updateHelpfulness, unUsed) => {
-  // console.log(id, unUsed);
   if (unUsed.flag) {
     axios.put(`/reviews/${id}/helpful`)
       .then(() => {
         updateHelpfulness((x) => x + 1);
         // eslint-disable-next-line no-param-reassign
         unUsed.flag = false;
-        // e.target.childNodes[0].nodeValue = Number(e.target.text)
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+};
+
+const reportReview = (e, id, unUsed) => {
+  if (unUsed.flag) {
+    axios.put(`/reviews/${id}/report`)
+      .then(() => {
+        // eslint-disable-next-line no-param-reassign
+        unUsed.flag = false;
       })
       .catch((err) => {
         throw err;
@@ -27,23 +39,11 @@ const formatDateString = (date) => {
   return str;
 };
 
-const reportReview = (e, id, unUsed) => {
-  if (unUsed.flag) {
-    axios.put(`/reviews/${id}/report`)
-      .then(() => {
-        // console.log(results);
-        // eslint-disable-next-line no-param-reassign
-        unUsed.flag = false;
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }
-};
-
 export default function IndividualReview({ review }) {
   const [helpfulness, updateHelpfulness] = React.useState(review.helpfulness);
   const [unUsed] = React.useState({ flag: true });
+  const [bodyChars, updateBodyChars] = React.useState(250);
+  const [currentPicture, updateCurrentPicture] = React.useState(null);
   return (
     <li className="IndividualReview">
       <div className="IndividualReviewTitleBar">
@@ -69,10 +69,43 @@ export default function IndividualReview({ review }) {
         {review.summary}
       </h3>
       <p className="ReviewBody">
-        {review.body.length < 250 && review.body}
-        {review.body.length > 250 && `${review.body.slice(0, 250)}... Load More TODO`}
+        {review.body.length < bodyChars && review.body}
+        {review.body.length > bodyChars && `${review.body.slice(0, bodyChars)}...`}
+        {review.body.length > bodyChars && (<br />)}
+        {review.body.length > bodyChars && (
+          <button type="submit" className="LoadMoreBodyButton" onClick={() => updateBodyChars(1000)}>
+            Load More
+          </button>
+        )}
       </p>
-      {review.photos.map(({ url, id }) => (<img src={url} alt="user-submitted" width="100" key={id} loading="lazy" />))}
+      {review.photos.map(({ url, id }) => (
+        <img
+          src={url}
+          alt="user-submitted"
+          width="100"
+          key={id}
+          loading="lazy"
+          onClick={(e) => updateCurrentPicture(e.target.src)}
+        />
+      ))}
+      {currentPicture && (
+        <ReactModal
+          isOpen
+          ariaHideApp={false}
+          onRequestClose={
+            () => updateCurrentPicture(null)
+          }
+          shouldCloseOnOverlayClick
+          shouldCloseOnEsc
+        >
+          <div className="ReviewPictureModal">
+            <img
+              src={currentPicture}
+              alt="user-submitted"
+            />
+          </div>
+        </ReactModal>
+      )}
       {review.recommend && (<div className="ReviewRecommendation">✓ I recommend this product</div>)}
       {review.response !== null && (
         <div className="ResponseBox">

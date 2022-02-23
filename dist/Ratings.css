@@ -5,7 +5,7 @@
 }
 
 .ResponseBox {
-  background-color: gray;
+  background-color: rgb(185, 184, 184);
 }
 
 .ReviewsList {
@@ -13,6 +13,7 @@
   width: 90%;
   word-break: break-word;
   overflow: scroll;
+  overflow-x: hidden;
   list-style-type: none;
 }
 
@@ -44,6 +45,12 @@
   display: grid;
   grid-template-areas:
   'load add'
+}
+
+.ReviewPictureModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .LoadReviewsButton {
