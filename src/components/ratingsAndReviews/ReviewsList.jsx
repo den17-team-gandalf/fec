@@ -10,7 +10,7 @@ export default function ReviewsList({ filter, metadata }) {
   const [addReviewOpen, updateAddReview] = React.useState(false);
   return (
     <contexts.RatingsContext.Consumer>
-      {([reviews]) => {
+      {([reviews = []]) => {
         const filteredReviews = reviews.filter((review) => ((filter.length === 0)
           || (filter.includes(review.rating))));
         return (

@@ -15,10 +15,11 @@ export default function App() {
   const [currentProduct, updateCurrentProduct] = React.useState(44388);
   if (flag) {
     flag = false;
-    axios.get('/products')
+    axios.get('/products?count=15')
       .then(({ data }) => setProducts(data))
       .catch(() => { });
   }
+
   return (
     <div className="appContents">
       <contexts.AppContext.Provider value={{
