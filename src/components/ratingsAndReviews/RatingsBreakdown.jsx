@@ -32,7 +32,6 @@ export default function RatingsBreakdown({ metadata, filterHook }) {
   if (Number.isNaN(roundedRating)) {
     roundedRating = 0;
   }
-
   return (
     <div className="RatingsLeftSide">
       <div className="RatingsLeftSideStars">
@@ -52,7 +51,7 @@ export default function RatingsBreakdown({ metadata, filterHook }) {
           </Ratings>
         </div>
         <div className="PercentReviews">
-          {`${percentPositive}% of ${numReviews} reviews recommend this product`}
+          {`${percentPositive || 0}% of ${numReviews || 0} reviews recommend this product`}
         </div>
         {Object.keys(metadata.ratings).map(
           (numStars) => (
