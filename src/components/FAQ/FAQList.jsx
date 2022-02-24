@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import FAQLinks from './FAQLinks';
 import FAQForm from './FAQForm';
+import axios from 'axios';
 
 Modal.setAppElement(document.getElementById('app'));
 const customStyles = {
@@ -203,6 +204,7 @@ export default function FAQList({ data }) {
   function closeModal() {
     setIsOpen(false);
   }
+
   return (
     <>
       {currentList.map((q) => (
@@ -213,7 +215,7 @@ export default function FAQList({ data }) {
           </div>
         </div>
       ))}
-      {list.length > 2 && (
+      {list.length > 2 && questionCount < list.length ? (
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -225,30 +227,14 @@ export default function FAQList({ data }) {
         >
           More Questions
         </button>
-      )}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault;
-          openModal();
+      ) : null}
+      <br />
+      <FAQForm
+        data={{
+          formType: 'question',
+          productId: productId,
         }}
-      >
-        Add Question
-      </button>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="questionForm"
-      >
-        <FAQForm
-          data={{
-            formType: 'question',
-            productId: productId,
-          }}
-        />
-      </Modal>
+      />
     </>
   );
 }
