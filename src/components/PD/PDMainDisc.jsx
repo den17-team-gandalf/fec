@@ -53,8 +53,10 @@ export default function PDMainDisc({ product, expanded }) {
           loaded = currentProduct;
           axios.get(`/reviews/meta/?product_id=${currentProduct}`)
             .then(({ data }) => {
-              setAvgStars(avg(data.ratings));
-              setTotalStars(totalRevs(data.ratings));
+              if (typeof data.ratings === 'number' && Number(data.ratings).isNaN) {
+                setAvgStars(avg(data.ratings));
+                setTotalStars(totalRevs(data.ratings));
+              }
             })
             .catch(() => { });
         }

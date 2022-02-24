@@ -38,9 +38,14 @@ export default function PDInfo({ product }) {
             <FontAwesomeIcon icon={faCheck} />
             {' '}
             <strong>{feature.feature}</strong>
-            :
-            {' '}
-            {feature.value}
+            {feature.value !== null
+            && (
+            <>
+              :
+              {' '}
+              {feature.value}
+            </>
+            )}
             <br />
           </span>
         ))}
