@@ -15,16 +15,6 @@ export default function Header() {
       {({
         products, currentProduct, updateCurrentProduct, setProducts,
       }) => {
-        if (Object.keys(products) && Object.keys(products).length < 5) {
-          axios.get('/products/44397')
-            .then(({ data }) => {
-              setStones(data);
-            })
-            .catch(() => { });
-          { /* .then(() => {
-              setProducts(products.push(stones));
-            }) */ }
-        }
         const modeToggle = () => {
           document.documentElement.setAttribute('data-theme', darkMode ? 'light' : 'dark');
           setDarkMode(!darkMode);
@@ -45,8 +35,7 @@ export default function Header() {
               {' '}
               <FontAwesomeIcon onClick={() => modeToggle()} className="I_bulb" icon={faLightbulb} />
               <span className="hSearch">
-                <select className="hInput" type="text" name="size" id="size" onChange={selectChanger}>
-                  {/* <option value="">Choose a Product...</option> */}
+                <select className="hInput" type="text" name="productChanger" id="productChanger" onChange={selectChanger}>
                   {products
                     .map(
                       ({ name }) => (

@@ -48,7 +48,7 @@ a {
   position: relative;
   grid-area: carousel;
   background-color: gray;
-  width: auto;
+  width: 800px;
   height: 700px;
   margin: 15px;
   cursor: zoom-in;
@@ -73,8 +73,8 @@ a {
 }
 
 .primaryImg {
-  width: 300px;
-  height: auto;
+  max-width: 100%;
+  max-height: 100%;
   align-self: center;
   justify-self: center;
   object-fit: cover;

@@ -9,13 +9,14 @@ export default function PDShop() {
   const [totalSkuQ, setTotalSkuQ] = React.useState('');
   const selectEl = React.useRef(0);
   const inputEl = React.useRef(0);
+  const addEl = React.useRef(0);
 
   const selectChanger = (e) => {
     setTotalSkuQ(e.target.value.slice(e.target.value.indexOf(',') + 1, e.target.value.length));
     setCurrentSku(e.target.value.slice(0, e.target.value.indexOf(',')));
     setCurrentSkuQ('1');
-    if (totalSkuQ === '0') {
-      selectEl.current.value = 'OUT OF STOCK';
+    if (currentSku === null) {
+      addEl.current.value = 'OUT OF STOCK';
     } else {
       inputEl.current.value = 1;
     }
@@ -57,7 +58,8 @@ export default function PDShop() {
           <option value="">SELECT SIZE</option>
           {Object.entries(currentStyle.skus)
             .filter(
-              (clothingStyle) => clothingStyle[1].quantity !== 0,
+              (clothingStyle) => clothingStyle[1].quantity !== 0
+              && clothingStyle[1].quantity !== null,
             )
             .map(
               (clothingStyle) => (
@@ -74,7 +76,8 @@ export default function PDShop() {
         {' '}
         {' '}
         {/* Quantity Selector */}
-        {Object.keys(totalSkuQ).length === 0
+        {currentSku === null
+        || currentSku === ''
           ? (
             <input
               className="quantitySelector"
@@ -98,15 +101,23 @@ export default function PDShop() {
             />
           )}
         {/* Submit Button */}
-        {totalSkuQ !== '0' || selectEl.current.value === ''
+        {selectEl.current.length !== 1
           ? (
             <input
+              ref={addEl}
               className="addToBag"
               type="submit"
               value="ADD TO BAG"
             />
           )
-          : <div />}
+          : (
+            <input
+              ref={addEl}
+              className="addToBag"
+              type="button"
+              value="OUT OF STOCK"
+            />
+          )}
 
       </form>
     </div>

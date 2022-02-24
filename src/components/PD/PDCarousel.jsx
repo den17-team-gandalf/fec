@@ -47,6 +47,7 @@ export default function PDCarousel({
         pImage.current.style.width = '450px';
         pImage.current.style.cursor = 'zoom-in';
         carousel.current.style.cursor = 'zoom-in';
+        carousel.current.style.width = '800px';
         // If in expanded view and clicking on container or image...
       } else if (expanded
         && (e.target.className === 'primaryImg'
@@ -74,6 +75,7 @@ export default function PDCarousel({
           "details details details"
         `;
         pImage.current.style.width = '450px';
+        carousel.current.style.width = '1200px';
       }
     }
   };
