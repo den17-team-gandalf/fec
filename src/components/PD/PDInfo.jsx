@@ -18,11 +18,17 @@ export default function PDInfo({ product }) {
         <br />
         {product.description}
         <br />
-        <FacebookIcon key="1" className="I_share" />
+        <a href="https://www.facebook.com" aria-label="Pinterest Link">
+          <FacebookIcon key="1" className="I_share" alt="Facebook Icon" />
+        </a>
         {' '}
-        <TwitterIcon key="2" className="I_share" />
+        <a href="https://www.twitter.com" aria-label="Pinterest Link">
+          <TwitterIcon key="2" className="I_share" alt="Twitter Icon" />
+        </a>
         {' '}
-        <PinterestIcon key="3" className="I_share" />
+        <a href="https://www.pinterest.com" aria-label="Pinterest Link">
+          <PinterestIcon key="3" className="I_share" alt="Pinterest Icon" />
+        </a>
       </div>
       )}
       <div className="vl" />
@@ -32,9 +38,14 @@ export default function PDInfo({ product }) {
             <FontAwesomeIcon icon={faCheck} />
             {' '}
             <strong>{feature.feature}</strong>
-            :
-            {' '}
-            {feature.value}
+            {feature.value !== null
+            && (
+            <>
+              :
+              {' '}
+              {feature.value}
+            </>
+            )}
             <br />
           </span>
         ))}

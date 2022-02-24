@@ -50,8 +50,10 @@ export default function PDWidget() {
           axios.get(`products/${currentProduct}/styles`)
             .then(({ data }) => {
               setProductStyles(data);
-              styleHook[1](data.results[0]);
-              setCurrentPhoto(data.results[0].photos[0].url);
+              if (data.results.length !== 0) {
+                styleHook[1](data.results[0]);
+                setCurrentPhoto(data.results[0].photos[0].url);
+              }
             })
             .catch(() => { });
           axios.get(`/products/${currentProduct}`)
