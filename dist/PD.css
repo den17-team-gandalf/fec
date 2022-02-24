@@ -1,5 +1,5 @@
 :root, html[data-theme="light"] {
-  --background-color: #fff;
+  --background-color: #EFE7DB;
   --alternate-background-color: #f7f7f9;
   --text-color: #121416d8;
   --text-color-light: #777676bb;
@@ -221,6 +221,7 @@ a {
 
 .I_bulb {
   color: var(--mode-color);
+  border-radius: 100%;
 }
 
 .header {
