@@ -65,9 +65,9 @@ export default function IndividualReview({ review }) {
           {`, ${formatDateString(review.date)}`}
         </div>
       </div>
-      <h3 className="ReviewBody">
+      <p className="ReviewSummary">
         {review.summary}
-      </h3>
+      </p>
       <p className="ReviewBody">
         {review.body.length < bodyChars && review.body}
         {review.body.length > bodyChars && `${review.body.slice(0, bodyChars)}...`}

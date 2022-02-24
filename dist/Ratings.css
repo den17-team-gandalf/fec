@@ -23,6 +23,15 @@
   'stars username';
 }
 
+.ReviewSummary {
+  font-size: medium;
+  font-weight: bold;
+}
+
+/* .ReviewBody {
+
+} */
+
 .ReviewStarRating {
   grid-area: stars;
 }
