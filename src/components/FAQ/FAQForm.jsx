@@ -2,84 +2,108 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import contexts from '../contexts';
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 
 export default function FAQForm({ data }) {
   const { formType, productId } = data;
+  // console.log(formType);
+
   const [userInput, setUserInput] = useState('');
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
 
-  // console.log(userInput.length, nameInput, emailInput);
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
+  // use context to pull name out
+  const { products } = React.useContext(contexts.AppContext);
+  const productData = products.find((item) => {
+    if (item.id.toString() === productId) {
+      return item.name;
+    }
+  });
 
-  function handleClick(type, id) {
-    axios.post('/qa/questions', {
+  // console.log(formType, ' id2');
+  function handleClick() {
+    const sendData = {
       body: userInput,
       name: nameInput,
       email: emailInput,
-      product_id: id,
-    });
-    setEmailInput('');
-    setNameInput('');
-    setUserInput('');
+      product_id: productId,
+    };
+    if (formType === 'questions') {
+      axios.post('/qa/questions', sendData);
+    } else {
+      axios.post('/qa/questions', sendData);
+    }
   }
-  let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-
   function closeModal() {
     setIsOpen(false);
   }
+
   return (
     <>
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault;
-          openModal();
-        }}
-      >
-        Add Question
-      </button>
+      {formType === 'answers' ? (
+        <button
+          className="FAQModalANS"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault;
+            openModal();
+          }}
+        >
+          Add Answer
+        </button>
+      ) : (
+        <button
+          className="FAQModalFORM"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault;
+            openModal();
+          }}
+        >
+          Add Question
+        </button>
+      )}
       <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="questionForm"
+        contentLabel="Enlarged Img"
       >
         <form>
           <label>
             {formType === 'answers' ? (
-              <div>
+              <>
                 Submit Your Answer:
                 <br />
-                {/* <sub>{`${productData.name}: ${data.questionBody}`}</sub> */}
-              </div>
+                {/* <sub>{`${productData}: ${data.questionBody}`}</sub> */}
+                <sub>About this product:</sub>
+              </>
             ) : (
-              <div>
+              <>
+                {' '}
                 Ask Your Question:
                 <br />
-                <sub>About this item:</sub>
-              </div>
+                {/* <sub>{`About the ${productData}:`}</sub> */}
+                <sub>About this product:</sub>
+              </>
             )}
+            <br />
             <textarea
               rows="6"
               cols="50"
@@ -95,7 +119,7 @@ export default function FAQForm({ data }) {
           </label>
           <br />
           <label>
-            Nickname:
+            Nickname
             <br />
             <input
               type="text"
@@ -109,7 +133,7 @@ export default function FAQForm({ data }) {
           </label>
           <br />
           <label>
-            Email:
+            Email
             <br />
             <input
               type="email"
@@ -122,13 +146,22 @@ export default function FAQForm({ data }) {
             <sub> For authentication reasons, you will not be emailed</sub>
           </label>
           <br />
-          {formType === 'ans' ? (
-            <input type="button" name="Upload Photo" value="Upload Photo" />
-          ) : null}
+          {/* {formType === 'answers' ? (
+            <input
+              className="FAQModalFORM"
+              type="button"
+              name="Upload Photo"
+              value="Upload Photo"
+              >
+
+              </input>
+
+          ) : null} */}
           <button
+            className="FAQModalFORM"
             onClick={(e) => {
               e.preventDefault();
-              handleClick(formType, productId);
+              handleClick();
               closeModal();
             }}
             type="button"

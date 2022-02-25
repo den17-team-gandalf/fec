@@ -20,9 +20,10 @@ export default function FAQLinks({ entry }) {
     }
   }
   return (
-    <sub className={type}>
+    <sub>
       | Helpful? |
       <a
+        className="FAQLinks"
         href="/"
         onClick={(e) => {
           e.preventDefault();
@@ -34,6 +35,7 @@ export default function FAQLinks({ entry }) {
       </a>{' '}
       ({helpful}) |{' '}
       <a
+        className="FAQLinks"
         href="/"
         onClick={(e) => {
           e.preventDefault();

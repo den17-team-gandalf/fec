@@ -5,7 +5,7 @@ const DIST_DIR = path.join(__dirname, '/dist');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: `${SRC_DIR}/index.js`,
   output: {
     filename: 'bundle.js',
