@@ -30,7 +30,7 @@ export default function FAQForm({ data }) {
       return item.name;
     }
   });
-
+//
   // console.log(formType, ' id2');
   function handleClick() {
     const sendData = {
