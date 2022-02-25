@@ -48,6 +48,7 @@ export default function PDCarousel({
         pImage.current.style.cursor = 'zoom-in';
         carousel.current.style.cursor = 'zoom-in';
         carousel.current.style.width = '800px';
+        setSuperZoomed(false);
         // If in expanded view and clicking on container or image...
       } else if (expanded
         && (e.target.className === 'primaryImg'
