@@ -6,20 +6,28 @@
   border: 5px black;
 }
 .FAQStart {
-  background-color: whitesmoke;
+  background-color: var(--alternate-background-color);
+}
+
+.FAQTitle {
+  padding-top: 50px;
+}
+
+.FAQQuestions {
+  background-color: var(--background-color);
 }
 
 .FAQAnswers {
-  background-color: white;
+  background-color: var(--background-color);
 }
 
 .FAQModalQUE,
 .FAQModalFORM,
 .FAQModalANS,
 .FAQModalLIST {
-  background-color: #aeafae;
+  background-color: white;
   border: none;
-  color: white;
+  color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -89,10 +97,10 @@
 } */
 
 .FAQAnswer:nth-child(even) {
-  background: #f5f5f2;
+  background: var(--background-color);
 }
 .FAQAnswer:nth-child(odd) {
-  background: #fff;
+  background: var(--alternative-background-color);
 }
 
 .FAQModalQUE {
