@@ -104,13 +104,14 @@ export default function PDMainDisc({ product, expanded }) {
                     $
                     {currentStyle.sale_price}
                   </span>
-            &nbsp;
+                  {' '}
                   <s>
                     $
                     {currentStyle.original_price}
                   </s>
                 </div>
               )}
+            <hr className="hl" />
           </div>
         );
       }}
