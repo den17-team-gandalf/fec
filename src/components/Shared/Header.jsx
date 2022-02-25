@@ -33,7 +33,7 @@ export default function Header() {
               {' '}
               - Team Gandalf -
               {' '}
-              <FontAwesomeIcon onClick={() => modeToggle()} className="I_bulb" icon={faLightbulb} />
+              <FontAwesomeIcon onClick={() => modeToggle()} className="I_bulb" icon={faLightbulb} style={!darkMode ? { boxShadow: '0px -5px 10px yellow' } : {}} />
               <span className="hSearch">
                 <select className="hInput" type="text" name="productChanger" id="productChanger" onChange={selectChanger}>
                   {products

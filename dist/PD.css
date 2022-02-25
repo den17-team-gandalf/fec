@@ -1,5 +1,5 @@
 :root, html[data-theme="light"] {
-  --background-color: #fff;
+  --background-color: #EFE7DB;
   --alternate-background-color: #f7f7f9;
   --text-color: #121416d8;
   --text-color-light: #777676bb;
@@ -22,10 +22,12 @@ body {
   margin: 0;
   background-color: var(--background-color);
   color: var(--text-color);
+  overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -53,6 +55,8 @@ a {
   margin: 15px;
   cursor: zoom-in;
   overflow: auto;
+  box-shadow: 2px 2px 10px black;
+  user-select: none;
 }
 
 .PDMainDisc {
@@ -85,6 +89,14 @@ a {
   margin: 10px;
   border-radius: 100%;
   position: relative;
+}
+
+.I_share:hover {
+  grid-area: share;
+  margin: 10px;
+  border-radius: 100%;
+  position: relative;
+  box-shadow: 2px 2px 10px black;
 }
 
 .I_expand {
@@ -141,6 +153,11 @@ a {
   height: 100%;
   grid-area: line;
   margin: 10px;
+}
+
+.hl {
+  margin-top: 50px;
+  border: 1px solid #121416d8;
 }
 
 .I_checksD {
@@ -208,6 +225,15 @@ a {
   background-color: #121416d8;
 }
 
+.PDStyleImg:hover {
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #121416d8;
+  background-color: #121416d8;
+  box-shadow: 2px 2px 10px black;
+}
+
 .I_checksS {
   position: absolute;
   padding: 2px;
@@ -221,6 +247,8 @@ a {
 
 .I_bulb {
   color: var(--mode-color);
+  border-radius: 100%;
+  cursor: pointer;
 }
 
 .header {
@@ -244,6 +272,7 @@ a {
   margin-right: 15px;
   position: fixed;
   right: 0px;
+  cursor: pointer;
 }
 
 .hInput {
@@ -251,6 +280,7 @@ a {
   outline: 0;
   border-width: 0 0 1px;
   background-color: #303030;
+  cursor: pointer;
 }
 
 .PDSlides {
@@ -281,6 +311,16 @@ a {
   position: relative;
 }
 
+.imgCard:hover {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #121416d8;
+  background-color: #121416d8;
+  margin: 5px;
+  position: relative;
+  box-shadow: 2px 2px 10px black;
+}
+
 .imgCardExpanded {
   width: 40px;
   height: 40px;
@@ -288,6 +328,16 @@ a {
   background-color: #121416d8;
   margin: 5px;
   position: relative;
+}
+
+.imgCardExpanded:hover {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #121416d8;
+  background-color: #121416d8;
+  margin: 5px;
+  position: relative;
+  box-shadow: 2px 2px 10px black;
 }
 
 .loaderContainer {
@@ -315,12 +365,11 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
   background: dimgray;
 }
 
 ::-webkit-scrollbar-thumb {
-  width: 5px;
-  height: 50px;
+  border: 1px solid lightgray;
   background: black;
 }

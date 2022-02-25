@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import FAQFetchList from './FAQFetchList';
 import FAQList from './FAQList';
+import contexts from '../contexts';
 
 export default function FAQWidget() {
+  console.log(React.useContext(contexts.DetailsContext));
   const data = FAQFetchList();
   const [searchResultList, setSearchResult] = useState('');
   const windowSize = {
+    margin: 'auto',
     width: window.innerWidth,
     maxHeight: window.innerHeight,
     overflow: 'auto',
   };
+
   // console.log(searchResultList, ' sreachlist');
   return (
     <>
@@ -18,6 +22,7 @@ export default function FAQWidget() {
         <FAQSearchBar data={[data, setSearchResult]} />
       </div>
       <div style={windowSize} className="FAQList">
+
         <div>
           {data ? (
             <FAQList key={`${Math.random() * 10}FAQListOG`} data={data} />

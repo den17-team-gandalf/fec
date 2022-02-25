@@ -33,16 +33,16 @@ export default function PDStyles({ styles, currentPhoto, setCurrentPhoto }) {
             <br />
             <div className="PDStyles">
               {Object.keys(styles).length !== 0
-        && styles.results.map((style) => (
-          <PDStyle
-            key={style.style_id}
-            toggled={toggled}
-            setToggled={setToggled}
-            thisStyle={style}
-            currentPhoto={currentPhoto}
-            setCurrentPhoto={setCurrentPhoto}
-          />
-        ))}
+              && styles.results.map((style) => (
+                <PDStyle
+                  key={style.style_id}
+                  toggled={toggled}
+                  setToggled={setToggled}
+                  thisStyle={style}
+                  currentPhoto={currentPhoto}
+                  setCurrentPhoto={setCurrentPhoto}
+                />
+              ))}
             </div>
           </div>
         );
