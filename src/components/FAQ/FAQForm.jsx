@@ -17,7 +17,7 @@ const customStyles = {
 
 export default function FAQForm({ data }) {
   const { formType, productId } = data;
-  console.log(formType);
+  // console.log(formType);
 
   const [userInput, setUserInput] = useState('');
   const [nameInput, setNameInput] = useState('');
