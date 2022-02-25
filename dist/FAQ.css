@@ -38,6 +38,11 @@
   margin-right: 0;
   margin-left: 1rem;
 }
+
+.FAQModalLIST {
+  width: 100%;
+}
+
 .FAQModalQUE:hover,
 .FAQModalFORM:hover,
 .FAQModalANS:hover,
