@@ -78,9 +78,32 @@
   margin-left: 40%;
 }
 
-/* .AddReviewErrorMessage {
-  color: red;
-} */
+.AddReviewOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(53, 41, 41);
+  z-index: 3;
+}
+
+.AddReviewContent {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  z-index: 4;
+  background-color: var(--background-color);
+}
 
 .ReviewInput:invalid {
   background-color: rgb(255, 155, 155);
