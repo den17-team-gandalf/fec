@@ -1,0 +1,105 @@
+.FAQList {
+  margin: auto;
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 5px black;
+}
+.FAQStart {
+  background-color: whitesmoke;
+}
+
+.FAQAnswers {
+  background-color: white;
+}
+
+.FAQModalQUE,
+.FAQModalFORM,
+.FAQModalANS,
+.FAQModalLIST {
+  background-color: #aeafae;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 0;
+  margin-left: 1rem;
+}
+.FAQModalQUE:hover,
+.FAQModalFORM:hover,
+.FAQModalANS:hover,
+.FAQModalLIST:hover {
+  color: white;
+  background-color: #008000;
+}
+.FAQModalQUE:link,
+.FAQModalFORM:link,
+.FAQModalANS:link,
+.FAQModalLIST:link {
+  color: #fff;
+}
+.FAQModalQUE:visited,
+.FAQModalFORM:visited,
+.FAQModalANS:visited,
+.FAQModalLIST:visited {
+  color: #008000;
+}
+
+.FAQLinks:link {
+  color: #fff;
+}
+.FAQLinks:visited {
+  color: #008000;
+}
+.FAQLinks:hover {
+  color: #ffa500;
+}
+.FAQLinks:active {
+  color: #808080;
+}
+/* .questions:hover,
+.questions:hover {
+  color: red;
+} */
+
+.FAQTitle {
+  padding-left: 1.2%;
+  font-size: 180%;
+  margin-bottom: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  text-align: center;
+}
+
+/* .FAQAnswers:nth-child(5n + 3) {
+  font-weight: bold;
+} */
+/* .FAQAnswers:nth-child(even) .FAQAnswer {
+  background: #ccc;
+}
+.FAQAnswers:nth-child(odd) .FAQAnswer {
+  background: #fff;
+} */
+
+.FAQAnswer:nth-child(even) {
+  background: #f5f5f2;
+}
+.FAQAnswer:nth-child(odd) {
+  background: #fff;
+}
+
+.FAQModalQUE {
+  margin: 0;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  background-color: #fff;
+  color: black;
+}
