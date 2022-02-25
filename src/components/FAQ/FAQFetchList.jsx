@@ -17,4 +17,5 @@ export default function FAQFetchList() {
   }, [currentProduct]);
 
   return renderList;
+  // .
 }
