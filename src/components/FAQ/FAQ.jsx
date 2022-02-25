@@ -11,14 +11,12 @@ export default function FAQWidget() {
     maxHeight: window.innerHeight,
     overflow: 'auto',
   };
-  const [searchInput, setSearchInput] = useState('');
-  const [searchResultList, setSearchResult] = useState(null);
 
   return (
     <>
       <div className="FAQTitle">
         <h2>Questions Answers</h2>
-        <FAQSearchBar />
+        <FAQSearchBar data={data} />
       </div>
       <div style={windowSize} className="FAQList">
         <div>
@@ -34,6 +32,8 @@ export default function FAQWidget() {
 }
 
 function FAQSearchBar() {
+  const [searchInput, setSearchInput] = useState('');
+  const [searchResultList, setSearchResult] = useState(null);
   useEffect(() => {
     if (searchInput.length >= 3) {
       let searchResult = data.results.map((q) => {
