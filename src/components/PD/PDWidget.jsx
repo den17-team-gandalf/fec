@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import axios from 'axios';
 import PDCarousel from './PDCarousel';
@@ -21,26 +23,7 @@ export default function PDWidget() {
   const interactions = (e) => {
     const cTime = new Date().toLocaleTimeString();
     axios.post('/interactions', { element: `${e.target.tagName} .${e.target.className}`, widget: 'Product Details', time: cTime });
-    // .then((data) => console.log(data.data));
   };
-
-  // if (Object.keys(productStyles).length === 0) {
-  //   axios.get(`products/${currentProduct}/styles`)
-  //     .then(({ data }) => {
-  //       setProductStyles(data);
-  //       styleHook[1](data.results[0]);
-  //       setCurrentPhoto(data.results[0].photos[0].url);
-  //     })
-  //     .catch(() => { });
-  // }
-
-  // if (Object.keys(product).length === 0) {
-  //   axios.get(`/products/${currentProduct}`)
-  //     .then(({ data }) => {
-  //       setProduct(data);
-  //     })
-  //     .catch(() => { });
-  // }
 
   return (
     <contexts.AppContext.Consumer>
@@ -50,8 +33,10 @@ export default function PDWidget() {
           axios.get(`products/${currentProduct}/styles`)
             .then(({ data }) => {
               setProductStyles(data);
-              styleHook[1](data.results[0]);
-              setCurrentPhoto(data.results[0].photos[0].url);
+              if (data.results.length !== 0) {
+                styleHook[1](data.results[0]);
+                setCurrentPhoto(data.results[0].photos[0].url);
+              }
             })
             .catch(() => { });
           axios.get(`/products/${currentProduct}`)

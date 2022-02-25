@@ -7,10 +7,10 @@ let loaded = 0;
 
 export default function PDStyles({ styles, currentPhoto, setCurrentPhoto }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
-  const [toggled, setToggled] = React.useState(currentStyle.name);
+  const [toggled, setToggled] = React.useState(currentStyle.style_id);
 
   useEffect(() => {
-    setToggled(currentStyle.name);
+    setToggled(currentStyle.style_id);
   }, [currentStyle]);
 
   return (
@@ -33,16 +33,16 @@ export default function PDStyles({ styles, currentPhoto, setCurrentPhoto }) {
             <br />
             <div className="PDStyles">
               {Object.keys(styles).length !== 0
-        && styles.results.map((style) => (
-          <PDStyle
-            key={style.style_id}
-            toggled={toggled}
-            setToggled={setToggled}
-            thisStyle={style}
-            currentPhoto={currentPhoto}
-            setCurrentPhoto={setCurrentPhoto}
-          />
-        ))}
+              && styles.results.map((style) => (
+                <PDStyle
+                  key={style.style_id}
+                  toggled={toggled}
+                  setToggled={setToggled}
+                  thisStyle={style}
+                  currentPhoto={currentPhoto}
+                  setCurrentPhoto={setCurrentPhoto}
+                />
+              ))}
             </div>
           </div>
         );

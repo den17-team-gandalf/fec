@@ -11,7 +11,7 @@ export default function PDStyle({
 
   const clicky = () => {
     setCurrentStyle(thisStyle);
-    setToggled(thisStyle.name);
+    setToggled(thisStyle.style_id);
     setCurrentPhoto(thisStyle.photos[0].url);
   };
 
@@ -27,7 +27,7 @@ export default function PDStyle({
         alt={thisStyle.name}
         value={thisStyle}
       />
-      {toggled === thisStyle.name
+      {toggled === thisStyle.style_id
       && (
       <FontAwesomeIcon className="I_checksS" icon={faCheck} />
       )}
@@ -37,7 +37,7 @@ export default function PDStyle({
 
 PDStyle.propTypes = {
   thisStyle: PropTypes.object,
-  toggled: PropTypes.string.isRequired,
+  toggled: PropTypes.number.isRequired,
   setToggled: PropTypes.func.isRequired,
   currentPhoto: PropTypes.string,
   setCurrentPhoto: PropTypes.func.isRequired,

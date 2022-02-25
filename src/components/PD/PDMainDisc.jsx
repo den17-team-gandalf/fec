@@ -5,11 +5,13 @@ import Ratings from 'react-ratings-declarative';
 import contexts from '../contexts';
 
 let loaded = 0;
+let storedRating;
+let storedTotal;
 
 export default function PDMainDisc({ product, expanded }) {
   const [currentStyle, setCurrentStyle] = React.useContext(contexts.DetailsContext);
-  const [avgStars, setAvgStars] = React.useState(0);
-  const [totalStars, setTotalStars] = React.useState(0);
+  const [avgStars, setAvgStars] = React.useState(storedRating || 0);
+  const [totalStars, setTotalStars] = React.useState(storedTotal || 0);
   const [showStars, setShowStars] = React.useState(true);
 
   const totalRevs = (ratings) => (
@@ -35,16 +37,7 @@ export default function PDMainDisc({ product, expanded }) {
     } else {
       setShowStars(true);
     }
-  }, [expanded, totalStars, showStars]);
-
-  // if (Object.keys(avgStars).length === 0) {
-  //   axios.get('/reviews/meta/?product_id=44388')
-  //     .then(({ data }) => {
-  //       setAvgStars(avg(data.ratings));
-  //       setTotalStars(totalRevs(data.ratings));
-  //     })
-  //     .catch(() => { });
-  // }
+  }, [expanded]);
 
   return (
     <contexts.AppContext.Consumer>
@@ -53,30 +46,38 @@ export default function PDMainDisc({ product, expanded }) {
           loaded = currentProduct;
           axios.get(`/reviews/meta/?product_id=${currentProduct}`)
             .then(({ data }) => {
-              setAvgStars(avg(data.ratings));
-              setTotalStars(totalRevs(data.ratings));
+              const tempA = avg(data.ratings);
+              const tempT = totalRevs(data.ratings);
+              if (typeof tempA === 'number' && !Number.isNaN(tempA)) {
+                setAvgStars(tempA);
+                setTotalStars(tempT);
+                storedRating = tempA;
+                storedTotal = tempT;
+              } else {
+                setAvgStars(0);
+                setTotalStars(0);
+              }
             })
             .catch(() => { });
         }
         return (
           <div className="PDMainDisc">
             <br />
-            {showStars
-      && (
-        <Ratings
-          rating={avgStars}
-          widgetRatedColors="green"
-          widgetDimensions="20px"
-          widgetSpacings="1px"
-          className="ReviewStarRating"
-        >
-          <Ratings.Widget />
-          <Ratings.Widget />
-          <Ratings.Widget />
-          <Ratings.Widget />
-          <Ratings.Widget />
-        </Ratings>
-      )}
+            {showStars && (
+              <Ratings
+                rating={avgStars}
+                widgetRatedColors="green"
+                widgetDimensions="20px"
+                widgetSpacings="1px"
+                className="ReviewStarRating"
+              >
+                <Ratings.Widget />
+                <Ratings.Widget />
+                <Ratings.Widget />
+                <Ratings.Widget />
+                <Ratings.Widget />
+              </Ratings>
+            )}
             {' '}
             {showStars && (
             <a href="#Reviews" target="_self">
@@ -92,7 +93,7 @@ export default function PDMainDisc({ product, expanded }) {
             <br />
             <br />
             {product.category
-      && product.category.toUpperCase()}
+            && product.category.toUpperCase()}
             <br />
             {product.name && (<div className="productName"><strong>{product.name}</strong></div>)}
             <br />
@@ -103,13 +104,14 @@ export default function PDMainDisc({ product, expanded }) {
                     $
                     {currentStyle.sale_price}
                   </span>
-            &nbsp;
+                  {' '}
                   <s>
                     $
                     {currentStyle.original_price}
                   </s>
                 </div>
               )}
+            <hr className="hl" />
           </div>
         );
       }}
