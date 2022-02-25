@@ -108,6 +108,8 @@ export default function AddReview({ isOpen, updateIsOpen, metadata }) {
             }
             shouldCloseOnOverlayClick
             shouldCloseOnEsc
+            overlayClassName="AddReviewOverlay"
+            className="AddReviewContent"
           >
             <h3>Write Your Review</h3>
             <h4>{`About the ${products.filter((product) => product.id === currentProduct)[0].name}`}</h4>
