@@ -59,16 +59,6 @@ export default function Answers({ answer }) {
         {answer.answerer_name} |<time dateTime={date}> {date} </time>
       </sub>
       <FAQLinks entry={ansProp} />
-      <button
-        className="FAQModalANS"
-        type="button"
-        onClick={(e) => {
-          e.preventDefault;
-          openModal();
-        }}
-      >
-        Add Answer
-      </button>
       <FAQForm data={{ formType: 'answers', itemId: answer.id }} />
       <br />
     </div>

@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import FAQFetchList from './FAQFetchList';
 import FAQList from './FAQList';
-// import contexts from '../contexts';
 
 export default function FAQWidget() {
-  // const { currentProduct } = React.useContext(contexts.AppContext);
   const data = FAQFetchList();
+  const [searchResultList, setSearchResult] = useState('');
   const windowSize = {
     width: window.innerWidth,
     maxHeight: window.innerHeight,
     overflow: 'auto',
   };
-
+  // console.log(searchResultList, ' sreachlist');
   return (
     <>
       <div className="FAQTitle">
         <h2>Questions Answers</h2>
-        <FAQSearchBar data={data} />
+        <FAQSearchBar data={[data, setSearchResult]} />
       </div>
       <div style={windowSize} className="FAQList">
         <div>
@@ -31,26 +30,30 @@ export default function FAQWidget() {
   );
 }
 
-function FAQSearchBar() {
+function FAQSearchBar({ data }) {
+  const [list, func] = data;
+  // console.log(data, ' search');
   const [searchInput, setSearchInput] = useState('');
-  const [searchResultList, setSearchResult] = useState(null);
-  useEffect(() => {
-    if (searchInput.length >= 3) {
-      let searchResult = data.results.map((q) => {
-        if (
-          q.question_body.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-          -1
-        ) {
-          return q;
-        }
-        return undefined;
-      });
-      searchResult = searchResult.filter((x) => x !== undefined);
-      setSearchResult(searchResult);
-    } else {
-      setSearchResult(null);
-    }
-  }, [searchInput]);
+  // const [searchOutput, setSearchInput] = useState(false);
+  // if(searchInput)
+
+  // useEffect(() => {
+  //   if (searchInput.length >= 3) {
+  //     let searchResult = list.results.map((q) => {
+  //       if (
+  //         q.question_body.toLowerCase().indexOf(searchInput.toLowerCase()) !==
+  //         -1
+  //       ) {
+  //         return q;
+  //       }
+  //       return undefined;
+  //     });
+  //     searchResult = searchResult.filter((x) => x !== undefined);
+  //     func(searchResult);
+  //   } else {
+  //     func(null);
+  //   }
+  // }, [searchInput]);
   return (
     <form>
       <input

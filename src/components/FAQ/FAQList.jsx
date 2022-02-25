@@ -6,12 +6,15 @@ import contexts from '../contexts';
 export default function FAQList({ data }) {
   const { currentProduct } = React.useContext(contexts.AppContext);
   const productId = currentProduct;
-  console.log(data, ' data');
+  // console.log(data, ' data');
   const list = data.results;
-  console.log(data, ' data');
+  // console.log(data, ' data');
   const [questionCount, setQuestionCount] = useState(2);
-  const currentList = list.slice(0, questionCount);
-  console.log(currentList, ' list');
+  const currentList = list?.slice(0, questionCount);
+  // console.log(currentList, ' list');
+  if (currentList === undefined) {
+    return <div>No Results Found</div>;
+  }
   return (
     <div className="FAQStart">
       {currentList?.map((q) => (

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import contexts from '../contexts';
 
@@ -17,6 +17,7 @@ const customStyles = {
 
 export default function FAQForm({ data }) {
   const { formType, productId } = data;
+  console.log(formType);
 
   const [userInput, setUserInput] = useState('');
   const [nameInput, setNameInput] = useState('');
@@ -44,15 +45,6 @@ export default function FAQForm({ data }) {
       axios.post('/qa/questions', sendData);
     }
   }
-  useEffect(() => {
-    // if (userInput.length > 1000 && nameInput.length > 60) {
-    //   setErrors(`Response needs ${1000 - userInput.length} more characters!`);
-    // } else {
-    //   setErrors('');
-    // }
-  }, [userInput, nameInput]);
-  // if question get question to stick on top of answers
-  // productData.find((q) => console.log(q));
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -65,16 +57,29 @@ export default function FAQForm({ data }) {
 
   return (
     <>
-      <button
-        className="FAQModalFORM"
-        type="button"
-        onClick={(e) => {
-          e.preventDefault;
-          openModal();
-        }}
-      >
-        Add Question
-      </button>
+      {formType === 'answers' ? (
+        <button
+          className="FAQModalANS"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault;
+            openModal();
+          }}
+        >
+          Add Answer
+        </button>
+      ) : (
+        <button
+          className="FAQModalFORM"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault;
+            openModal();
+          }}
+        >
+          Add Question
+        </button>
+      )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -86,14 +91,16 @@ export default function FAQForm({ data }) {
               <>
                 Submit Your Answer:
                 <br />
-                <sub>{`${productData}: ${data.questionBody}`}</sub>
+                {/* <sub>{`${productData}: ${data.questionBody}`}</sub> */}
+                <sub>About this product:</sub>
               </>
             ) : (
               <>
                 {' '}
                 Ask Your Question:
                 <br />
-                <sub>{`About the ${productData}:`}</sub>
+                {/* <sub>{`About the ${productData}:`}</sub> */}
+                <sub>About this product:</sub>
               </>
             )}
             <br />
@@ -139,14 +146,17 @@ export default function FAQForm({ data }) {
             <sub> For authentication reasons, you will not be emailed</sub>
           </label>
           <br />
-          {formType === 'answers' ? (
+          {/* {formType === 'answers' ? (
             <input
               className="FAQModalFORM"
               type="button"
               name="Upload Photo"
               value="Upload Photo"
-            />
-          ) : null}
+              >
+
+              </input>
+
+          ) : null} */}
           <button
             className="FAQModalFORM"
             onClick={(e) => {
